@@ -1,0 +1,65 @@
+{
+  "name": "cdxml-compound-parser",
+  "version": "1.0.0",
+  "description": "CDXML 化合物解析（Electron 壳 + Python 核心）",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build:bridge": "python -m PyInstaller ../packaging/cdxml-bridge.spec --noconfirm --distpath ../dist --workpath ../build/pyi",
+    "build:text-ai-bridge": "python -m PyInstaller ../packaging/text-ai-bridge.spec --noconfirm --distpath ../dist --workpath ../build/pyi-text-ai",
+    "dist": "npm run build:bridge && npm run build:text-ai-bridge && electron-builder --win portable --publish never",
+    "dist:unpacked": "npm run build:bridge && npm run build:text-ai-bridge && electron-builder --win dir --publish never",
+    "dist:nsis": "npm run build:bridge && npm run build:text-ai-bridge && electron-builder --win nsis --publish never"
+  },
+  "build": {
+    "appId": "com.cdxml.compoundparser",
+    "productName": "CDXML Compound Parser",
+    "directories": {
+      "output": "dist-installer"
+    },
+    "files": [
+      "**/*",
+      "!dist-installer"
+    ],
+    "asar": true,
+    "extraResources": [
+      {
+        "from": "../dist/cdxml-bridge",
+        "to": "bridge",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": "../dist/text-ai-bridge",
+        "to": "text-ai-bridge",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "win": {
+      "signAndEditExecutable": false,
+      "artifactName": "${productName}-${version}-portable-${arch}.${ext}",
+      "target": [
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  },
+  "devDependencies": {
+    "electron": "^28.3.0",
+    "electron-builder": "^24.13.3"
+  },
+  "dependencies": {
+    "smiles-drawer": "^2.2.1"
+  }
+}

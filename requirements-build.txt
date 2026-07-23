@@ -1,0 +1,2 @@
+# Dev machine only: pip install -r requirements-build.txt
+pyinstaller>=6.0

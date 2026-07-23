@@ -1,0 +1,1241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE CDXML
+  SYSTEM 'https://static.chemistry.revvitycloud.com/cdxml/CDXML.dtd'>
+<CDXML BondLength="14.3547" LineWidth="0.72">
+	<colortable>
+		<color b="1" g="1" r="1"/>
+		<color b="0" g="0" r="0"/>
+		<color b="0" g="0" r="1"/>
+		<color b="1" g="0" r="0"/>
+		<color b="1" g="0" r="1"/>
+	</colortable>
+	<fonttable>
+		<font charset="Unknown" id="1" name="Arial"/>
+	</fonttable>
+	<page DrawingSpace="pages" Height="841.92" HeightPages="8" PageOverlap="12 12.24" PrintMargins="36 36 36 36" Width="595.2" WidthPages="12" id="1">
+		<fragment Z="1" id="2">
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="2" id="3" p="537 153.9"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="3" id="4" p="537 168.3"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="4" id="5" p="549.48 175.5"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="5" id="6" p="561.95 168.3"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="6" id="7" p="561.95 153.9"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="7" id="8" p="549.48 146.7"/>
+			<n Element="7" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="8" id="9" p="574.42 175.5">
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="9" id="10">
+					<s color="4" face="97" font="1" size="10">NH</s>
+				</t>
+			</n>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="10" id="11" p="574.42 146.7"/>
+			<n Element="16" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="11" id="12" p="524.53 146.7">
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="12" id="13">
+					<s color="4" face="97" font="1" size="10">S</s>
+				</t>
+			</n>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="13" id="14" p="574.42 189.9"/>
+			<n Element="7" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="14" id="15" p="561.95 197.1">
+				<t BoundingBox="0 0 0 0" Justification="Right" LabelJustification="Right" LabelLineHeight="variable" LineHeight="variable" Z="15" id="16">
+					<s color="4" face="97" font="1" size="10">N</s>
+				</t>
+			</n>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="16" id="17" p="561.95 211.5"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="17" id="18" p="574.42 218.7"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="18" id="19" p="586.89 211.5"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="19" id="20" p="586.89 197.1"/>
+			<n MarginWidth="2.5" NodeType="Nickname" Z="20" id="21" p="574.42 233.1">
+				<fragment Z="21" id="22">
+					<n NodeType="ExternalConnectionPoint" Z="22" id="23" p="574.42 218.7"/>
+					<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="23" id="24" p="574.42 233.1"/>
+					<n Element="9" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="24" id="25" p="574.4201 247.5">
+						<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="25" id="26">
+							<s color="4" face="97" font="1" size="10">F</s>
+						</t>
+					</n>
+					<n Element="9" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="26" id="27" p="560.02 233.1001">
+						<t BoundingBox="0 0 0 0" Justification="Right" LabelJustification="Right" LabelLineHeight="variable" LineHeight="variable" Z="27" id="28">
+							<s color="4" face="97" font="1" size="10">F</s>
+						</t>
+					</n>
+					<n Element="9" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="28" id="29" p="588.82 233.0999">
+						<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="29" id="30">
+							<s color="4" face="97" font="1" size="10">F</s>
+						</t>
+					</n>
+					<b B="23" Display="Solid" Display2="Solid" E="24" LineWidth="0.72" Order="1" Topology="Unspecified" Z="30" color="4" id="31"/>
+					<b B="24" Display="Solid" Display2="Solid" E="25" LineWidth="0.72" Order="1" Topology="Unspecified" Z="31" color="4" id="32"/>
+					<b B="24" Display="Solid" Display2="Solid" E="27" LineWidth="0.72" Order="1" Topology="Unspecified" Z="32" color="4" id="33"/>
+					<b B="24" Display="Solid" Display2="Solid" E="29" LineWidth="0.72" Order="1" Topology="Unspecified" Z="33" color="4" id="34"/>
+				</fragment>
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="34" id="35">
+					<s color="4" face="97" font="1" size="10">CF3</s>
+				</t>
+			</n>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="35" id="36" p="575.92 132.38"/>
+			<n Element="7" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="36" id="37" p="590.01 129.38">
+				<t BoundingBox="0 0 0 0" Justification="Right" LabelJustification="Right" LabelLineHeight="variable" LineHeight="variable" Z="37" id="38">
+					<s color="4" face="97" font="1" size="10">N</s>
+				</t>
+			</n>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="38" id="39" p="597.21 141.86"/>
+			<n Element="7" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="39" id="40" p="587.57 152.56">
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="40" id="41">
+					<s color="4" face="97" font="1" size="10">N</s>
+				</t>
+			</n>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="3" Z="41" id="42" p="595.86 116.23"/>
+			<n Element="7" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="42" id="43" p="512.06 153.9">
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="43" id="44">
+					<s color="4" face="97" font="1" size="10">NH</s>
+				</t>
+			</n>
+			<n Element="8" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="44" id="45" p="524.53 132.3">
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="45" id="46">
+					<s color="4" face="97" font="1" size="10">O</s>
+				</t>
+			</n>
+			<n Element="8" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="46" id="47" p="524.53 161.1">
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="47" id="48">
+					<s color="4" face="97" font="1" size="10">O</s>
+				</t>
+			</n>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="3" Z="48" id="49" p="499.59 146.7"/>
+			<b B="3" BondSpacing="18" Display="Solid" Display2="Solid" E="4" LineWidth="0.72" Order="2" Topology="Unspecified" Z="49" color="4" id="50"/>
+			<b B="4" Display="Solid" Display2="Solid" E="5" LineWidth="0.72" Order="1" Topology="Unspecified" Z="50" color="4" id="51"/>
+			<b B="5" BondSpacing="18" Display="Solid" Display2="Solid" E="6" LineWidth="0.72" Order="2" Topology="Unspecified" Z="51" color="4" id="52"/>
+			<b B="6" Display="Solid" Display2="Solid" E="7" LineWidth="0.72" Order="1" Topology="Unspecified" Z="52" color="4" id="53"/>
+			<b B="7" BondSpacing="18" Display="Solid" Display2="Solid" E="8" LineWidth="0.72" Order="2" Topology="Unspecified" Z="53" color="4" id="54"/>
+			<b B="8" Display="Solid" Display2="Solid" E="3" LineWidth="0.72" Order="1" Topology="Unspecified" Z="54" color="4" id="55"/>
+			<b B="6" Display="Solid" Display2="Solid" E="9" LineWidth="0.72" Order="1" Topology="Unspecified" Z="55" color="4" id="56"/>
+			<b B="7" Display="Solid" Display2="Solid" E="11" LineWidth="0.72" Order="1" Topology="Unspecified" Z="56" color="4" id="57"/>
+			<b B="3" Display="Solid" Display2="Solid" E="12" LineWidth="0.72" Order="1" Topology="Unspecified" Z="57" color="4" id="58"/>
+			<b B="9" Display="Solid" Display2="Solid" E="14" LineWidth="0.72" Order="1" Topology="Unspecified" Z="58" color="4" id="59"/>
+			<b B="14" BondSpacing="18" Display="Solid" Display2="Solid" E="15" LineWidth="0.72" Order="2" Topology="Unspecified" Z="59" color="4" id="60"/>
+			<b B="15" Display="Solid" Display2="Solid" E="17" LineWidth="0.72" Order="1" Topology="Unspecified" Z="60" color="4" id="61"/>
+			<b B="17" BondSpacing="18" Display="Solid" Display2="Solid" E="18" LineWidth="0.72" Order="2" Topology="Unspecified" Z="61" color="4" id="62"/>
+			<b B="18" Display="Solid" Display2="Solid" E="19" LineWidth="0.72" Order="1" Topology="Unspecified" Z="62" color="4" id="63"/>
+			<b B="19" BondSpacing="18" Display="Solid" Display2="Solid" E="20" LineWidth="0.72" Order="2" Topology="Unspecified" Z="63" color="4" id="64"/>
+			<b B="20" Display="Solid" Display2="Solid" E="14" LineWidth="0.72" Order="1" Topology="Unspecified" Z="64" color="4" id="65"/>
+			<b B="18" Display="Solid" Display2="Solid" E="21" EndAttach="0" LineWidth="0.72" Order="1" Topology="Unspecified" Z="65" color="4" id="66"/>
+			<b B="11" BondSpacing="18" Display="Solid" Display2="Solid" E="36" LineWidth="0.72" Order="2" Topology="Unspecified" Z="66" color="4" id="67"/>
+			<b B="36" Display="Solid" Display2="Solid" E="37" LineWidth="0.72" Order="1" Topology="Unspecified" Z="67" color="4" id="68"/>
+			<b B="37" Display="Solid" Display2="Solid" E="39" LineWidth="0.72" Order="1" Topology="Unspecified" Z="68" color="4" id="69"/>
+			<b B="39" BondSpacing="18" Display="Solid" Display2="Solid" E="40" LineWidth="0.72" Order="2" Topology="Unspecified" Z="69" color="4" id="70"/>
+			<b B="40" Display="Solid" Display2="Solid" E="11" LineWidth="0.72" Order="1" Topology="Unspecified" Z="70" color="4" id="71"/>
+			<b B="37" Display="Solid" Display2="Solid" E="42" LineWidth="0.72" Order="1" Topology="Unspecified" Z="71" color="4" id="72"/>
+			<b B="12" Display="Solid" Display2="Solid" E="43" LineWidth="0.72" Order="1" Topology="Unspecified" Z="72" color="4" id="73"/>
+			<b B="12" BondSpacing="18" Display="Solid" Display2="Solid" E="45" LineWidth="0.72" Order="2" Topology="Unspecified" Z="73" color="4" id="74"/>
+			<b B="12" BondSpacing="18" Display="Solid" Display2="Solid" E="47" LineWidth="0.72" Order="2" Topology="Unspecified" Z="74" color="4" id="75"/>
+			<b B="43" Display="Solid" Display2="Solid" E="49" LineWidth="0.72" Order="1" Topology="Unspecified" Z="75" color="4" id="76"/>
+		</fragment>
+		<t BoundingBox="0 0 0 0" CaptionJustification="Left" CaptionLineHeight="11.75" IgnoreWarnings="yes" Justification="Left" LineHeight="11.75" Z="76" id="77" p="505.98 237.6">
+			<s color="5" face="1" font="1" size="10">HW180003</s>
+		</t>
+		<fragment Z="77" id="78">
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="78" id="79" p="1037.5601 143.44"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="79" id="80" p="1037.5601 157.84"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="80" id="81" p="1050.03 165.04"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="81" id="82" p="1062.4999 157.84"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="82" id="83" p="1062.4999 143.44"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="83" id="84" p="1050.03 136.24"/>
+			<n Element="7" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="84" id="85" p="1074.97 165.04">
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="85" id="86">
+					<s color="4" face="96" font="1" size="10">NH</s>
+				</t>
+			</n>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="86" id="87" p="1074.97 136.24"/>
+			<n Element="16" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="87" id="88" p="1025.0901 136.24">
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="88" id="89">
+					<s color="4" face="96" font="1" size="10">S</s>
+				</t>
+			</n>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="89" id="90" p="1074.97 179.44"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="90" id="91" p="1062.4999 186.64"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="91" id="92" p="1062.4999 201.04"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="92" id="93" p="1074.97 208.24"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="93" id="94" p="1087.45 201.04"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="94" id="95" p="1087.45 186.64"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="95" id="96" p="1076.48 121.92"/>
+			<n Element="7" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="96" id="97" p="1090.5699 118.93">
+				<t BoundingBox="0 0 0 0" Justification="Right" LabelJustification="Right" LabelLineHeight="variable" LineHeight="variable" Z="97" id="98">
+					<s color="4" face="96" font="1" size="10">N</s>
+				</t>
+			</n>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="98" id="99" p="1097.77 131.4"/>
+			<n Element="7" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="99" id="100" p="1088.13 142.1">
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="100" id="101">
+					<s color="4" face="96" font="1" size="10">N</s>
+				</t>
+			</n>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="3" Z="101" id="102" p="1096.4199 105.77"/>
+			<n Element="7" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="102" id="103" p="1012.62 143.44">
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="103" id="104">
+					<s color="4" face="96" font="1" size="10">NH</s>
+				</t>
+			</n>
+			<n Element="8" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="104" id="105" p="1025.0901 121.84">
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="105" id="106">
+					<s color="4" face="96" font="1" size="10">O</s>
+				</t>
+			</n>
+			<n Element="8" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="106" id="107" p="1025.0901 150.64">
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="107" id="108">
+					<s color="4" face="96" font="1" size="10">O</s>
+				</t>
+			</n>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="3" Z="108" id="109" p="1000.1501 136.24"/>
+			<n MarginWidth="2.5" NodeType="Nickname" Z="109" id="110" p="1099.92 208.24">
+				<fragment Z="110" id="111">
+					<n NodeType="ExternalConnectionPoint" Z="111" id="112" p="1087.45 201.04"/>
+					<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="112" id="113" p="1099.92 208.24"/>
+					<n Element="9" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="113" id="114" p="1112.3906 215.4402">
+						<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="114" id="115">
+							<s color="4" face="96" font="1" size="10">F</s>
+						</t>
+					</n>
+					<n Element="9" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="115" id="116" p="1092.7195 220.7106">
+						<t BoundingBox="0 0 0 0" Justification="Right" LabelJustification="Right" LabelLineHeight="variable" LineHeight="variable" Z="116" id="117">
+							<s color="4" face="96" font="1" size="10">F</s>
+						</t>
+					</n>
+					<n Element="9" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="117" id="118" p="1107.1202 195.7694">
+						<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="118" id="119">
+							<s color="4" face="96" font="1" size="10">F</s>
+						</t>
+					</n>
+					<b B="112" Display="Solid" Display2="Solid" E="113" LineWidth="0.72" Order="1" Topology="Unspecified" Z="119" color="4" id="120"/>
+					<b B="113" Display="Solid" Display2="Solid" E="114" LineWidth="0.72" Order="1" Topology="Unspecified" Z="120" color="4" id="121"/>
+					<b B="113" Display="Solid" Display2="Solid" E="116" LineWidth="0.72" Order="1" Topology="Unspecified" Z="121" color="4" id="122"/>
+					<b B="113" Display="Solid" Display2="Solid" E="118" LineWidth="0.72" Order="1" Topology="Unspecified" Z="122" color="4" id="123"/>
+				</fragment>
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="123" id="124">
+					<s color="4" face="96" font="1" size="10">CF3</s>
+				</t>
+			</n>
+			<b B="79" BondSpacing="18" Display="Solid" Display2="Solid" E="80" LineWidth="0.72" Order="2" Topology="Unspecified" Z="124" color="4" id="125"/>
+			<b B="80" Display="Solid" Display2="Solid" E="81" LineWidth="0.72" Order="1" Topology="Unspecified" Z="125" color="4" id="126"/>
+			<b B="81" BondSpacing="18" Display="Solid" Display2="Solid" E="82" LineWidth="0.72" Order="2" Topology="Unspecified" Z="126" color="4" id="127"/>
+			<b B="82" Display="Solid" Display2="Solid" E="83" LineWidth="0.72" Order="1" Topology="Unspecified" Z="127" color="4" id="128"/>
+			<b B="83" BondSpacing="18" Display="Solid" Display2="Solid" E="84" LineWidth="0.72" Order="2" Topology="Unspecified" Z="128" color="4" id="129"/>
+			<b B="84" Display="Solid" Display2="Solid" E="79" LineWidth="0.72" Order="1" Topology="Unspecified" Z="129" color="4" id="130"/>
+			<b B="82" Display="Solid" Display2="Solid" E="85" LineWidth="0.72" Order="1" Topology="Unspecified" Z="130" color="4" id="131"/>
+			<b B="83" Display="Solid" Display2="Solid" E="87" LineWidth="0.72" Order="1" Topology="Unspecified" Z="131" color="4" id="132"/>
+			<b B="79" Display="Solid" Display2="Solid" E="88" LineWidth="0.72" Order="1" Topology="Unspecified" Z="132" color="4" id="133"/>
+			<b B="85" Display="Solid" Display2="Solid" E="90" LineWidth="0.72" Order="1" Topology="Unspecified" Z="133" color="4" id="134"/>
+			<b B="90" BondSpacing="18" Display="Solid" Display2="Solid" E="91" LineWidth="0.72" Order="2" Topology="Unspecified" Z="134" color="4" id="135"/>
+			<b B="91" Display="Solid" Display2="Solid" E="92" LineWidth="0.72" Order="1" Topology="Unspecified" Z="135" color="4" id="136"/>
+			<b B="92" BondSpacing="18" Display="Solid" Display2="Solid" E="93" LineWidth="0.72" Order="2" Topology="Unspecified" Z="136" color="4" id="137"/>
+			<b B="93" Display="Solid" Display2="Solid" E="94" LineWidth="0.72" Order="1" Topology="Unspecified" Z="137" color="4" id="138"/>
+			<b B="94" BondSpacing="18" Display="Solid" Display2="Solid" E="95" LineWidth="0.72" Order="2" Topology="Unspecified" Z="138" color="4" id="139"/>
+			<b B="95" Display="Solid" Display2="Solid" E="90" LineWidth="0.72" Order="1" Topology="Unspecified" Z="139" color="4" id="140"/>
+			<b B="87" BondSpacing="18" Display="Solid" Display2="Solid" E="96" LineWidth="0.72" Order="2" Topology="Unspecified" Z="140" color="4" id="141"/>
+			<b B="96" Display="Solid" Display2="Solid" E="97" LineWidth="0.72" Order="1" Topology="Unspecified" Z="141" color="4" id="142"/>
+			<b B="97" Display="Solid" Display2="Solid" E="99" LineWidth="0.72" Order="1" Topology="Unspecified" Z="142" color="4" id="143"/>
+			<b B="99" BondSpacing="18" Display="Solid" Display2="Solid" E="100" LineWidth="0.72" Order="2" Topology="Unspecified" Z="143" color="4" id="144"/>
+			<b B="100" Display="Solid" Display2="Solid" E="87" LineWidth="0.72" Order="1" Topology="Unspecified" Z="144" color="4" id="145"/>
+			<b B="97" Display="Solid" Display2="Solid" E="102" LineWidth="0.72" Order="1" Topology="Unspecified" Z="145" color="4" id="146"/>
+			<b B="88" Display="Solid" Display2="Solid" E="103" LineWidth="0.72" Order="1" Topology="Unspecified" Z="146" color="4" id="147"/>
+			<b B="88" BondSpacing="18" Display="Solid" Display2="Solid" E="105" LineWidth="0.72" Order="2" Topology="Unspecified" Z="147" color="4" id="148"/>
+			<b B="88" BondSpacing="18" Display="Solid" Display2="Solid" E="107" LineWidth="0.72" Order="2" Topology="Unspecified" Z="148" color="4" id="149"/>
+			<b B="103" Display="Solid" Display2="Solid" E="109" LineWidth="0.72" Order="1" Topology="Unspecified" Z="149" color="4" id="150"/>
+			<b B="94" Display="Solid" Display2="Solid" E="110" EndAttach="0" LineWidth="0.72" Order="1" Topology="Unspecified" Z="150" color="4" id="151"/>
+		</fragment>
+		<t BoundingBox="0 0 0 0" CaptionJustification="Center" CaptionLineHeight="11.3" IgnoreWarnings="yes" Justification="Center" LineHeight="11.3" Z="151" id="152" p="1126.47 157.08">
+			<s color="4" face="0" font="1" size="10">tPSA: 73.8
+CLogP: 3.96023</s>
+		</t>
+		<fragment Z="152" id="153">
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="153" id="154" p="241.8 148.6"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="154" id="155" p="241.8 163"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="155" id="156" p="254.27 170.2"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="156" id="157" p="266.74 163"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="157" id="158" p="266.74 148.6"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="158" id="159" p="254.27 141.4"/>
+			<n Element="7" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="159" id="160" p="279.21 170.2">
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="160" id="161">
+					<s color="4" face="96" font="1" size="10">NH</s>
+				</t>
+			</n>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="161" id="162" p="279.21 141.4"/>
+			<n Element="16" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="162" id="163" p="229.33 141.4">
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="163" id="164">
+					<s color="4" face="96" font="1" size="10">S</s>
+				</t>
+			</n>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="2" Z="164" id="165" p="279.21 184.6"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="165" id="166" p="280.71 127.08"/>
+			<n Element="7" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="166" id="167" p="294.8 124.09">
+				<t BoundingBox="0 0 0 0" Justification="Right" LabelJustification="Right" LabelLineHeight="variable" LineHeight="variable" Z="167" id="168">
+					<s color="4" face="96" font="1" size="10">N</s>
+				</t>
+			</n>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="168" id="169" p="302 136.56"/>
+			<n Element="7" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="169" id="170" p="292.36 147.26">
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="170" id="171">
+					<s color="4" face="96" font="1" size="10">N</s>
+				</t>
+			</n>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="3" Z="171" id="172" p="300.66 110.93"/>
+			<n Element="7" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="172" id="173" p="216.85 148.6">
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="173" id="174">
+					<s color="4" face="96" font="1" size="10">NH</s>
+				</t>
+			</n>
+			<n Element="8" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="174" id="175" p="229.33 127">
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="175" id="176">
+					<s color="4" face="96" font="1" size="10">O</s>
+				</t>
+			</n>
+			<n Element="8" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="176" id="177" p="229.33 155.8">
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="177" id="178">
+					<s color="4" face="96" font="1" size="10">O</s>
+				</t>
+			</n>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="3" Z="178" id="179" p="204.38 141.4"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="179" id="180" p="291.68 191.8"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="180" id="181" p="291.68 206.2"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="181" id="182" p="304.15 213.4"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="182" id="183" p="316.62 206.2"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="183" id="184" p="316.62 191.8"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="184" id="185" p="304.15 184.6"/>
+			<n MarginWidth="2.5" NodeType="Nickname" Z="185" id="186" p="329.09 213.4">
+				<fragment Z="186" id="187">
+					<n NodeType="ExternalConnectionPoint" Z="187" id="188" p="316.62 206.2"/>
+					<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="188" id="189" p="329.09 213.4"/>
+					<n Element="9" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="189" id="190" p="341.5606 220.6003">
+						<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="190" id="191">
+							<s color="4" face="96" font="1" size="10">F</s>
+						</t>
+					</n>
+					<n Element="9" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="191" id="192" p="321.8897 225.8706">
+						<t BoundingBox="0 0 0 0" Justification="Right" LabelJustification="Right" LabelLineHeight="variable" LineHeight="variable" Z="192" id="193">
+							<s color="4" face="96" font="1" size="10">F</s>
+						</t>
+					</n>
+					<n Element="9" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="193" id="194" p="336.2903 200.9294">
+						<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="194" id="195">
+							<s color="4" face="96" font="1" size="10">F</s>
+						</t>
+					</n>
+					<b B="188" Display="Solid" Display2="Solid" E="189" LineWidth="0.72" Order="1" Topology="Unspecified" Z="195" color="4" id="196"/>
+					<b B="189" Display="Solid" Display2="Solid" E="190" LineWidth="0.72" Order="1" Topology="Unspecified" Z="196" color="4" id="197"/>
+					<b B="189" Display="Solid" Display2="Solid" E="192" LineWidth="0.72" Order="1" Topology="Unspecified" Z="197" color="4" id="198"/>
+					<b B="189" Display="Solid" Display2="Solid" E="194" LineWidth="0.72" Order="1" Topology="Unspecified" Z="198" color="4" id="199"/>
+				</fragment>
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="199" id="200">
+					<s color="4" face="96" font="1" size="10">CF3</s>
+				</t>
+			</n>
+			<b B="154" BondSpacing="18" Display="Solid" Display2="Solid" E="155" LineWidth="0.72" Order="2" Topology="Unspecified" Z="200" color="4" id="201"/>
+			<b B="155" Display="Solid" Display2="Solid" E="156" LineWidth="0.72" Order="1" Topology="Unspecified" Z="201" color="4" id="202"/>
+			<b B="156" BondSpacing="18" Display="Solid" Display2="Solid" E="157" LineWidth="0.72" Order="2" Topology="Unspecified" Z="202" color="4" id="203"/>
+			<b B="157" Display="Solid" Display2="Solid" E="158" LineWidth="0.72" Order="1" Topology="Unspecified" Z="203" color="4" id="204"/>
+			<b B="158" BondSpacing="18" Display="Solid" Display2="Solid" E="159" LineWidth="0.72" Order="2" Topology="Unspecified" Z="204" color="4" id="205"/>
+			<b B="159" Display="Solid" Display2="Solid" E="154" LineWidth="0.72" Order="1" Topology="Unspecified" Z="205" color="4" id="206"/>
+			<b B="157" Display="Solid" Display2="Solid" E="160" LineWidth="0.72" Order="1" Topology="Unspecified" Z="206" color="4" id="207"/>
+			<b B="158" Display="Solid" Display2="Solid" E="162" LineWidth="0.72" Order="1" Topology="Unspecified" Z="207" color="4" id="208"/>
+			<b B="154" Display="Solid" Display2="Solid" E="163" LineWidth="0.72" Order="1" Topology="Unspecified" Z="208" color="4" id="209"/>
+			<b B="160" Display="Solid" Display2="Solid" E="165" LineWidth="0.72" Order="1" Topology="Unspecified" Z="209" color="4" id="210"/>
+			<b B="162" BondSpacing="18" Display="Solid" Display2="Solid" E="166" LineWidth="0.72" Order="2" Topology="Unspecified" Z="210" color="4" id="211"/>
+			<b B="166" Display="Solid" Display2="Solid" E="167" LineWidth="0.72" Order="1" Topology="Unspecified" Z="211" color="4" id="212"/>
+			<b B="167" Display="Solid" Display2="Solid" E="169" LineWidth="0.72" Order="1" Topology="Unspecified" Z="212" color="4" id="213"/>
+			<b B="169" BondSpacing="18" Display="Solid" Display2="Solid" E="170" LineWidth="0.72" Order="2" Topology="Unspecified" Z="213" color="4" id="214"/>
+			<b B="170" Display="Solid" Display2="Solid" E="162" LineWidth="0.72" Order="1" Topology="Unspecified" Z="214" color="4" id="215"/>
+			<b B="167" Display="Solid" Display2="Solid" E="172" LineWidth="0.72" Order="1" Topology="Unspecified" Z="215" color="4" id="216"/>
+			<b B="163" Display="Solid" Display2="Solid" E="173" LineWidth="0.72" Order="1" Topology="Unspecified" Z="216" color="4" id="217"/>
+			<b B="163" BondSpacing="18" Display="Solid" Display2="Solid" E="175" LineWidth="0.72" Order="2" Topology="Unspecified" Z="217" color="4" id="218"/>
+			<b B="163" BondSpacing="18" Display="Solid" Display2="Solid" E="177" LineWidth="0.72" Order="2" Topology="Unspecified" Z="218" color="4" id="219"/>
+			<b B="173" Display="Solid" Display2="Solid" E="179" LineWidth="0.72" Order="1" Topology="Unspecified" Z="219" color="4" id="220"/>
+			<b B="165" Display="Solid" Display2="Solid" E="180" LineWidth="0.72" Order="1" Topology="Unspecified" Z="220" color="4" id="221"/>
+			<b B="180" BondSpacing="18" Display="Solid" Display2="Solid" E="181" LineWidth="0.72" Order="2" Topology="Unspecified" Z="221" color="4" id="222"/>
+			<b B="181" Display="Solid" Display2="Solid" E="182" LineWidth="0.72" Order="1" Topology="Unspecified" Z="222" color="4" id="223"/>
+			<b B="182" BondSpacing="18" Display="Solid" Display2="Solid" E="183" LineWidth="0.72" Order="2" Topology="Unspecified" Z="223" color="4" id="224"/>
+			<b B="183" Display="Solid" Display2="Solid" E="184" LineWidth="0.72" Order="1" Topology="Unspecified" Z="224" color="4" id="225"/>
+			<b B="184" BondSpacing="18" Display="Solid" Display2="Solid" E="185" LineWidth="0.72" Order="2" Topology="Unspecified" Z="225" color="4" id="226"/>
+			<b B="185" Display="Solid" Display2="Solid" E="180" LineWidth="0.72" Order="1" Topology="Unspecified" Z="226" color="4" id="227"/>
+			<b B="183" Display="Solid" Display2="Solid" E="186" EndAttach="0" LineWidth="0.72" Order="1" Topology="Unspecified" Z="227" color="4" id="228"/>
+		</fragment>
+		<t BoundingBox="0 0 0 0" CaptionJustification="Left" CaptionLineHeight="11.3" IgnoreWarnings="yes" Justification="Left" LineHeight="11.3" Z="228" id="229" p="243.92 223.38">
+			<s color="5" face="0" font="1" size="10">HW180002</s>
+		</t>
+		<t BoundingBox="0 0 0 0" CaptionJustification="Right" CaptionLineHeight="11.3" IgnoreWarnings="yes" Justification="Right" LineHeight="11.3" Z="229" id="230" p="366.98 162.55">
+			<s color="4" face="0" font="1" size="10">tPSA: 73.8
+CLogP: 3.34151</s>
+		</t>
+		<fragment Z="230" id="231">
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="231" id="232" p="824.38 147.79"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="232" id="233" p="824.38 162.19"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="233" id="234" p="836.85 169.39"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="234" id="235" p="849.32 162.19"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="235" id="236" p="849.32 147.79"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="236" id="237" p="836.85 140.59"/>
+			<n Element="7" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="237" id="238" p="861.79 169.39">
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="238" id="239">
+					<s color="4" face="96" font="1" size="10">NH</s>
+				</t>
+			</n>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="239" id="240" p="861.79 140.59"/>
+			<n Element="16" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="240" id="241" p="811.91 140.59">
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="241" id="242">
+					<s color="4" face="96" font="1" size="10">S</s>
+				</t>
+			</n>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="242" id="243" p="861.79 183.79"/>
+			<n Element="7" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="243" id="244" p="849.32 190.99">
+				<t BoundingBox="0 0 0 0" Justification="Right" LabelJustification="Right" LabelLineHeight="variable" LineHeight="variable" Z="244" id="245">
+					<s color="4" face="96" font="1" size="10">N</s>
+				</t>
+			</n>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="245" id="246" p="849.32 205.39"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="246" id="247" p="861.79 212.59"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="247" id="248" p="874.26 205.39"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="248" id="249" p="874.26 190.99"/>
+			<n MarginWidth="2.5" NodeType="Nickname" Z="249" id="250" p="861.79 226.99">
+				<fragment Z="250" id="251">
+					<n NodeType="ExternalConnectionPoint" Z="251" id="252" p="861.79 212.59"/>
+					<n Element="8" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="252" id="253" p="861.79 226.99">
+						<t BoundingBox="0 0 0 0" Justification="Right" LabelJustification="Right" LabelLineHeight="variable" LineHeight="variable" Z="253" id="254">
+							<s color="4" face="96" font="1" size="10">O</s>
+						</t>
+					</n>
+					<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="254" id="255" p="874.2607 234.1899"/>
+					<n Element="9" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="255" id="256" p="886.7316 241.3899">
+						<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="256" id="257">
+							<s color="4" face="96" font="1" size="10">F</s>
+						</t>
+					</n>
+					<n Element="9" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="257" id="258" p="881.4607 221.7191">
+						<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="258" id="259">
+							<s color="4" face="96" font="1" size="10">F</s>
+						</t>
+					</n>
+					<n Element="9" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="259" id="260" p="867.0608 246.6607">
+						<t BoundingBox="0 0 0 0" Justification="Right" LabelJustification="Right" LabelLineHeight="variable" LineHeight="variable" Z="260" id="261">
+							<s color="4" face="96" font="1" size="10">F</s>
+						</t>
+					</n>
+					<b B="252" Display="Solid" Display2="Solid" E="253" LineWidth="0.72" Order="1" Topology="Unspecified" Z="261" color="4" id="262"/>
+					<b B="255" Display="Solid" Display2="Solid" E="256" LineWidth="0.72" Order="1" Topology="Unspecified" Z="262" color="4" id="263"/>
+					<b B="255" Display="Solid" Display2="Solid" E="258" LineWidth="0.72" Order="1" Topology="Unspecified" Z="263" color="4" id="264"/>
+					<b B="255" Display="Solid" Display2="Solid" E="260" LineWidth="0.72" Order="1" Topology="Unspecified" Z="264" color="4" id="265"/>
+					<b B="253" Display="Solid" Display2="Solid" E="255" LineWidth="0.72" Order="1" Topology="Unspecified" Z="265" color="4" id="266"/>
+				</fragment>
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="266" id="267">
+					<s color="4" face="96" font="1" size="10">OCF3</s>
+				</t>
+			</n>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="267" id="268" p="863.3 126.27"/>
+			<n Element="7" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="268" id="269" p="877.38 123.27">
+				<t BoundingBox="0 0 0 0" Justification="Right" LabelJustification="Right" LabelLineHeight="variable" LineHeight="variable" Z="269" id="270">
+					<s color="4" face="96" font="1" size="10">N</s>
+				</t>
+			</n>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="270" id="271" p="884.58 135.74"/>
+			<n Element="7" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="271" id="272" p="874.95 146.45">
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="272" id="273">
+					<s color="4" face="96" font="1" size="10">N</s>
+				</t>
+			</n>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="3" Z="273" id="274" p="883.24 110.12"/>
+			<n Element="7" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="274" id="275" p="799.44 147.79">
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="275" id="276">
+					<s color="4" face="96" font="1" size="10">NH</s>
+				</t>
+			</n>
+			<n Element="8" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="276" id="277" p="811.91 126.19">
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="277" id="278">
+					<s color="4" face="96" font="1" size="10">O</s>
+				</t>
+			</n>
+			<n Element="8" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="278" id="279" p="811.91 154.99">
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="279" id="280">
+					<s color="4" face="96" font="1" size="10">O</s>
+				</t>
+			</n>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="3" Z="280" id="281" p="786.97 140.59"/>
+			<b B="232" BondSpacing="18" Display="Solid" Display2="Solid" E="233" LineWidth="0.72" Order="2" Topology="Unspecified" Z="281" color="4" id="282"/>
+			<b B="233" Display="Solid" Display2="Solid" E="234" LineWidth="0.72" Order="1" Topology="Unspecified" Z="282" color="4" id="283"/>
+			<b B="234" BondSpacing="18" Display="Solid" Display2="Solid" E="235" LineWidth="0.72" Order="2" Topology="Unspecified" Z="283" color="4" id="284"/>
+			<b B="235" Display="Solid" Display2="Solid" E="236" LineWidth="0.72" Order="1" Topology="Unspecified" Z="284" color="4" id="285"/>
+			<b B="236" BondSpacing="18" Display="Solid" Display2="Solid" E="237" LineWidth="0.72" Order="2" Topology="Unspecified" Z="285" color="4" id="286"/>
+			<b B="237" Display="Solid" Display2="Solid" E="232" LineWidth="0.72" Order="1" Topology="Unspecified" Z="286" color="4" id="287"/>
+			<b B="235" Display="Solid" Display2="Solid" E="238" LineWidth="0.72" Order="1" Topology="Unspecified" Z="287" color="4" id="288"/>
+			<b B="236" Display="Solid" Display2="Solid" E="240" LineWidth="0.72" Order="1" Topology="Unspecified" Z="288" color="4" id="289"/>
+			<b B="232" Display="Solid" Display2="Solid" E="241" LineWidth="0.72" Order="1" Topology="Unspecified" Z="289" color="4" id="290"/>
+			<b B="238" Display="Solid" Display2="Solid" E="243" LineWidth="0.72" Order="1" Topology="Unspecified" Z="290" color="4" id="291"/>
+			<b B="243" BondSpacing="18" Display="Solid" Display2="Solid" E="244" LineWidth="0.72" Order="2" Topology="Unspecified" Z="291" color="4" id="292"/>
+			<b B="244" Display="Solid" Display2="Solid" E="246" LineWidth="0.72" Order="1" Topology="Unspecified" Z="292" color="4" id="293"/>
+			<b B="246" BondSpacing="18" Display="Solid" Display2="Solid" E="247" LineWidth="0.72" Order="2" Topology="Unspecified" Z="293" color="4" id="294"/>
+			<b B="247" Display="Solid" Display2="Solid" E="248" LineWidth="0.72" Order="1" Topology="Unspecified" Z="294" color="4" id="295"/>
+			<b B="248" BondSpacing="18" Display="Solid" Display2="Solid" E="249" LineWidth="0.72" Order="2" Topology="Unspecified" Z="295" color="4" id="296"/>
+			<b B="249" Display="Solid" Display2="Solid" E="243" LineWidth="0.72" Order="1" Topology="Unspecified" Z="296" color="4" id="297"/>
+			<b B="247" Display="Solid" Display2="Solid" E="250" EndAttach="0" LineWidth="0.72" Order="1" Topology="Unspecified" Z="297" color="4" id="298"/>
+			<b B="240" BondSpacing="18" Display="Solid" Display2="Solid" E="268" LineWidth="0.72" Order="2" Topology="Unspecified" Z="298" color="4" id="299"/>
+			<b B="268" Display="Solid" Display2="Solid" E="269" LineWidth="0.72" Order="1" Topology="Unspecified" Z="299" color="4" id="300"/>
+			<b B="269" Display="Solid" Display2="Solid" E="271" LineWidth="0.72" Order="1" Topology="Unspecified" Z="300" color="4" id="301"/>
+			<b B="271" BondSpacing="18" Display="Solid" Display2="Solid" E="272" LineWidth="0.72" Order="2" Topology="Unspecified" Z="301" color="4" id="302"/>
+			<b B="272" Display="Solid" Display2="Solid" E="240" LineWidth="0.72" Order="1" Topology="Unspecified" Z="302" color="4" id="303"/>
+			<b B="269" Display="Solid" Display2="Solid" E="274" LineWidth="0.72" Order="1" Topology="Unspecified" Z="303" color="4" id="304"/>
+			<b B="241" Display="Solid" Display2="Solid" E="275" LineWidth="0.72" Order="1" Topology="Unspecified" Z="304" color="4" id="305"/>
+			<b B="241" BondSpacing="18" Display="Solid" Display2="Solid" E="277" LineWidth="0.72" Order="2" Topology="Unspecified" Z="305" color="4" id="306"/>
+			<b B="241" BondSpacing="18" Display="Solid" Display2="Solid" E="279" LineWidth="0.72" Order="2" Topology="Unspecified" Z="306" color="4" id="307"/>
+			<b B="275" Display="Solid" Display2="Solid" E="281" LineWidth="0.72" Order="1" Topology="Unspecified" Z="307" color="4" id="308"/>
+		</fragment>
+		<t BoundingBox="0 0 0 0" CaptionJustification="Left" CaptionLineHeight="11.3" IgnoreWarnings="yes" Justification="Left" LineHeight="11.3" Z="308" id="309" p="830.88 245.91">
+			<s color="5" face="0" font="1" size="10">HW180004</s>
+		</t>
+		<fragment Z="309" id="310">
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="310" id="311" p="47.8 148.48"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="311" id="312" p="47.8 162.83"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="312" id="313" p="60.23 170.01"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="313" id="314" p="72.66 162.83"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="314" id="315" p="72.66 148.48"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="315" id="316" p="60.36 141.38"/>
+			<n Element="7" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="316" id="317" p="85.09 170.01">
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="317" id="318">
+					<s color="4" face="96" font="1" size="10">NH</s>
+				</t>
+			</n>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="318" id="319" p="85.09 141.31"/>
+			<n Element="16" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="319" id="320" p="35.38 141.31">
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="320" id="321">
+					<s color="4" face="96" font="1" size="10">S</s>
+				</t>
+			</n>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="2" Z="321" id="322" p="85.09 184.36"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="322" id="323" p="86.59 127.03"/>
+			<n Element="7" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="323" id="324" p="100.62 124.05">
+				<t BoundingBox="0 0 0 0" Justification="Right" LabelJustification="Right" LabelLineHeight="variable" LineHeight="variable" Z="324" id="325">
+					<s color="4" face="96" font="1" size="10">N</s>
+				</t>
+			</n>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="325" id="326" p="107.8 136.48"/>
+			<n Element="7" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="326" id="327" p="98.2 147.14">
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="327" id="328">
+					<s color="4" face="96" font="1" size="10">N</s>
+				</t>
+			</n>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="3" Z="328" id="329" p="106.46 110.94"/>
+			<n Element="7" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="329" id="330" p="22.95 134.13">
+				<t BoundingBox="0 0 0 0" Justification="Right" LabelJustification="Right" LabelLineHeight="variable" LineHeight="variable" Z="330" id="331">
+					<s color="4" face="96" font="1" size="10">NH</s>
+				</t>
+			</n>
+			<n Element="8" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="331" id="332" p="42.55 128.88">
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="332" id="333">
+					<s color="4" face="96" font="1" size="10">O</s>
+				</t>
+			</n>
+			<n Element="8" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="333" id="334" p="28.2 153.73">
+				<t BoundingBox="0 0 0 0" Justification="Right" LabelJustification="Right" LabelLineHeight="variable" LineHeight="variable" Z="334" id="335">
+					<s color="4" face="96" font="1" size="10">O</s>
+				</t>
+			</n>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="3" Z="335" id="336" p="22.95 119.78"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="336" id="337" p="97.51 191.53"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="337" id="338" p="97.51 205.88"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="338" id="339" p="109.94 213.06"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="339" id="340" p="122.37 205.88"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="340" id="341" p="122.37 191.53"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="341" id="342" p="109.94 184.36"/>
+			<b B="311" BondSpacing="18" Display="Solid" Display2="Solid" E="312" LineWidth="0.72" Order="2" Topology="Unspecified" Z="342" color="4" id="343"/>
+			<b B="312" Display="Solid" Display2="Solid" E="313" LineWidth="0.72" Order="1" Topology="Unspecified" Z="343" color="4" id="344"/>
+			<b B="313" BondSpacing="18" Display="Solid" Display2="Solid" E="314" LineWidth="0.72" Order="2" Topology="Unspecified" Z="344" color="4" id="345"/>
+			<b B="314" Display="Solid" Display2="Solid" E="315" LineWidth="0.72" Order="1" Topology="Unspecified" Z="345" color="4" id="346"/>
+			<b B="315" BondSpacing="19" Display="Solid" Display2="Solid" E="316" LineWidth="0.72" Order="2" Topology="Unspecified" Z="346" color="4" id="347"/>
+			<b B="316" Display="Solid" Display2="Solid" E="311" LineWidth="0.72" Order="1" Topology="Unspecified" Z="347" color="4" id="348"/>
+			<b B="314" Display="Solid" Display2="Solid" E="317" LineWidth="0.72" Order="1" Topology="Unspecified" Z="348" color="4" id="349"/>
+			<b B="315" Display="Solid" Display2="Solid" E="319" LineWidth="0.72" Order="1" Topology="Unspecified" Z="349" color="4" id="350"/>
+			<b B="311" Display="Solid" Display2="Solid" E="320" LineWidth="0.72" Order="1" Topology="Unspecified" Z="350" color="4" id="351"/>
+			<b B="317" Display="Solid" Display2="Solid" E="322" LineWidth="0.72" Order="1" Topology="Unspecified" Z="351" color="4" id="352"/>
+			<b B="319" BondSpacing="18" Display="Solid" Display2="Solid" E="323" LineWidth="0.72" Order="2" Topology="Unspecified" Z="352" color="4" id="353"/>
+			<b B="323" Display="Solid" Display2="Solid" E="324" LineWidth="0.72" Order="1" Topology="Unspecified" Z="353" color="4" id="354"/>
+			<b B="324" Display="Solid" Display2="Solid" E="326" LineWidth="0.72" Order="1" Topology="Unspecified" Z="354" color="4" id="355"/>
+			<b B="326" BondSpacing="18" Display="Solid" Display2="Solid" E="327" LineWidth="0.72" Order="2" Topology="Unspecified" Z="355" color="4" id="356"/>
+			<b B="327" Display="Solid" Display2="Solid" E="319" LineWidth="0.72" Order="1" Topology="Unspecified" Z="356" color="4" id="357"/>
+			<b B="324" Display="Solid" Display2="Solid" E="329" LineWidth="0.72" Order="1" Topology="Unspecified" Z="357" color="4" id="358"/>
+			<b B="320" Display="Solid" Display2="Solid" E="330" LineWidth="0.72" Order="1" Topology="Unspecified" Z="358" color="4" id="359"/>
+			<b B="320" BondSpacing="18" Display="Solid" Display2="Solid" E="332" LineWidth="0.72" Order="2" Topology="Unspecified" Z="359" color="4" id="360"/>
+			<b B="320" BondSpacing="18" Display="Solid" Display2="Solid" E="334" LineWidth="0.72" Order="2" Topology="Unspecified" Z="360" color="4" id="361"/>
+			<b B="330" Display="Solid" Display2="Solid" E="336" LineWidth="0.72" Order="1" Topology="Unspecified" Z="361" color="4" id="362"/>
+			<b B="322" Display="Solid" Display2="Solid" E="337" LineWidth="0.72" Order="1" Topology="Unspecified" Z="362" color="4" id="363"/>
+			<b B="337" BondSpacing="18" Display="Solid" Display2="Solid" E="338" LineWidth="0.72" Order="2" Topology="Unspecified" Z="363" color="4" id="364"/>
+			<b B="338" Display="Solid" Display2="Solid" E="339" LineWidth="0.72" Order="1" Topology="Unspecified" Z="364" color="4" id="365"/>
+			<b B="339" BondSpacing="18" Display="Solid" Display2="Solid" E="340" LineWidth="0.72" Order="2" Topology="Unspecified" Z="365" color="4" id="366"/>
+			<b B="340" Display="Solid" Display2="Solid" E="341" LineWidth="0.72" Order="1" Topology="Unspecified" Z="366" color="4" id="367"/>
+			<b B="341" BondSpacing="18" Display="Solid" Display2="Solid" E="342" LineWidth="0.72" Order="2" Topology="Unspecified" Z="367" color="4" id="368"/>
+			<b B="342" Display="Solid" Display2="Solid" E="337" LineWidth="0.72" Order="1" Topology="Unspecified" Z="368" color="4" id="369"/>
+		</fragment>
+		<t BoundingBox="0 0 0 0" CaptionJustification="Center" CaptionLineHeight="11.3" IgnoreWarnings="yes" Justification="Center" LineHeight="11.3" Z="369" id="370" p="145.18 155.73">
+			<s color="3" face="0" font="1" size="10">tPSA: 73.8
+CLogP: 2.45851</s>
+		</t>
+		<t BoundingBox="0 0 0 0" CaptionJustification="Left" CaptionLineHeight="11.3" IgnoreWarnings="yes" Justification="Left" LineHeight="11.3" Z="370" id="371" p="594.6801 174.75">
+			<s color="4" face="0" font="1" size="10">tPSA: 86.16
+CLogP: 3.03334</s>
+		</t>
+		<t BoundingBox="0 0 0 0" CaptionJustification="Left" CaptionLineHeight="11.3" IgnoreWarnings="yes" Justification="Left" LineHeight="11.3" Z="371" id="372" p="878.31 169.39">
+			<s color="4" face="0" font="1" size="10">tPSA: 95.39
+CLogP: 3.52366</s>
+		</t>
+		<t BoundingBox="0 0 0 0" CaptionJustification="Left" CaptionLineHeight="11.75" IgnoreWarnings="yes" Justification="Left" LineHeight="11.75" Z="372" id="373" p="1051.38 236.91">
+			<s color="5" face="1" font="1" size="10">HW180005</s>
+		</t>
+		<fragment Z="373" id="374">
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="374" id="375" p="128.54 494.69"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="375" id="376" p="128.54 509.04"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="376" id="377" p="116.11 516.22"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="377" id="378" p="103.68 509.04"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="378" id="379" p="103.68 494.69"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="379" id="380" p="116.11 487.52"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="380" id="381" p="91.26 516.22"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="381" id="382" p="78.83 509.04"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="382" id="383" p="78.83 494.69"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="383" id="384" p="91.26 487.52"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="384" id="385" p="66.4 487.52"/>
+			<n Element="7" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="385" id="386" p="53.97 494.69">
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="386" id="387">
+					<s color="4" face="96" font="1" size="10">NH</s>
+				</t>
+			</n>
+			<n Element="8" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="387" id="388" p="66.4 473.17">
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="388" id="389">
+					<s color="4" face="96" font="1" size="10">O</s>
+				</t>
+			</n>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="389" id="390" p="41.55 487.52"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="3" Z="390" id="391" p="29.12 494.69"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="3" Z="391" id="392" p="41.55 473.17"/>
+			<n Element="8" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="392" id="393" p="116.11 530.57">
+				<t BoundingBox="0 0 0 0" Justification="Right" LabelJustification="Right" LabelLineHeight="variable" LineHeight="variable" Z="393" id="394">
+					<s color="4" face="96" font="1" size="10">O</s>
+				</t>
+			</n>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="394" id="395" p="128.54 537.74"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="395" id="396" p="140.97 530.57"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="396" id="397" p="153.39 537.74"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="397" id="398" p="153.39 552.09"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="398" id="399" p="140.97 559.27"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="399" id="400" p="128.54 552.09"/>
+			<n MarginWidth="2.5" NodeType="Nickname" Z="400" id="401" p="165.82 559.27">
+				<fragment Z="401" id="402">
+					<n NodeType="ExternalConnectionPoint" Z="402" id="403" p="153.39 552.09"/>
+					<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="403" id="404" p="165.82 559.27"/>
+					<n Element="9" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="404" id="405" p="178.2892 566.4727">
+						<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="405" id="406">
+							<s color="4" face="96" font="1" size="10">F</s>
+						</t>
+					</n>
+					<n Element="9" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="406" id="407" p="158.6173 571.7393">
+						<t BoundingBox="0 0 0 0" Justification="Right" LabelJustification="Right" LabelLineHeight="variable" LineHeight="variable" Z="407" id="408">
+							<s color="4" face="96" font="1" size="10">F</s>
+						</t>
+					</n>
+					<n Element="9" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="408" id="409" p="173.0227 546.8007">
+						<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="409" id="410">
+							<s color="4" face="96" font="1" size="10">F</s>
+						</t>
+					</n>
+					<b B="403" Display="Solid" Display2="Solid" E="404" LineWidth="0.72" Order="1" Topology="Unspecified" Z="410" color="4" id="411"/>
+					<b B="404" Display="Solid" Display2="Solid" E="405" LineWidth="0.72" Order="1" Topology="Unspecified" Z="411" color="4" id="412"/>
+					<b B="404" Display="Solid" Display2="Solid" E="407" LineWidth="0.72" Order="1" Topology="Unspecified" Z="412" color="4" id="413"/>
+					<b B="404" Display="Solid" Display2="Solid" E="409" LineWidth="0.72" Order="1" Topology="Unspecified" Z="413" color="4" id="414"/>
+				</fragment>
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="414" id="415">
+					<s color="4" face="96" font="1" size="10">CF3</s>
+				</t>
+			</n>
+			<b B="375" BondSpacing="18" Display="Solid" Display2="Solid" E="376" LineWidth="0.72" Order="2" Topology="Unspecified" Z="415" color="4" id="416"/>
+			<b B="376" Display="Solid" Display2="Solid" E="377" LineWidth="0.72" Order="1" Topology="Unspecified" Z="416" color="4" id="417"/>
+			<b B="377" BondSpacing="18" Display="Solid" Display2="Solid" E="378" LineWidth="0.72" Order="2" Topology="Unspecified" Z="417" color="4" id="418"/>
+			<b B="378" Display="Solid" Display2="Solid" E="379" LineWidth="0.72" Order="1" Topology="Unspecified" Z="418" color="4" id="419"/>
+			<b B="379" BondSpacing="18" Display="Solid" Display2="Solid" E="380" LineWidth="0.72" Order="2" Topology="Unspecified" Z="419" color="4" id="420"/>
+			<b B="380" Display="Solid" Display2="Solid" E="375" LineWidth="0.72" Order="1" Topology="Unspecified" Z="420" color="4" id="421"/>
+			<b B="378" Display="Solid" Display2="Solid" E="381" LineWidth="0.72" Order="1" Topology="Unspecified" Z="421" color="4" id="422"/>
+			<b B="381" BondSpacing="18" Display="Solid" Display2="Solid" E="382" LineWidth="0.72" Order="2" Topology="Unspecified" Z="422" color="4" id="423"/>
+			<b B="382" Display="Solid" Display2="Solid" E="383" LineWidth="0.72" Order="1" Topology="Unspecified" Z="423" color="4" id="424"/>
+			<b B="383" BondSpacing="18" Display="Solid" Display2="Solid" E="384" LineWidth="0.72" Order="2" Topology="Unspecified" Z="424" color="4" id="425"/>
+			<b B="384" Display="Solid" Display2="Solid" E="379" LineWidth="0.72" Order="1" Topology="Unspecified" Z="425" color="4" id="426"/>
+			<b B="383" Display="Solid" Display2="Solid" E="385" LineWidth="0.72" Order="1" Topology="Unspecified" Z="426" color="4" id="427"/>
+			<b B="385" Display="Solid" Display2="Solid" E="386" LineWidth="0.72" Order="1" Topology="Unspecified" Z="427" color="4" id="428"/>
+			<b B="385" BondSpacing="18" Display="Solid" Display2="Solid" E="388" LineWidth="0.72" Order="2" Topology="Unspecified" Z="428" color="4" id="429"/>
+			<b B="386" Display="Solid" Display2="Solid" E="390" LineWidth="0.72" Order="1" Topology="Unspecified" Z="429" color="4" id="430"/>
+			<b B="390" Display="Solid" Display2="Solid" E="391" LineWidth="0.72" Order="1" Topology="Unspecified" Z="430" color="4" id="431"/>
+			<b B="390" Display="Solid" Display2="Solid" E="392" LineWidth="0.72" Order="1" Topology="Unspecified" Z="431" color="4" id="432"/>
+			<b B="377" Display="Solid" Display2="Solid" E="393" LineWidth="0.72" Order="1" Topology="Unspecified" Z="432" color="4" id="433"/>
+			<b B="393" Display="Solid" Display2="Solid" E="395" LineWidth="0.72" Order="1" Topology="Unspecified" Z="433" color="4" id="434"/>
+			<b B="395" BondSpacing="18" Display="Solid" Display2="Solid" E="396" LineWidth="0.72" Order="2" Topology="Unspecified" Z="434" color="4" id="435"/>
+			<b B="396" Display="Solid" Display2="Solid" E="397" LineWidth="0.72" Order="1" Topology="Unspecified" Z="435" color="4" id="436"/>
+			<b B="397" BondSpacing="18" Display="Solid" Display2="Solid" E="398" LineWidth="0.72" Order="2" Topology="Unspecified" Z="436" color="4" id="437"/>
+			<b B="398" Display="Solid" Display2="Solid" E="399" LineWidth="0.72" Order="1" Topology="Unspecified" Z="437" color="4" id="438"/>
+			<b B="399" BondSpacing="18" Display="Solid" Display2="Solid" E="400" LineWidth="0.72" Order="2" Topology="Unspecified" Z="438" color="4" id="439"/>
+			<b B="400" Display="Solid" Display2="Solid" E="395" LineWidth="0.72" Order="1" Topology="Unspecified" Z="439" color="4" id="440"/>
+			<b B="398" Display="Solid" Display2="Solid" E="401" EndAttach="0" LineWidth="0.72" Order="1" Topology="Unspecified" Z="440" color="4" id="441"/>
+		</fragment>
+		<t BoundingBox="0 0 0 0" CaptionJustification="Center" CaptionLineHeight="11.3" IgnoreWarnings="yes" Justification="Center" LineHeight="11.3" Z="441" id="442" p="68.24 537.98">
+			<s color="4" face="0" font="1" size="10">tPSA: 38.33
+CLogP: 5.854</s>
+		</t>
+		<t BoundingBox="0 0 0 0" CaptionJustification="Center" CaptionLineHeight="11.3" IgnoreWarnings="yes" Justification="Center" LineHeight="11.3" Z="442" id="443" p="263.5 545.98">
+			<s color="4" face="0" font="1" size="10">tPSA: 72.47
+CLogP: 4.966</s>
+		</t>
+		<fragment Z="443" id="444">
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="444" id="445" p="310.52 497.57"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="445" id="446" p="310.52 511.68"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="446" id="447" p="298.3 518.73"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="447" id="448" p="286.09 511.68"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="448" id="449" p="286.09 497.57"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="449" id="450" p="298.3 490.52"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="450" id="451" p="273.87 518.73"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="451" id="452" p="261.65 511.68"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="452" id="453" p="261.65 497.57"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="453" id="454" p="273.87 490.52"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="454" id="455" p="249.43 490.52"/>
+			<n Element="7" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="455" id="456" p="237.22 497.57">
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="456" id="457">
+					<s color="4" face="96" font="1" size="10">NH</s>
+				</t>
+			</n>
+			<n Element="8" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="457" id="458" p="249.43 476.41">
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="458" id="459">
+					<s color="4" face="96" font="1" size="10">O</s>
+				</t>
+			</n>
+			<n Element="16" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="459" id="460" p="225 490.52">
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="460" id="461">
+					<s color="4" face="96" font="1" size="10">S</s>
+				</t>
+			</n>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="3" Z="461" id="462" p="212.78 483.46"/>
+			<n Element="8" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="462" id="463" p="232.05 478.3">
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="463" id="464">
+					<s color="4" face="96" font="1" size="10">O</s>
+				</t>
+			</n>
+			<n Element="8" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="464" id="465" p="298.3 532.84">
+				<t BoundingBox="0 0 0 0" Justification="Right" LabelJustification="Right" LabelLineHeight="variable" LineHeight="variable" Z="465" id="466">
+					<s color="4" face="96" font="1" size="10">O</s>
+				</t>
+			</n>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="466" id="467" p="310.52 539.89"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="467" id="468" p="322.74 532.84"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="468" id="469" p="334.96 539.89"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="469" id="470" p="334.96 554"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="470" id="471" p="322.74 561.05"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="471" id="472" p="310.52 554"/>
+			<n MarginWidth="2.5" NodeType="Nickname" Z="472" id="473" p="347.17 561.05">
+				<fragment Z="473" id="474">
+					<n NodeType="ExternalConnectionPoint" Z="474" id="475" p="334.96 554"/>
+					<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="475" id="476" p="347.17 561.0499"/>
+					<n Element="9" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="476" id="477" p="359.4327 568.1302">
+						<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="477" id="478">
+							<s color="4" face="96" font="1" size="10">F</s>
+						</t>
+					</n>
+					<n Element="9" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="478" id="479" p="340.0896 573.3126">
+						<t BoundingBox="0 0 0 0" Justification="Right" LabelJustification="Right" LabelLineHeight="variable" LineHeight="variable" Z="479" id="480">
+							<s color="4" face="96" font="1" size="10">F</s>
+						</t>
+					</n>
+					<n Element="9" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="480" id="481" p="354.2504 548.7872">
+						<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="481" id="482">
+							<s color="4" face="96" font="1" size="10">F</s>
+						</t>
+					</n>
+					<b B="475" Display="Solid" Display2="Solid" E="476" LineWidth="0.72" Order="1" Topology="Unspecified" Z="482" color="4" id="483"/>
+					<b B="476" Display="Solid" Display2="Solid" E="477" LineWidth="0.72" Order="1" Topology="Unspecified" Z="483" color="4" id="484"/>
+					<b B="476" Display="Solid" Display2="Solid" E="479" LineWidth="0.72" Order="1" Topology="Unspecified" Z="484" color="4" id="485"/>
+					<b B="476" Display="Solid" Display2="Solid" E="481" LineWidth="0.72" Order="1" Topology="Unspecified" Z="485" color="4" id="486"/>
+				</fragment>
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="486" id="487">
+					<s color="4" face="96" font="1" size="10">CF3</s>
+				</t>
+			</n>
+			<n Element="8" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="487" id="488" p="217.95 502.73">
+				<t BoundingBox="0 0 0 0" Justification="Right" LabelJustification="Right" LabelLineHeight="variable" LineHeight="variable" Z="488" id="489">
+					<s color="4" face="96" font="1" size="10">O</s>
+				</t>
+			</n>
+			<b B="445" BondSpacing="19" Display="Solid" Display2="Solid" E="446" LineWidth="0.72" Order="2" Topology="Unspecified" Z="489" color="4" id="490"/>
+			<b B="446" Display="Solid" Display2="Solid" E="447" LineWidth="0.72" Order="1" Topology="Unspecified" Z="490" color="4" id="491"/>
+			<b B="447" BondSpacing="19" Display="Solid" Display2="Solid" E="448" LineWidth="0.72" Order="2" Topology="Unspecified" Z="491" color="4" id="492"/>
+			<b B="448" Display="Solid" Display2="Solid" E="449" LineWidth="0.72" Order="1" Topology="Unspecified" Z="492" color="4" id="493"/>
+			<b B="449" BondSpacing="19" Display="Solid" Display2="Solid" E="450" LineWidth="0.72" Order="2" Topology="Unspecified" Z="493" color="4" id="494"/>
+			<b B="450" Display="Solid" Display2="Solid" E="445" LineWidth="0.72" Order="1" Topology="Unspecified" Z="494" color="4" id="495"/>
+			<b B="448" Display="Solid" Display2="Solid" E="451" LineWidth="0.72" Order="1" Topology="Unspecified" Z="495" color="4" id="496"/>
+			<b B="451" BondSpacing="19" Display="Solid" Display2="Solid" E="452" LineWidth="0.72" Order="2" Topology="Unspecified" Z="496" color="4" id="497"/>
+			<b B="452" Display="Solid" Display2="Solid" E="453" LineWidth="0.72" Order="1" Topology="Unspecified" Z="497" color="4" id="498"/>
+			<b B="453" BondSpacing="19" Display="Solid" Display2="Solid" E="454" LineWidth="0.72" Order="2" Topology="Unspecified" Z="498" color="4" id="499"/>
+			<b B="454" Display="Solid" Display2="Solid" E="449" LineWidth="0.72" Order="1" Topology="Unspecified" Z="499" color="4" id="500"/>
+			<b B="453" Display="Solid" Display2="Solid" E="455" LineWidth="0.72" Order="1" Topology="Unspecified" Z="500" color="4" id="501"/>
+			<b B="455" Display="Solid" Display2="Solid" E="456" LineWidth="0.72" Order="1" Topology="Unspecified" Z="501" color="4" id="502"/>
+			<b B="455" BondSpacing="19" Display="Solid" Display2="Solid" E="458" LineWidth="0.72" Order="2" Topology="Unspecified" Z="502" color="4" id="503"/>
+			<b B="456" Display="Solid" Display2="Solid" E="460" LineWidth="0.72" Order="1" Topology="Unspecified" Z="503" color="4" id="504"/>
+			<b B="460" Display="Solid" Display2="Solid" E="462" LineWidth="0.72" Order="1" Topology="Unspecified" Z="504" color="4" id="505"/>
+			<b B="460" BondSpacing="19" Display="Solid" Display2="Solid" E="463" LineWidth="0.72" Order="2" Topology="Unspecified" Z="505" color="4" id="506"/>
+			<b B="447" Display="Solid" Display2="Solid" E="465" LineWidth="0.72" Order="1" Topology="Unspecified" Z="506" color="4" id="507"/>
+			<b B="465" Display="Solid" Display2="Solid" E="467" LineWidth="0.72" Order="1" Topology="Unspecified" Z="507" color="4" id="508"/>
+			<b B="467" BondSpacing="19" Display="Solid" Display2="Solid" E="468" LineWidth="0.72" Order="2" Topology="Unspecified" Z="508" color="4" id="509"/>
+			<b B="468" Display="Solid" Display2="Solid" E="469" LineWidth="0.72" Order="1" Topology="Unspecified" Z="509" color="4" id="510"/>
+			<b B="469" BondSpacing="19" Display="Solid" Display2="Solid" E="470" LineWidth="0.72" Order="2" Topology="Unspecified" Z="510" color="4" id="511"/>
+			<b B="470" Display="Solid" Display2="Solid" E="471" LineWidth="0.72" Order="1" Topology="Unspecified" Z="511" color="4" id="512"/>
+			<b B="471" BondSpacing="19" Display="Solid" Display2="Solid" E="472" LineWidth="0.72" Order="2" Topology="Unspecified" Z="512" color="4" id="513"/>
+			<b B="472" Display="Solid" Display2="Solid" E="467" LineWidth="0.72" Order="1" Topology="Unspecified" Z="513" color="4" id="514"/>
+			<b B="470" Display="Solid" Display2="Solid" E="473" EndAttach="0" LineWidth="0.72" Order="1" Topology="Unspecified" Z="514" color="4" id="515"/>
+			<b B="460" BondSpacing="19" Display="Solid" Display2="Solid" E="488" LineWidth="0.72" Order="2" Topology="Unspecified" Z="515" color="4" id="516"/>
+		</fragment>
+		<t BoundingBox="0 0 0 0" CaptionJustification="Left" CaptionLineHeight="11.3" IgnoreWarnings="yes" Justification="Left" LineHeight="11.3" Z="516" id="517" p="75.16 582.61">
+			<s color="4" face="0" font="1" size="10">HW180006</s>
+		</t>
+		<t BoundingBox="0 0 0 0" CaptionJustification="Left" CaptionLineHeight="11.75" IgnoreWarnings="yes" Justification="Left" LineHeight="11.75" Z="517" id="518" p="234.04 579.73">
+			<s color="5" face="1" font="1" size="10">HW180007</s>
+		</t>
+		<t BoundingBox="0 0 0 0" CaptionJustification="Left" CaptionLineHeight="15.35" IgnoreWarnings="yes" Justification="Left" LineHeight="15.35" WordWrapWidth="264" Z="518" id="519" p="473.41 250.73">
+			<s color="3" face="0" font="1" size="10">HEK293T IC</s>
+			<s color="3" face="32" font="1" size="10">50</s>
+			<s color="3" face="0" font="1" size="10">(nM)=</s>
+			<s color="6" face="0" font="1" size="10">28.47</s>
+			<s color="3" face="0" font="1" size="10">,</s>
+			<s color="6" face="0" font="1" size="10">23.76</s>
+			<s color="3" face="0" font="1" size="10">,</s>
+			<s color="6" face="0" font="1" size="10">16.54,20.7,49.03
+</s>
+			<s color="3" face="0" font="1" size="10">H226 IC</s>
+			<s color="3" face="32" font="1" size="10">50</s>
+			<s color="3" face="0" font="1" size="10">(nM)=</s>
+			<s color="4" face="0" font="1" size="10">32.63, 20.45, 24.93,2.082, 2.928, 10.99
+9.28, 10.3, 5.91, 12.40, 10.29, 6.043
+</s>
+			<s color="3" face="0" font="1" size="10">MCF-7 IC</s>
+			<s color="3" face="32" font="1" size="10">50</s>
+			<s color="3" face="0" font="1" size="10">(nM)=23.35, 53.69,49.19,37.11, 19.47, </s>
+			<s color="6" face="0" font="1" size="10">34.6, 36.9
+</s>
+			<s color="3" face="0" font="1" size="10">Fu (%) H/R/Mou/D/Mon= </s>
+			<s color="4" face="0" font="1" size="10">0.74/1.01/0.69/0.83/1.37
+</s>
+			<s color="3" face="0" font="1" size="10">MMS(T</s>
+			<s color="3" face="32" font="1" size="10">1</s>
+			<s color="3" face="0" font="1" size="10">/</s>
+			<s color="3" face="32" font="1" size="10">2</s>
+			<s color="3" face="0" font="1" size="10">min)H/R/Mou/D/Mon
+                     198766/172/193/287/381
+% of CYP inhibition(2C9/2D6/3A4M/3A4T, 10uM)=
+ 31.47/-22.93/-23.90/5.03
+Solubility(ug/ml):549.63/FaSSGF (pH 1.6); 2.66/FaSSIF (pH 6.5); 0.53/PBS (pH 7.4)
+AUC0-t(h*ng/ml=38613(Mouse),14651(rat),20204.71(dog)</s>
+		</t>
+		<t BoundingBox="0 0 0 0" CaptionJustification="Left" CaptionLineHeight="11.3" IgnoreWarnings="yes" Justification="Left" LineHeight="11.3" Z="519" id="520" p="451.75 572.8">
+			<s color="5" face="0" font="1" size="10">HW180008(K-975)</s>
+		</t>
+		<t BoundingBox="0 0 0 0" CaptionJustification="Center" CaptionLineHeight="11.3" IgnoreWarnings="yes" Justification="Center" LineHeight="11.3" Z="520" id="521" p="577.21 521.7">
+			<s color="4" face="0" font="1" size="10">tPSA: 38.33
+CLogP: 4.726</s>
+		</t>
+		<t BoundingBox="0 0 0 0" CaptionJustification="Left" CaptionLineHeight="15.35" IgnoreWarnings="yes" Justification="Left" LineHeight="15.35" Z="521" id="522" p="420.88 587.3">
+			<s color="3" face="0" font="1" size="10">H2052 IC</s>
+			<s color="3" face="32" font="1" size="10">50</s>
+			<s color="3" face="0" font="1" size="10">(nM)=20.05,Top=88.5%
+HEK293T IC</s>
+			<s color="3" face="32" font="1" size="10">50</s>
+			<s color="3" face="0" font="1" size="10">(nM)=11.85(36.97),Top=25.26%
+HEK293T IC</s>
+			<s color="3" face="32" font="1" size="10">50</s>
+			<s color="3" face="0" font="1" size="10">(nM)=16.44(</s>
+			<s color="4" face="0" font="1" size="10">47.78</s>
+			<s color="3" face="0" font="1" size="10">),wuxi
+H226 IC</s>
+			<s color="3" face="32" font="1" size="10">50</s>
+			<s color="3" face="0" font="1" size="10">(nM)=25.24(</s>
+			<s color="4" face="0" font="1" size="10">32.63)
+</s>
+			<s color="3" face="0" font="1" size="10">H226  IC</s>
+			<s color="3" face="32" font="1" size="10">50</s>
+			<s color="3" face="0" font="1" size="10">(nM)=38.57(Staurosporine</s>
+			<s color="6" face="0" font="1" size="10">47.24</s>
+			<s color="3" face="0" font="1" size="10">)
+MCF-7 IC</s>
+			<s color="3" face="32" font="1" size="10">50</s>
+			<s color="3" face="0" font="1" size="10">(nM)=18.28(</s>
+			<s color="6" face="0" font="1" size="10">23.35</s>
+			<s color="3" face="0" font="1" size="10">)13.70(53.69)</s>
+		</t>
+		<t BoundingBox="0 0 0 0" CaptionJustification="Left" CaptionLineHeight="15.35" IgnoreWarnings="yes" Justification="Left" LineHeight="15.35" Z="522" id="523" p="769.56 261.28">
+			<s color="3" face="0" font="1" size="10">HEK293T IC</s>
+			<s color="3" face="32" font="1" size="10">50</s>
+			<s color="3" face="0" font="1" size="10">(nM)=38.51(36.97),Top=65.70%
+HEK293T IC</s>
+			<s color="3" face="32" font="1" size="10">50</s>
+			<s color="3" face="0" font="1" size="10">(nM)=46.67(</s>
+			<s color="6" face="0" font="1" size="10">20.7</s>
+			<s color="3" face="0" font="1" size="10">)</s>
+		</t>
+		<fragment Z="523" id="524">
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="524" id="525" p="494.69 498.76"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="525" id="526" p="506.65 491.85"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="526" id="527" p="518.61 498.76"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="527" id="528" p="518.61 512.56"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="528" id="529" p="506.65 519.47"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="529" id="530" p="494.69 512.56"/>
+			<n Element="7" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="530" id="531" p="482.73 491.85">
+				<t BoundingBox="0 0 0 0" Justification="Right" LabelJustification="Right" LabelLineHeight="variable" LineHeight="variable" Z="531" id="532">
+					<s color="4" face="96" font="1" size="10">NH</s>
+				</t>
+			</n>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="532" id="533" p="482.73 478.05"/>
+			<n Element="8" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="533" id="534" p="494.69 471.14">
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="534" id="535">
+					<s color="4" face="96" font="1" size="10">O</s>
+				</t>
+			</n>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="535" id="536" p="470.78 471.14"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="3" Z="536" id="537" p="530.56 519.47"/>
+			<n Element="8" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="537" id="538" p="506.65 533.28">
+				<t BoundingBox="0 0 0 0" Justification="Right" LabelJustification="Right" LabelLineHeight="variable" LineHeight="variable" Z="538" id="539">
+					<s color="4" face="96" font="1" size="10">O</s>
+				</t>
+			</n>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="539" id="540" p="518.61 540.18"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="540" id="541" p="530.56 533.28"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="541" id="542" p="542.52 540.18"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="542" id="543" p="542.52 553.99"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="543" id="544" p="530.56 560.89"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="544" id="545" p="518.61 553.99"/>
+			<n Element="17" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="545" id="546" p="554.48 560.89">
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="546" id="547">
+					<s color="4" face="96" font="1" size="10">Cl</s>
+				</t>
+			</n>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="2" Z="547" id="548" p="458.31 478.34"/>
+			<b B="525" BondSpacing="17" Display="Solid" Display2="Solid" E="526" LineWidth="0.72" Order="2" Topology="Unspecified" Z="548" color="4" id="549"/>
+			<b B="526" Display="Solid" Display2="Solid" E="527" LineWidth="0.72" Order="1" Topology="Unspecified" Z="549" color="4" id="550"/>
+			<b B="527" BondSpacing="17" Display="Solid" Display2="Solid" E="528" LineWidth="0.72" Order="2" Topology="Unspecified" Z="550" color="4" id="551"/>
+			<b B="528" Display="Solid" Display2="Solid" E="529" LineWidth="0.72" Order="1" Topology="Unspecified" Z="551" color="4" id="552"/>
+			<b B="529" BondSpacing="17" Display="Solid" Display2="Solid" E="530" LineWidth="0.72" Order="2" Topology="Unspecified" Z="552" color="4" id="553"/>
+			<b B="530" Display="Solid" Display2="Solid" E="525" LineWidth="0.72" Order="1" Topology="Unspecified" Z="553" color="4" id="554"/>
+			<b B="525" Display="Solid" Display2="Solid" E="531" LineWidth="0.72" Order="1" Topology="Unspecified" Z="554" color="4" id="555"/>
+			<b B="531" Display="Solid" Display2="Solid" E="533" LineWidth="0.72" Order="1" Topology="Unspecified" Z="555" color="4" id="556"/>
+			<b B="533" BondSpacing="17" Display="Solid" Display2="Solid" E="534" LineWidth="0.72" Order="2" Topology="Unspecified" Z="556" color="4" id="557"/>
+			<b B="533" Display="Solid" Display2="Solid" E="536" LineWidth="0.72" Order="1" Topology="Unspecified" Z="557" color="4" id="558"/>
+			<b B="528" Display="Solid" Display2="Solid" E="537" LineWidth="0.72" Order="1" Topology="Unspecified" Z="558" color="4" id="559"/>
+			<b B="529" Display="Solid" Display2="Solid" E="538" LineWidth="0.72" Order="1" Topology="Unspecified" Z="559" color="4" id="560"/>
+			<b B="538" Display="Solid" Display2="Solid" E="540" LineWidth="0.72" Order="1" Topology="Unspecified" Z="560" color="4" id="561"/>
+			<b B="540" BondSpacing="17" Display="Solid" Display2="Solid" E="541" LineWidth="0.72" Order="2" Topology="Unspecified" Z="561" color="4" id="562"/>
+			<b B="541" Display="Solid" Display2="Solid" E="542" LineWidth="0.72" Order="1" Topology="Unspecified" Z="562" color="4" id="563"/>
+			<b B="542" BondSpacing="17" Display="Solid" Display2="Solid" E="543" LineWidth="0.72" Order="2" Topology="Unspecified" Z="563" color="4" id="564"/>
+			<b B="543" Display="Solid" Display2="Solid" E="544" LineWidth="0.72" Order="1" Topology="Unspecified" Z="564" color="4" id="565"/>
+			<b B="544" BondSpacing="17" Display="Solid" Display2="Solid" E="545" LineWidth="0.72" Order="2" Topology="Unspecified" Z="565" color="4" id="566"/>
+			<b B="545" Display="Solid" Display2="Solid" E="540" LineWidth="0.72" Order="1" Topology="Unspecified" Z="566" color="4" id="567"/>
+			<b B="543" Display="Solid" Display2="Solid" E="546" LineWidth="0.72" Order="1" Topology="Unspecified" Z="567" color="4" id="568"/>
+			<b B="536" BondSpacing="18" Display="Solid" Display2="Solid" E="548" LineWidth="0.72" Order="2" Topology="Unspecified" Z="568" color="4" id="569"/>
+		</fragment>
+		<t BoundingBox="0 0 0 0" CaptionJustification="Center" CaptionLineHeight="11.3" IgnoreWarnings="yes" Justification="Center" LineHeight="11.3" Z="569" id="570" p="700.71 540.98">
+			<s color="4" face="0" font="1" size="10">tPSA: 50.69
+CLogP: 5.796</s>
+		</t>
+		<t BoundingBox="0 0 0 0" CaptionJustification="Left" CaptionLineHeight="11.3" IgnoreWarnings="yes" Justification="Left" LineHeight="11.3" Z="570" id="571" p="676.13 568.73">
+			<s color="5" face="0" font="1" size="10">HW180009</s>
+		</t>
+		<fragment Z="571" id="572">
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="572" id="573" p="963.0101 475.6"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="573" id="574" p="963.0101 489.95"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="574" id="575" p="950.5901 497.13"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="575" id="576" p="938.16 489.95"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="576" id="577" p="938.16 475.6"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="577" id="578" p="950.5901 468.43"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="578" id="579" p="925.73 497.13"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="579" id="580" p="913.3 489.95"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="580" id="581" p="913.3 475.6"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="581" id="582" p="925.73 468.43"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="582" id="583" p="900.88 468.43"/>
+			<n Element="8" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="583" id="584" p="900.88 454.08">
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="584" id="585">
+					<s color="4" face="96" font="1" size="10">O</s>
+				</t>
+			</n>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="585" id="586" p="950.5901 511.48"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="586" id="587" p="938.11 518.68"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="587" id="588" p="938.11 533.08"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="588" id="589" p="950.5901 540.28"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="589" id="590" p="963.06 533.08"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="590" id="591" p="963.06 518.68"/>
+			<n MarginWidth="2.5" NodeType="Nickname" Z="591" id="592" p="950.5901 554.68">
+				<fragment Z="592" id="593">
+					<n NodeType="ExternalConnectionPoint" Z="593" id="594" p="950.5901 540.28"/>
+					<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="594" id="595" p="950.5901 554.68"/>
+					<n Element="9" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="595" id="596" p="950.5901 569.08">
+						<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="596" id="597">
+							<s color="4" face="96" font="1" size="10">F</s>
+						</t>
+					</n>
+					<n Element="9" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="597" id="598" p="936.1901 554.6801">
+						<t BoundingBox="0 0 0 0" Justification="Right" LabelJustification="Right" LabelLineHeight="variable" LineHeight="variable" Z="598" id="599">
+							<s color="4" face="96" font="1" size="10">F</s>
+						</t>
+					</n>
+					<n Element="9" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="599" id="600" p="964.9901 554.6799">
+						<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="600" id="601">
+							<s color="4" face="96" font="1" size="10">F</s>
+						</t>
+					</n>
+					<b B="594" Display="Solid" Display2="Solid" E="595" LineWidth="0.72" Order="1" Topology="Unspecified" Z="601" color="4" id="602"/>
+					<b B="595" Display="Solid" Display2="Solid" E="596" LineWidth="0.72" Order="1" Topology="Unspecified" Z="602" color="4" id="603"/>
+					<b B="595" Display="Solid" Display2="Solid" E="598" LineWidth="0.72" Order="1" Topology="Unspecified" Z="603" color="4" id="604"/>
+					<b B="595" Display="Solid" Display2="Solid" E="600" LineWidth="0.72" Order="1" Topology="Unspecified" Z="604" color="4" id="605"/>
+				</fragment>
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="605" id="606">
+					<s color="4" face="96" font="1" size="10">CF3</s>
+				</t>
+			</n>
+			<n Element="7" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="606" id="607" p="888.45 475.6">
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="607" id="608">
+					<s color="4" face="96" font="1" size="10">NH</s>
+				</t>
+			</n>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="608" id="609" p="876.02 468.43"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="3" Z="609" id="610" p="876.02 454.08"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="610" id="611" p="863.59 475.6"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="611" id="612" p="851.17 468.43"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="612" id="613" p="838.74 475.6"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="613" id="614" p="838.74 489.95"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="614" id="615" p="851.17 497.13"/>
+			<n Element="7" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="615" id="616" p="863.59 489.95">
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="616" id="617">
+					<s color="4" face="96" font="1" size="10">N</s>
+				</t>
+			</n>
+			<b B="573" BondSpacing="18" Display="Solid" Display2="Solid" E="574" LineWidth="0.72" Order="2" Topology="Unspecified" Z="617" color="4" id="618"/>
+			<b B="574" Display="Solid" Display2="Solid" E="575" LineWidth="0.72" Order="1" Topology="Unspecified" Z="618" color="4" id="619"/>
+			<b B="575" BondSpacing="18" Display="Solid" Display2="Solid" E="576" LineWidth="0.72" Order="2" Topology="Unspecified" Z="619" color="4" id="620"/>
+			<b B="576" Display="Solid" Display2="Solid" E="577" LineWidth="0.72" Order="1" Topology="Unspecified" Z="620" color="4" id="621"/>
+			<b B="577" BondSpacing="18" Display="Solid" Display2="Solid" E="578" LineWidth="0.72" Order="2" Topology="Unspecified" Z="621" color="4" id="622"/>
+			<b B="578" Display="Solid" Display2="Solid" E="573" LineWidth="0.72" Order="1" Topology="Unspecified" Z="622" color="4" id="623"/>
+			<b B="576" Display="Solid" Display2="Solid" E="579" LineWidth="0.72" Order="1" Topology="Unspecified" Z="623" color="4" id="624"/>
+			<b B="579" BondSpacing="18" Display="Solid" Display2="Solid" E="580" LineWidth="0.72" Order="2" Topology="Unspecified" Z="624" color="4" id="625"/>
+			<b B="580" Display="Solid" Display2="Solid" E="581" LineWidth="0.72" Order="1" Topology="Unspecified" Z="625" color="4" id="626"/>
+			<b B="581" BondSpacing="18" Display="Solid" Display2="Solid" E="582" LineWidth="0.72" Order="2" Topology="Unspecified" Z="626" color="4" id="627"/>
+			<b B="582" Display="Solid" Display2="Solid" E="577" LineWidth="0.72" Order="1" Topology="Unspecified" Z="627" color="4" id="628"/>
+			<b B="581" Display="Solid" Display2="Solid" E="583" LineWidth="0.72" Order="1" Topology="Unspecified" Z="628" color="4" id="629"/>
+			<b B="583" BondSpacing="18" Display="Solid" Display2="Solid" E="584" LineWidth="0.72" Order="2" Topology="Unspecified" Z="629" color="4" id="630"/>
+			<b B="575" Display="Solid" Display2="Solid" E="586" LineWidth="0.72" Order="1" Topology="Unspecified" Z="630" color="4" id="631"/>
+			<b B="586" BondSpacing="18" Display="Solid" Display2="Solid" E="587" LineWidth="0.72" Order="2" Topology="Unspecified" Z="631" color="4" id="632"/>
+			<b B="587" Display="Solid" Display2="Solid" E="588" LineWidth="0.72" Order="1" Topology="Unspecified" Z="632" color="4" id="633"/>
+			<b B="588" BondSpacing="18" Display="Solid" Display2="Solid" E="589" LineWidth="0.72" Order="2" Topology="Unspecified" Z="633" color="4" id="634"/>
+			<b B="589" Display="Solid" Display2="Solid" E="590" LineWidth="0.72" Order="1" Topology="Unspecified" Z="634" color="4" id="635"/>
+			<b B="590" BondSpacing="18" Display="Solid" Display2="Solid" E="591" LineWidth="0.72" Order="2" Topology="Unspecified" Z="635" color="4" id="636"/>
+			<b B="591" Display="Solid" Display2="Solid" E="586" LineWidth="0.72" Order="1" Topology="Unspecified" Z="636" color="4" id="637"/>
+			<b B="589" Display="Solid" Display2="Solid" E="592" EndAttach="0" LineWidth="0.72" Order="1" Topology="Unspecified" Z="637" color="4" id="638"/>
+			<b B="583" Display="Solid" Display2="Solid" E="607" LineWidth="0.72" Order="1" Topology="Unspecified" Z="638" color="4" id="639"/>
+			<b B="607" Display="Solid" Display2="Solid" E="609" LineWidth="0.72" Order="1" Topology="Unspecified" Z="639" color="4" id="640"/>
+			<b B="609" BoldWidth="3.12" Display="WedgedHashBegin" Display2="Solid" E="610" HashSpacing="2.4" LineWidth="0.72" Order="1" Topology="Unspecified" Z="640" color="4" id="641"/>
+			<b B="609" Display="Solid" Display2="Solid" E="611" LineWidth="0.72" Order="1" Topology="Unspecified" Z="641" color="4" id="642"/>
+			<b B="611" BondSpacing="18" Display="Solid" Display2="Solid" E="612" LineWidth="0.72" Order="2" Topology="Unspecified" Z="642" color="4" id="643"/>
+			<b B="612" Display="Solid" Display2="Solid" E="613" LineWidth="0.72" Order="1" Topology="Unspecified" Z="643" color="4" id="644"/>
+			<b B="613" BondSpacing="18" Display="Solid" Display2="Solid" E="614" LineWidth="0.72" Order="2" Topology="Unspecified" Z="644" color="4" id="645"/>
+			<b B="614" Display="Solid" Display2="Solid" E="615" LineWidth="0.72" Order="1" Topology="Unspecified" Z="645" color="4" id="646"/>
+			<b B="615" BondSpacing="18" Display="Solid" Display2="Solid" E="616" LineWidth="0.72" Order="2" Topology="Unspecified" Z="646" color="4" id="647"/>
+			<b B="616" Display="Solid" Display2="Solid" E="611" LineWidth="0.72" Order="1" Topology="Unspecified" Z="647" color="4" id="648"/>
+		</fragment>
+		<fragment Z="648" id="649">
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="649" id="650" p="764.76 496.57"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="650" id="651" p="764.76 510.92"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="651" id="652" p="752.33 518.09"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="652" id="653" p="739.91 510.92"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="653" id="654" p="739.91 496.57"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="654" id="655" p="752.33 489.39"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="655" id="656" p="727.48 518.09"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="656" id="657" p="715.05 510.92"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="657" id="658" p="715.05 496.57"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="658" id="659" p="727.48 489.39"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="659" id="660" p="702.62 489.39"/>
+			<n Element="7" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="660" id="661" p="690.2 496.57">
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="661" id="662">
+					<s color="4" face="96" font="1" size="10">NH</s>
+				</t>
+			</n>
+			<n Element="8" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="662" id="663" p="702.62 475.04">
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="663" id="664">
+					<s color="4" face="96" font="1" size="10">O</s>
+				</t>
+			</n>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="664" id="665" p="677.77 489.39"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="665" id="666" p="665.34 496.57"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="3" Z="666" id="667" p="677.77 475.04"/>
+			<n Element="8" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="667" id="668" p="752.33 532.44">
+				<t BoundingBox="0 0 0 0" Justification="Right" LabelJustification="Right" LabelLineHeight="variable" LineHeight="variable" Z="668" id="669">
+					<s color="4" face="96" font="1" size="10">O</s>
+				</t>
+			</n>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="669" id="670" p="764.76 539.62"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="670" id="671" p="777.19 532.44"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="671" id="672" p="789.62 539.62"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="672" id="673" p="789.62 553.97"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="673" id="674" p="777.19 561.14"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="674" id="675" p="764.76 553.97"/>
+			<n MarginWidth="2.5" NodeType="Nickname" Z="675" id="676" p="802.04 561.14">
+				<fragment Z="676" id="677">
+					<n NodeType="ExternalConnectionPoint" Z="677" id="678" p="789.62 553.97"/>
+					<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="678" id="679" p="802.0401 561.1401"/>
+					<n Element="9" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="679" id="680" p="814.511 568.3395">
+						<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="680" id="681">
+							<s color="4" face="96" font="1" size="10">F</s>
+						</t>
+					</n>
+					<n Element="9" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="681" id="682" p="794.8406 573.6113">
+						<t BoundingBox="0 0 0 0" Justification="Right" LabelJustification="Right" LabelLineHeight="variable" LineHeight="variable" Z="682" id="683">
+							<s color="4" face="96" font="1" size="10">F</s>
+						</t>
+					</n>
+					<n Element="9" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="683" id="684" p="809.2396 548.6691">
+						<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="684" id="685">
+							<s color="4" face="96" font="1" size="10">F</s>
+						</t>
+					</n>
+					<b B="678" Display="Solid" Display2="Solid" E="679" LineWidth="0.72" Order="1" Topology="Unspecified" Z="685" color="4" id="686"/>
+					<b B="679" Display="Solid" Display2="Solid" E="680" LineWidth="0.72" Order="1" Topology="Unspecified" Z="686" color="4" id="687"/>
+					<b B="679" Display="Solid" Display2="Solid" E="682" LineWidth="0.72" Order="1" Topology="Unspecified" Z="687" color="4" id="688"/>
+					<b B="679" Display="Solid" Display2="Solid" E="684" LineWidth="0.72" Order="1" Topology="Unspecified" Z="688" color="4" id="689"/>
+				</fragment>
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="689" id="690">
+					<s color="4" face="96" font="1" size="10">CF3</s>
+				</t>
+			</n>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="690" id="691" p="652.87 489.37"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="691" id="692" p="640.4 496.57"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="692" id="693" p="640.4 510.97"/>
+			<n Element="6" MarginWidth="2.5" NodeType="Element" NumHydrogens="1" Z="693" id="694" p="652.87 518.17"/>
+			<n Element="7" MarginWidth="2.5" NodeType="Element" NumHydrogens="0" Z="694" id="695" p="665.34 510.97">
+				<t BoundingBox="0 0 0 0" Justification="Left" LabelJustification="Left" LabelLineHeight="variable" LineHeight="variable" Z="695" id="696">
+					<s color="4" face="96" font="1" size="10">N</s>
+				</t>
+			</n>
+			<b B="650" BondSpacing="18" Display="Solid" Display2="Solid" E="651" LineWidth="0.72" Order="2" Topology="Unspecified" Z="696" color="4" id="697"/>
+			<b B="651" Display="Solid" Display2="Solid" E="652" LineWidth="0.72" Order="1" Topology="Unspecified" Z="697" color="4" id="698"/>
+			<b B="652" BondSpacing="18" Display="Solid" Display2="Solid" E="653" LineWidth="0.72" Order="2" Topology="Unspecified" Z="698" color="4" id="699"/>
+			<b B="653" Display="Solid" Display2="Solid" E="654" LineWidth="0.72" Order="1" Topology="Unspecified" Z="699" color="4" id="700"/>
+			<b B="654" BondSpacing="18" Display="Solid" Display2="Solid" E="655" LineWidth="0.72" Order="2" Topology="Unspecified" Z="700" color="4" id="701"/>
+			<b B="655" Display="Solid" Display2="Solid" E="650" LineWidth="0.72" Order="1" Topology="Unspecified" Z="701" color="4" id="702"/>
+			<b B="653" Display="Solid" Display2="Solid" E="656" LineWidth="0.72" Order="1" Topology="Unspecified" Z="702" color="4" id="703"/>
+			<b B="656" BondSpacing="18" Display="Solid" Display2="Solid" E="657" LineWidth="0.72" Order="2" Topology="Unspecified" Z="703" color="4" id="704"/>
+			<b B="657" Display="Solid" Display2="Solid" E="658" LineWidth="0.72" Order="1" Topology="Unspecified" Z="704" color="4" id="705"/>
+			<b B="658" BondSpacing="18" Display="Solid" Display2="Solid" E="659" LineWidth="0.72" Order="2" Topology="Unspecified" Z="705" color="4" id="706"/>
+			<b B="659" Display="Solid" Display2="Solid" E="654" LineWidth="0.72" Order="1" Topology="Unspecified" Z="706" color="4" id="707"/>
+			<b B="658" Display="Solid" Display2="Solid" E="660" LineWidth="0.72" Order="1" Topology="Unspecified" Z="707" color="4" id="708"/>
+			<b B="660" Display="Solid" Display2="Solid" E="661" LineWidth="0.72" Order="1" Topology="Unspecified" Z="708" color="4" id="709"/>
+			<b B="660" BondSpacing="18" Display="Solid" Display2="Solid" E="663" LineWidth="0.72" Order="2" Topology="Unspecified" Z="709" color="4" id="710"/>
+			<b B="661" Display="Solid" Display2="Solid" E="665" LineWidth="0.72" Order="1" Topology="Unspecified" Z="710" color="4" id="711"/>
+			<b B="665" Display="Solid" Display2="Solid" E="666" LineWidth="0.72" Order="1" Topology="Unspecified" Z="711" color="4" id="712"/>
+			<b B="665" BoldWidth="3.12" Display="WedgedHashBegin" Display2="Solid" E="667" HashSpacing="2.4" LineWidth="0.72" Order="1" Topology="Unspecified" Z="712" color="4" id="713"/>
+			<b B="652" Display="Solid" Display2="Solid" E="668" LineWidth="0.72" Order="1" Topology="Unspecified" Z="713" color="4" id="714"/>
+			<b B="668" Display="Solid" Display2="Solid" E="670" LineWidth="0.72" Order="1" Topology="Unspecified" Z="714" color="4" id="715"/>
+			<b B="670" BondSpacing="18" Display="Solid" Display2="Solid" E="671" LineWidth="0.72" Order="2" Topology="Unspecified" Z="715" color="4" id="716"/>
+			<b B="671" Display="Solid" Display2="Solid" E="672" LineWidth="0.72" Order="1" Topology="Unspecified" Z="716" color="4" id="717"/>
+			<b B="672" BondSpacing="18" Display="Solid" Display2="Solid" E="673" LineWidth="0.72" Order="2" Topology="Unspecified" Z="717" color="4" id="718"/>
+			<b B="673" Display="Solid" Display2="Solid" E="674" LineWidth="0.72" Order="1" Topology="Unspecified" Z="718" color="4" id="719"/>
+			<b B="674" BondSpacing="18" Display="Solid" Display2="Solid" E="675" LineWidth="0.72" Order="2" Topology="Unspecified" Z="719" color="4" id="720"/>
+			<b B="675" Display="Solid" Display2="Solid" E="670" LineWidth="0.72" Order="1" Topology="Unspecified" Z="720" color="4" id="721"/>
+			<b B="673" Display="Solid" Display2="Solid" E="676" EndAttach="0" LineWidth="0.72" Order="1" Topology="Unspecified" Z="721" color="4" id="722"/>
+			<b B="666" BondSpacing="18" Display="Solid" Display2="Solid" E="691" LineWidth="0.72" Order="2" Topology="Unspecified" Z="722" color="4" id="723"/>
+			<b B="691" Display="Solid" Display2="Solid" E="692" LineWidth="0.72" Order="1" Topology="Unspecified" Z="723" color="4" id="724"/>
+			<b B="692" BondSpacing="18" Display="Solid" Display2="Solid" E="693" LineWidth="0.72" Order="2" Topology="Unspecified" Z="724" color="4" id="725"/>
+			<b B="693" Display="Solid" Display2="Solid" E="694" LineWidth="0.72" Order="1" Topology="Unspecified" Z="725" color="4" id="726"/>
+			<b B="694" BondSpacing="18" Display="Solid" Display2="Solid" E="695" LineWidth="0.72" Order="2" Topology="Unspecified" Z="726" color="4" id="727"/>
+			<b B="695" Display="Solid" Display2="Solid" E="666" LineWidth="0.72" Order="1" Topology="Unspecified" Z="727" color="4" id="728"/>
+		</fragment>
+		<t BoundingBox="0 0 0 0" CaptionJustification="Center" CaptionLineHeight="11.3" IgnoreWarnings="yes" Justification="Center" LineHeight="11.3" Z="728" id="729" p="895.84 518.08">
+			<s color="4" face="0" font="1" size="10">tPSA: 41.46
+CLogP: 5.586</s>
+		</t>
+		<t BoundingBox="0 0 0 0" CaptionJustification="Left" CaptionLineHeight="11.75" IgnoreWarnings="yes" Justification="Left" LineHeight="11.75" Z="729" id="730" p="865.91 547.01">
+			<s color="5" face="0" font="1" size="10">HW180010
+</s>
+			<s color="5" face="1" font="1" size="10">(VT-104)</s>
+		</t>
+		<t BoundingBox="0 0 0 0" CaptionJustification="Left" CaptionLineHeight="15.35" IgnoreWarnings="yes" Justification="Left" LineHeight="15.35" Z="730" id="731" p="11.53 253.03">
+			<s color="3" face="0" font="1" size="10">HEK293T IC</s>
+			<s color="3" face="32" font="1" size="10">50</s>
+			<s color="3" face="0" font="1" size="10">(nM)=69.88(6.358),
+Top=75.85%</s>
+		</t>
+		<t BoundingBox="0 0 0 0" CaptionJustification="Left" CaptionLineHeight="15.35" IgnoreWarnings="yes" Justification="Left" LineHeight="15.35" WordWrapWidth="254" Z="731" id="732" p="203.97 240.5">
+			<s color="3" face="0" font="1" size="10">HEK293T IC</s>
+			<s color="3" face="32" font="1" size="10">50</s>
+			<s color="3" face="0" font="1" size="10">(nM)=45.51(</s>
+			<s color="6" face="0" font="1" size="10">16.54</s>
+			<s color="3" face="0" font="1" size="10">)
+MCF-7 IC</s>
+			<s color="3" face="32" font="1" size="10">50</s>
+			<s color="3" face="0" font="1" size="10">(nM)=</s>
+			<s color="6" face="0" font="1" size="10">52.01(34.6),Top=79.88%;
+61.6(35.3),Top=75%, 39.35,top=69.7%
+</s>
+			<s color="3" face="0" font="1" size="10">H226 IC</s>
+			<s color="3" face="32" font="1" size="10">50</s>
+			<s color="3" face="0" font="1" size="10">(nM)=</s>
+			<s color="6" face="0" font="1" size="10">15.2(7.9), Top=63%;</s>
+			<s color="3" face="0" font="1" size="10"/>
+			<s color="6" face="0" font="1" size="10">14.6(9.5), Top=71%; 24.8, Top=51%; 20.9;
+ 25, Top=57%
+</s>
+			<s color="3" face="0" font="1" size="10">Fu (%) H/R/Mou/D/Mon= </s>
+			<s color="4" face="0" font="1" size="10">0.67/0.60/1.85/0.4/0.8
+</s>
+			<s color="3" face="0" font="1" size="10">MMS(T</s>
+			<s color="3" face="32" font="1" size="10">1</s>
+			<s color="3" face="0" font="1" size="10">/</s>
+			<s color="3" face="32" font="1" size="10">2</s>
+			<s color="3" face="0" font="1" size="10">min)H/R/Mou/D/Mon
+ 63/16/22/19/22
+Solubility(ug/ml):803/FaSSGF (pH 1.6); 
+2.58/FaSSIF (pH 6.5); 0.0062/PBS (pH 7.4)
+% of CYP inhibition(2C9/2D6/3A4M/3A4T, 10uM)=55.3/19.9/-19/30.5
+</s>
+			<s color="4" face="0" font="1" size="10">hERG IC</s>
+			<s color="4" face="32" font="1" size="10">50</s>
+			<s color="4" face="0" font="1" size="10">&gt;30 uM
+</s>
+			<s color="3" face="0" font="1" size="10">AUC0-t(h*ng/ml=3538(Mouse),1569(rat),661(dog)</s>
+		</t>
+		<t BoundingBox="0 0 0 0" CaptionJustification="Left" CaptionLineHeight="15.35" IgnoreWarnings="yes" Justification="Left" LineHeight="15.35" Z="732" id="733" p="15.13 608.9">
+			<s color="3" face="0" font="1" size="10">HEK293T IC</s>
+			<s color="3" face="32" font="1" size="10">50</s>
+			<s color="3" face="0" font="1" size="10">(nM)=43.26(</s>
+			<s color="6" face="0" font="1" size="10">20.7</s>
+			<s color="3" face="0" font="1" size="10">)</s>
+		</t>
+		<t BoundingBox="0 0 0 0" CaptionJustification="Left" CaptionLineHeight="15.35" IgnoreWarnings="yes" Justification="Left" LineHeight="15.35" Z="733" id="734" p="837.15 578.04">
+			<s color="3" face="0" font="1" size="10">HEK293T IC</s>
+			<s color="3" face="32" font="1" size="10">50</s>
+			<s color="3" face="0" font="1" size="10">(nM)=36.55(</s>
+			<s color="6" face="0" font="1" size="10">20.7</s>
+			<s color="3" face="0" font="1" size="10">)
+H226 IC</s>
+			<s color="3" face="32" font="1" size="10">50</s>
+			<s color="3" face="0" font="1" size="10">(nM)=20.78(</s>
+			<s color="4" face="0" font="1" size="10">32.63)</s>
+		</t>
+		<t BoundingBox="0 0 0 0" CaptionJustification="Left" CaptionLineHeight="15.35" IgnoreWarnings="yes" Justification="Left" LineHeight="15.35" Z="734" id="735" p="1017.42 255.87">
+			<s color="3" face="0" font="1" size="10">HEK293T IC</s>
+			<s color="3" face="32" font="1" size="10">50</s>
+			<s color="3" face="0" font="1" size="10">(nM)=9.851(</s>
+			<s color="6" face="0" font="1" size="10">20.7</s>
+			<s color="3" face="0" font="1" size="10">)</s>
+		</t>
+		<t BoundingBox="0 0 0 0" CaptionJustification="Left" CaptionLineHeight="15.35" IgnoreWarnings="yes" Justification="Left" LineHeight="15.35" Z="735" id="736" p="646.08 591.48">
+			<s color="3" face="0" font="1" size="10">HEK293T IC</s>
+			<s color="3" face="32" font="1" size="10">50</s>
+			<s color="3" face="0" font="1" size="10">(nM)=3505.81(</s>
+			<s color="6" face="0" font="1" size="10">49.03</s>
+			<s color="3" face="0" font="1" size="10">)</s>
+		</t>
+		<t BoundingBox="0 0 0 0" CaptionJustification="Left" CaptionLineHeight="15.35" IgnoreWarnings="yes" Justification="Left" LineHeight="15.35" Z="736" id="737" p="201.63 604.73">
+			<s color="3" face="0" font="1" size="10">MCF-7 IC</s>
+			<s color="3" face="32" font="1" size="10">50</s>
+			<s color="3" face="0" font="1" size="10">(nM)=16.64</s>
+			<s color="6" face="0" font="1" size="10">(53.69)</s>
+			<s color="3" face="0" font="1" size="10">Top=50.43%</s>
+		</t>
+		<t BoundingBox="0 0 0 0" CaptionJustification="Left" CaptionLineHeight="11.3" IgnoreWarnings="yes" Justification="Left" LineHeight="11.3" Z="737" id="738" p="39.75 226.5">
+			<s color="3" face="0" font="1" size="10">HW180001</s>
+		</t>
+	</page>
+</CDXML>
