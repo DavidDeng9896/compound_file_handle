@@ -247,10 +247,23 @@ SMILES 文本（可折行，max-width 与图同宽）
 
 ---
 
-## 12. 文件落点
+## 13. 细腻度修订（2026-07-23 二轮）
 
-- 规范本文：`docs/superpowers/specs/2026-07-23-compound-ui-spec.md`
-- 样式 token：`web/src/styles/tokens.css`
-- 主界面：`web/src/App.vue`（按本规范重写布局）
-- 结构单元格：`web/src/components/StructureCell.vue`
-- 设置浮层：`web/src/components/SettingsDrawer.vue`（新建）
+面向「工具产品」观感的密度与节奏：
+
+| 项 | 取值 |
+|----|------|
+| 控件高度 | 30px |
+| 标题栏 | 44px，标题 15px / 字重 600 |
+| 底栏 | ~48px，浅灰渐变底 |
+| 纵向节奏 | 工具区行距 8px；hint→tabs 约 14px；tabs→表 10px |
+| 页边距 | 外壳 8px；内容区水平 18px |
+| 表头高 | 36px；单元格上下 8px、左右 12px |
+| 圆角 | 3px |
+| 字号 | 正文 13 / 表 12.5 / 提示与 SMILES 11–12 |
+| Compound_ID | 等宽字体 |
+| 数值列 | `tabular-nums` + 右对齐 |
+| 结构卡片 | 1px `#e6e8ec` + 极轻阴影；SMILES 次级色等宽 |
+| 反馈 | 解析成功不弹成功 Toast，仅右侧状态文案 |
+
+验收：截图 `polish-after.png` 与效果图骨架一致，控件高度/间距可用尺子对齐。
