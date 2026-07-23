@@ -10,3 +10,6 @@ json-repair>=0.30.0
 PySide6>=6.6.0
 
 # Electron UI: run npm install in electron/
+
+# Web UI API (Vue3 front-end in web/)
+-r server/requirements.txt

@@ -12,10 +12,12 @@ compound_file_handle/
 │   ├── parser.py       # 解析与匹配
 │   ├── bridge.py       # Electron 子进程桥接（JSON）
 │   ├── text_ai_bridge.py  # AI 结构化 text 桥接
-│   ├── text_ai/        # AI 解析 6 表 schema、批量、导出
+│   ├── text_ai/        # AI 解析 6 表 schema、批量、导出、连表合并
 │   ├── gui.py          # PySide6 图形界面
 │   └── review.py       # 审查清单 CSV 导出
-├── electron/           # Electron 桌面应用
+├── server/             # FastAPI Web API（供 Vue 前端）
+├── web/                # Vue3 + Element Plus 前端
+├── electron/           # Electron 桌面应用（可选）
 ├── packaging/          # PyInstaller 规格
 ├── scripts/            # 命令行工具脚本
 ├── samples/            # 示例 CDXML 与 CSV
@@ -37,6 +39,25 @@ cd electron && npm install
 
 ```bash
 python -m cdxml samples/cdxml/EO018\ compounds\ list.cdxml -o out.csv
+```
+
+### Web UI 开发（推荐，无需 Electron）
+
+```bash
+pip install -r requirements.txt
+cd web && npm install && cd ..
+# 终端 1：API
+PYTHONPATH=. uvicorn server.app:app --reload --host 0.0.0.0 --port 8000
+# 终端 2：Vue3 + Element Plus
+cd web && npm run dev
+```
+
+浏览器打开 Vite 提示的地址（默认 http://127.0.0.1:5173）。
+
+或一键：
+
+```bash
+./scripts/dev-web.sh
 ```
 
 ### Electron 开发

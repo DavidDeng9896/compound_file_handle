@@ -1,5 +1,7 @@
 electron/node_modules/
 electron/dist-installer/
+web/node_modules/
+web/dist/
 dist/
 build/
 __pycache__/
