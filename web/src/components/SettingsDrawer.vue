@@ -90,9 +90,27 @@ function onTestAi() {
         aria-modal="true"
         :aria-label="title"
       >
-        <!-- 顶部：仅当前标题 + 关闭 -->
+        <!-- 顶部：当前标题（主）+ 另一项（淡色）+ 关闭 -->
         <header class="panel-head">
-          <h2 class="panel-title">{{ title }}</h2>
+          <div class="title-row">
+            <h2 class="panel-title">{{ title }}</h2>
+            <button
+              v-if="!isAi"
+              type="button"
+              class="alt-link"
+              @click="active = 'ai'"
+            >
+              AI 解析设置
+            </button>
+            <button
+              v-else
+              type="button"
+              class="alt-link"
+              @click="active = 'match'"
+            >
+              结构匹配设置
+            </button>
+          </div>
           <button type="button" class="panel-close" aria-label="关闭" @click="close">
             <el-icon :size="14"><Close /></el-icon>
           </button>
@@ -235,6 +253,13 @@ function onTestAi() {
   flex-shrink: 0;
 }
 
+.title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  min-width: 0;
+}
+
 .panel-title {
   margin: 0;
   font-size: 15px;
@@ -242,6 +267,20 @@ function onTestAi() {
   color: #1f2329;
   letter-spacing: 0.01em;
   line-height: 1.2;
+}
+
+.alt-link {
+  border: none;
+  background: transparent;
+  padding: 0;
+  color: #c0c4cc;
+  font-size: 13px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+.alt-link:hover {
+  color: #909399;
 }
 
 .panel-close {
