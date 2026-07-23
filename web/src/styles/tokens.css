@@ -179,8 +179,7 @@ body,
 }
 
 .el-tabs__nav-wrap::after {
-  height: 1px;
-  background-color: var(--cf-divider);
+  display: none;
 }
 
 .el-tabs__item {

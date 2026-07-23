@@ -919,7 +919,7 @@ onMounted(async () => {
 }
 
 .main-tabs :deep(.el-tabs__nav-wrap::after) {
-  height: 1px;
+  display: none;
 }
 
 .main-tabs :deep(.el-tabs__content) {
