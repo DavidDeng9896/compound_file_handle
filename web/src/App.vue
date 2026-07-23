@@ -208,7 +208,6 @@ async function runParse() {
     statusText.value = data.message || `解析完成：${(data.compounds || []).length} 条`
     appendLog(statusText.value)
     activeTab.value = 'results'
-    ElMessage.success(statusText.value)
     return true
   } catch (e) {
     statusText.value = e.message || String(e)
@@ -325,7 +324,6 @@ async function runTextAi({ excludeUnparseable = false } = {}) {
     statusText.value = finalPayload?.message || 'AI 结构化完成'
     appendLog(statusText.value)
     activeTab.value = 'structured'
-    ElMessage.success(statusText.value)
     return !!finalPayload?.success
   } catch (e) {
     statusText.value = e.message || String(e)
@@ -509,8 +507,10 @@ onMounted(async () => {
               class="file-name"
               @click="openFilePicker"
             />
-            <el-button @click="openSettings('match')">结构匹配设置</el-button>
-            <el-button @click="openSettings('ai')">AI 解析设置</el-button>
+            <div class="settings-group">
+              <el-button class="cf-btn-ghost" @click="openSettings('match')">结构匹配设置</el-button>
+              <el-button class="cf-btn-ghost" @click="openSettings('ai')">AI 解析设置</el-button>
+            </div>
           </div>
 
           <div class="action-row">
@@ -520,13 +520,13 @@ onMounted(async () => {
               <el-button class="cf-btn-secondary" :loading="parsing || aiRunning" @click="runAuto">自动执行</el-button>
             </div>
             <div class="progress-box">
-              <span v-if="statusText" class="status">{{ statusText }}</span>
+              <span v-if="statusText" class="status" :class="{ 'is-progress': aiProgress.visible }">{{ statusText }}</span>
               <el-progress
                 v-if="aiProgress.visible"
                 :percentage="aiProgressPct"
-                :stroke-width="8"
+                :stroke-width="6"
                 :show-text="false"
-                style="width: 220px"
+                class="ai-progress"
               />
             </div>
           </div>
@@ -545,15 +545,15 @@ onMounted(async () => {
               height="100%"
               empty-text="暂无数据"
             >
-              <el-table-column prop="compound_id" label="Compound_ID" width="130" />
-              <el-table-column label="结构" min-width="220">
+              <el-table-column prop="compound_id" label="Compound_ID" width="124" class-name="col-id" />
+              <el-table-column label="结构" min-width="210" class-name="col-struct">
                 <template #default="{ row }">
                   <StructureCell :smiles="row.smiles || ''" />
                 </template>
               </el-table-column>
-              <el-table-column prop="tpsa" label="tPSA" width="90" />
-              <el-table-column prop="clogp" label="CLogP" width="110" />
-              <el-table-column label="待解析文字" min-width="260">
+              <el-table-column prop="tpsa" label="tPSA" width="88" align="right" class-name="col-num" />
+              <el-table-column prop="clogp" label="CLogP" width="100" align="right" class-name="col-num" />
+              <el-table-column label="待解析文字" min-width="280" class-name="col-text">
                 <template #default="{ row }">
                   <div class="pre-text">{{ row.text }}</div>
                 </template>
@@ -637,7 +637,7 @@ onMounted(async () => {
       <footer class="dlg-footer">
         <template v-if="!showStructuredFooter">
           <div class="footer-left">
-            <el-button @click="logVisible = true">运行日志</el-button>
+            <el-button class="cf-btn-ghost" @click="logVisible = true">运行日志</el-button>
           </div>
           <div class="footer-right">
             <el-button class="cf-btn-secondary" @click="viewFullTable">查看完整解析表</el-button>
@@ -645,14 +645,14 @@ onMounted(async () => {
         </template>
         <template v-else>
           <div class="footer-left">
-            <el-button @click="logVisible = true">运行日志</el-button>
-            <el-button @click="exportMainCsv">导出结构解析结果</el-button>
-            <el-button @click="exportReviewCsv">导出审查清单</el-button>
-            <el-button @click="exportStructuredCsv">导出结构化数据表</el-button>
+            <el-button class="cf-btn-ghost" @click="logVisible = true">运行日志</el-button>
+            <el-button class="cf-btn-ghost" @click="exportMainCsv">导出结构解析结果</el-button>
+            <el-button class="cf-btn-ghost" @click="exportReviewCsv">导出审查清单</el-button>
+            <el-button class="cf-btn-ghost" @click="exportStructuredCsv">导出结构化数据表</el-button>
           </div>
           <div class="footer-right">
             <el-upload :auto-upload="false" :show-file-list="false" accept=".json" :on-change="importCompoundsJson">
-              <el-button>导入化合物结构</el-button>
+              <el-button class="cf-btn-ghost">导入化合物结构</el-button>
             </el-upload>
             <el-upload :auto-upload="false" :show-file-list="false" accept=".json" :on-change="importStructuredJson">
               <el-button class="cf-btn-secondary">导入化合物数据</el-button>
@@ -682,15 +682,16 @@ onMounted(async () => {
 <style scoped>
 .page {
   height: 100%;
-  padding: 10px;
+  padding: 8px;
   background: var(--cf-bg-page);
 }
 
 .dialog {
   height: 100%;
   background: var(--cf-bg-panel);
-  border: 1px solid var(--cf-border-light);
-  border-radius: 2px;
+  border: 1px solid #e3e6eb;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(31, 35, 41, 0.04), 0 8px 24px rgba(31, 35, 41, 0.04);
   display: flex;
   flex-direction: column;
   min-width: 960px;
@@ -698,8 +699,8 @@ onMounted(async () => {
 }
 
 .dlg-header {
-  height: 48px;
-  padding: 0 16px;
+  height: 44px;
+  padding: 0 18px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -709,8 +710,9 @@ onMounted(async () => {
 
 .dlg-header h1 {
   margin: 0;
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 600;
+  letter-spacing: 0.02em;
   color: var(--cf-text);
 }
 
@@ -724,7 +726,8 @@ onMounted(async () => {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 2px;
+  border-radius: var(--cf-radius);
+  transition: background-color 0.15s ease, color 0.15s ease;
 }
 .dlg-close:hover {
   color: var(--cf-text);
@@ -734,32 +737,46 @@ onMounted(async () => {
 .dlg-body {
   flex: 1;
   min-height: 0;
-  padding: 12px 16px 0;
+  padding: 14px 18px 0;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .toolbar {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   flex-shrink: 0;
+  padding-bottom: 2px;
 }
 
 .file-row,
 .action-row {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+}
+
+.settings-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
 }
 
 .file-name {
   flex: 1;
-  min-width: 200px;
+  min-width: 180px;
 }
 .file-name :deep(.el-input__wrapper) {
   cursor: pointer;
+  background: #fff;
+}
+.file-name :deep(.el-input__inner) {
+  color: var(--cf-text-regular);
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .actions {
@@ -771,14 +788,28 @@ onMounted(async () => {
   margin-left: auto;
   display: flex;
   align-items: center;
-  gap: 12px;
-  min-height: 32px;
+  justify-content: flex-end;
+  gap: 10px;
+  min-height: 30px;
+  min-width: 0;
 }
 
 .status {
-  color: var(--cf-text-regular);
-  font-size: 13px;
+  color: var(--cf-text-secondary);
+  font-size: 12px;
   white-space: nowrap;
+  max-width: 280px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.status.is-progress {
+  color: var(--cf-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.ai-progress {
+  width: 180px;
+  flex-shrink: 0;
 }
 
 .hint {
@@ -786,6 +817,7 @@ onMounted(async () => {
   color: var(--cf-text-secondary);
   font-size: 12px;
   line-height: 1.5;
+  letter-spacing: 0.01em;
 }
 
 .main-tabs {
@@ -793,10 +825,15 @@ onMounted(async () => {
   min-height: 0;
   display: flex;
   flex-direction: column;
+  margin-top: 2px;
 }
 
 .main-tabs :deep(.el-tabs__header) {
-  margin: 0 0 8px;
+  margin: 0 0 10px;
+}
+
+.main-tabs :deep(.el-tabs__nav-wrap::after) {
+  height: 1px;
 }
 
 .main-tabs :deep(.el-tabs__content) {
@@ -809,24 +846,43 @@ onMounted(async () => {
   height: 100%;
 }
 
+.main-tabs :deep(.col-id .cell) {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 12px;
+  color: var(--cf-text);
+  letter-spacing: 0.01em;
+}
+
+.main-tabs :deep(.col-num .cell) {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+  color: var(--cf-text);
+}
+
+.main-tabs :deep(.col-struct .cell) {
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
 .pre-text {
   white-space: pre-wrap;
   word-break: break-word;
-  line-height: 1.45;
+  line-height: 1.5;
   color: var(--cf-text-regular);
-  font-size: 13px;
+  font-size: 12.5px;
+  padding: 1px 0;
 }
 
 .dlg-footer {
   flex-shrink: 0;
-  min-height: 52px;
-  padding: 10px 16px;
+  min-height: 48px;
+  padding: 9px 18px;
   border-top: 1px solid var(--cf-divider);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  background: #fafbfc;
+  background: linear-gradient(180deg, #fbfcfd 0%, #f7f8fa 100%);
 }
 
 .footer-left,
@@ -842,7 +898,8 @@ onMounted(async () => {
   white-space: pre-wrap;
   word-break: break-word;
   font-size: 12px;
-  line-height: 1.5;
-  color: var(--cf-text);
+  line-height: 1.55;
+  color: var(--cf-text-regular);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 }
 </style>

@@ -97,7 +97,7 @@ function onTestAi() {
             </el-form>
           </div>
           <div class="drawer-footer">
-            <el-button @click="onSaveMatch">保存配置</el-button>
+            <el-button class="cf-btn-ghost" @click="onSaveMatch">保存配置</el-button>
           </div>
         </el-tab-pane>
 
@@ -146,8 +146,8 @@ function onTestAi() {
             </el-form>
           </div>
           <div class="drawer-footer">
-            <el-button @click="onSaveAi">保存配置</el-button>
-            <el-button @click="onTestAi">测试连接</el-button>
+            <el-button class="cf-btn-ghost" @click="onSaveAi">保存配置</el-button>
+            <el-button class="cf-btn-ghost" @click="onTestAi">测试连接</el-button>
           </div>
         </el-tab-pane>
       </el-tabs>
@@ -160,7 +160,7 @@ function onTestAi() {
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding: 4px 8px 0;
+  padding: 6px 4px 0;
 }
 .drawer-tabs {
   flex: 1;
@@ -169,7 +169,13 @@ function onTestAi() {
   flex-direction: column;
 }
 .drawer-tabs :deep(.el-tabs__header) {
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+}
+.drawer-tabs :deep(.el-tabs__item) {
+  padding: 0 12px !important;
+  height: 34px;
+  line-height: 34px;
+  font-size: 12.5px;
 }
 .drawer-tabs :deep(.el-tabs__content) {
   flex: 1;
@@ -188,43 +194,51 @@ function onTestAi() {
   flex: 1;
   min-height: 0;
   overflow: auto;
-  padding-right: 4px;
+  padding-right: 2px;
 }
 .drawer-form {
-  padding-top: 4px;
+  padding-top: 2px;
 }
 .pair {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   width: 100%;
   flex-wrap: wrap;
 }
 .pair-label {
-  color: #606266;
-  font-size: 13px;
+  color: var(--cf-text-secondary, #86909c);
+  font-size: 12px;
   white-space: nowrap;
+  min-width: 28px;
 }
 .drawer-footer {
   flex-shrink: 0;
   display: flex;
   justify-content: flex-end;
   gap: 8px;
-  padding: 12px 0 8px;
-  border-top: 1px solid #ebeef5;
+  padding: 12px 0 10px;
+  border-top: 1px solid var(--cf-divider, #ebeef2);
   background: #fff;
 }
 .ai-meta {
   display: flex;
   justify-content: space-between;
-  color: #909399;
+  align-items: center;
+  color: var(--cf-text-secondary, #86909c);
   font-size: 12px;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
+  padding: 0 1px;
+  font-variant-numeric: tabular-nums;
 }
 .placeholder-hint {
-  color: #909399;
-  font-size: 13px;
-  line-height: 1.6;
-  margin: 16px 0;
+  color: var(--cf-text-secondary, #86909c);
+  font-size: 12.5px;
+  line-height: 1.65;
+  margin: 12px 0;
+  padding: 12px 14px;
+  background: #f7f8fa;
+  border-radius: 3px;
+  border: 1px solid #eef0f3;
 }
 </style>
