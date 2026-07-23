@@ -1,0 +1,61 @@
+{
+  "compound_id": "HW180003",
+  "ic50": [
+    {"cell_line": "HEK293T", "ic50_nm": 28.47, "ic50_sd": null, "top_percent": null, "positive_control": null, "stereochemistry": null},
+    {"cell_line": "HEK293T", "ic50_nm": 23.76, "ic50_sd": null, "top_percent": null, "positive_control": null, "stereochemistry": null},
+    {"cell_line": "HEK293T", "ic50_nm": 16.54, "ic50_sd": null, "top_percent": null, "positive_control": null, "stereochemistry": null},
+    {"cell_line": "HEK293T", "ic50_nm": 20.7, "ic50_sd": null, "top_percent": null, "positive_control": null, "stereochemistry": null},
+    {"cell_line": "HEK293T", "ic50_nm": 49.03, "ic50_sd": null, "top_percent": null, "positive_control": null, "stereochemistry": null},
+    {"cell_line": "H226", "ic50_nm": 32.63, "ic50_sd": null, "top_percent": null, "positive_control": null, "stereochemistry": null},
+    {"cell_line": "H226", "ic50_nm": 20.45, "ic50_sd": null, "top_percent": null, "positive_control": null, "stereochemistry": null},
+    {"cell_line": "H226", "ic50_nm": 24.93, "ic50_sd": null, "top_percent": null, "positive_control": null, "stereochemistry": null},
+    {"cell_line": "H226", "ic50_nm": 2.082, "ic50_sd": null, "top_percent": null, "positive_control": null, "stereochemistry": null},
+    {"cell_line": "H226", "ic50_nm": 2.928, "ic50_sd": null, "top_percent": null, "positive_control": null, "stereochemistry": null},
+    {"cell_line": "H226", "ic50_nm": 10.99, "ic50_sd": null, "top_percent": null, "positive_control": null, "stereochemistry": null},
+    {"cell_line": "H226", "ic50_nm": 9.28, "ic50_sd": null, "top_percent": null, "positive_control": null, "stereochemistry": null},
+    {"cell_line": "H226", "ic50_nm": 10.3, "ic50_sd": null, "top_percent": null, "positive_control": null, "stereochemistry": null},
+    {"cell_line": "H226", "ic50_nm": 5.91, "ic50_sd": null, "top_percent": null, "positive_control": null, "stereochemistry": null},
+    {"cell_line": "H226", "ic50_nm": 12.40, "ic50_sd": null, "top_percent": null, "positive_control": null, "stereochemistry": null},
+    {"cell_line": "H226", "ic50_nm": 10.29, "ic50_sd": null, "top_percent": null, "positive_control": null, "stereochemistry": null},
+    {"cell_line": "H226", "ic50_nm": 6.043, "ic50_sd": null, "top_percent": null, "positive_control": null, "stereochemistry": null},
+    {"cell_line": "MCF-7", "ic50_nm": 23.35, "ic50_sd": null, "top_percent": null, "positive_control": null, "stereochemistry": null},
+    {"cell_line": "MCF-7", "ic50_nm": 53.69, "ic50_sd": null, "top_percent": null, "positive_control": null, "stereochemistry": null},
+    {"cell_line": "MCF-7", "ic50_nm": 49.19, "ic50_sd": null, "top_percent": null, "positive_control": null, "stereochemistry": null},
+    {"cell_line": "MCF-7", "ic50_nm": 37.11, "ic50_sd": null, "top_percent": null, "positive_control": null, "stereochemistry": null},
+    {"cell_line": "MCF-7", "ic50_nm": 19.47, "ic50_sd": null, "top_percent": null, "positive_control": null, "stereochemistry": null},
+    {"cell_line": "MCF-7", "ic50_nm": 34.6, "ic50_sd": null, "top_percent": null, "positive_control": null, "stereochemistry": null},
+    {"cell_line": "MCF-7", "ic50_nm": 36.9, "ic50_sd": null, "top_percent": null, "positive_control": null, "stereochemistry": null}
+  ],
+  "auc": [
+    {"species": "mouse", "auc_h_ng_ml": 38613, "f_percent": null, "dose_mpk": null},
+    {"species": "rat", "auc_h_ng_ml": 14651, "f_percent": null, "dose_mpk": null},
+    {"species": "dog", "auc_h_ng_ml": 20204.71, "f_percent": null, "dose_mpk": null}
+  ],
+  "fu": [
+    {"species": "human", "fu_percent": 0.74},
+    {"species": "rat", "fu_percent": 1.01},
+    {"species": "mouse", "fu_percent": 0.69},
+    {"species": "dog", "fu_percent": 0.83},
+    {"species": "monkey", "fu_percent": 1.37}
+  ],
+  "solubility": [
+    {"medium": "FaSSGF", "solubility_ug_ml": 549.63, "ph": 1.6},
+    {"medium": "FaSSIF", "solubility_ug_ml": 2.66, "ph": 6.5},
+    {"medium": "PBS", "solubility_ug_ml": 0.53, "ph": 7.4}
+  ],
+  "mms": [
+    {"species": "human", "t12_min": 198766, "method": "肝微粒体"},
+    {"species": "rat", "t12_min": 172, "method": "肝微粒体"},
+    {"species": "mouse", "t12_min": 193, "method": "肝微粒体"},
+    {"species": "dog", "t12_min": 287, "method": "肝微粒体"},
+    {"species": "monkey", "t12_min": 381, "method": "肝微粒体"}
+  ],
+  "cyp_inhibition": [
+    {"isoform": "2C9", "concentration_um": 10, "inhibition_percent": 31.47},
+    {"isoform": "2D6", "concentration_um": 10, "inhibition_percent": -22.93},
+    {"isoform": "3A4M", "concentration_um": 10, "inhibition_percent": -23.90},
+    {"isoform": "3A4T", "concentration_um": 10, "inhibition_percent": 5.03}
+  ],
+  "unparsed_lines": [],
+  "warnings": ["MMS human T1/2=198766 可能异常"]
+}
