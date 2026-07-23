@@ -4,8 +4,8 @@ import SmilesDrawer from 'smiles-drawer'
 
 const props = defineProps({
   smiles: { type: String, default: '' },
-  width: { type: Number, default: 84 },
-  height: { type: Number, default: 66 },
+  width: { type: Number, default: 88 },
+  height: { type: Number, default: 70 },
 })
 
 const svgRef = ref(null)
@@ -19,11 +19,11 @@ function draw() {
   const smiles = (props.smiles || '').trim()
   if (!smiles) {
     const t = document.createElementNS('http://www.w3.org/2000/svg', 'text')
-    t.setAttribute('x', '6')
-    t.setAttribute('y', String(props.height / 2))
-    t.setAttribute('fill', '#9ca3af')
-    t.setAttribute('font-size', '8')
-    t.textContent = '（无 SMILES）'
+    t.setAttribute('x', '8')
+    t.setAttribute('y', String(props.height / 2 + 3))
+    t.setAttribute('fill', '#c0c4cc')
+    t.setAttribute('font-size', '10')
+    t.textContent = '（无结构）'
     el.appendChild(t)
     return
   }
@@ -52,7 +52,7 @@ function draw() {
         }
       },
       () => {
-        error.value = '无法解析 SMILES'
+        error.value = '无法解析'
       }
     )
   } catch (e) {
@@ -65,8 +65,8 @@ watch(() => props.smiles, draw)
 </script>
 
 <template>
-  <div class="mol-stack">
-    <div class="mol-wrap">
+  <div class="mol">
+    <div class="mol-card">
       <svg
         ref="svgRef"
         class="mol-svg"
@@ -81,25 +81,28 @@ watch(() => props.smiles, draw)
 </template>
 
 <style scoped>
-.mol-stack {
+.mol {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  min-width: 100px;
+  gap: 6px;
+  padding: 2px 0;
 }
-.mol-wrap {
-  display: flex;
+.mol-card {
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
-  background: #fafbfc;
-  border: 1px solid #ebeef5;
-  border-radius: 4px;
+  align-self: flex-start;
+  background: #fff;
+  border: 1px solid #e4e7ed;
+  border-radius: 2px;
+  padding: 4px;
 }
 .mol-smiles {
   font-size: 11px;
   color: #606266;
   word-break: break-all;
-  line-height: 1.3;
-  max-width: 220px;
+  line-height: 1.35;
+  max-width: 240px;
 }
 .mol-err {
   font-size: 11px;

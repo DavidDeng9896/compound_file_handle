@@ -1,7 +1,9 @@
 <script setup>
 import { computed, onMounted, reactive, ref } from 'vue'
+import { Close } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
 import StructureCell from './components/StructureCell.vue'
+import SettingsDrawer from './components/SettingsDrawer.vue'
 
 const STORAGE_MATCH = {
   xl: 'cdxml_match_x_extend_left',
@@ -9,6 +11,7 @@ const STORAGE_MATCH = {
   yd: 'cdxml_match_y_down',
 }
 
+const fileInputRef = ref(null)
 const fileName = ref('')
 const fileObj = ref(null)
 const activeTab = ref('results')
@@ -17,8 +20,7 @@ const aiRunning = ref(false)
 const statusText = ref('')
 const logLines = ref([])
 const logVisible = ref(false)
-const matchDrawer = ref(false)
-const aiDrawer = ref(false)
+const settingsVisible = ref(false)
 const settingsTab = ref('match')
 
 const match = reactive({
@@ -46,19 +48,39 @@ const compounds = computed(() => lastPayload.value?.compounds || [])
 const unmatchedStructures = computed(() => lastPayload.value?.unmatched_structures || [])
 const mergedRows = computed(() => lastStructured.value?.merged_rows || [])
 const mergedColumns = computed(() => lastStructured.value?.merged_columns || [])
-const parseErrors = computed(() => {
-  const results = lastStructured.value?.results || []
-  return results.filter((r) => r.error)
-})
+const parseErrors = computed(() => (lastStructured.value?.results || []).filter((r) => r.error))
 
 const aiProgressPct = computed(() => {
   if (!aiProgress.total) return 0
   return Math.min(100, Math.round((aiProgress.done / aiProgress.total) * 100))
 })
 
+const showStructuredFooter = computed(() => activeTab.value === 'structured')
+
+const compoundIdSpans = computed(() => {
+  const rows = mergedRows.value
+  const spans = new Array(rows.length).fill(1)
+  let i = 0
+  while (i < rows.length) {
+    let j = i + 1
+    while (j < rows.length && rows[j].Compound_ID === rows[i].Compound_ID) j += 1
+    spans[i] = j - i
+    for (let k = i + 1; k < j; k++) spans[k] = 0
+    i = j
+  }
+  return spans
+})
+
+function spanMethod({ column, rowIndex }) {
+  if (column.property === 'Compound_ID') {
+    const rowspan = compoundIdSpans.value[rowIndex] ?? 1
+    return { rowspan, colspan: rowspan > 0 ? 1 : 0 }
+  }
+  return { rowspan: 1, colspan: 1 }
+}
+
 function appendLog(msg) {
-  const line = `[${new Date().toLocaleTimeString()}] ${msg}`
-  logLines.value.push(line)
+  logLines.value.push(`[${new Date().toLocaleTimeString()}] ${msg}`)
 }
 
 function loadMatchFromStorage() {
@@ -74,10 +96,10 @@ function loadMatchFromStorage() {
   }
 }
 
-function saveMatchToStorage() {
-  localStorage.setItem(STORAGE_MATCH.xl, String(match.matchXExtendLeft))
-  localStorage.setItem(STORAGE_MATCH.xr, String(match.matchXExtendRight))
-  localStorage.setItem(STORAGE_MATCH.yd, String(match.matchYDown))
+function saveMatchToStorage(m = match) {
+  localStorage.setItem(STORAGE_MATCH.xl, String(m.matchXExtendLeft))
+  localStorage.setItem(STORAGE_MATCH.xr, String(m.matchXExtendRight))
+  localStorage.setItem(STORAGE_MATCH.yd, String(m.matchYDown))
 }
 
 async function loadAiConfig() {
@@ -95,44 +117,40 @@ async function loadAiConfig() {
   })
 }
 
-function onFileChange(uploadFile) {
-  const raw = uploadFile?.raw
-  if (!raw) return
-  fileObj.value = raw
-  fileName.value = raw.name
-  appendLog(`已选择文件：${raw.name}`)
+function openFilePicker() {
+  fileInputRef.value?.click()
 }
 
-function clearFile() {
-  fileObj.value = null
-  fileName.value = ''
+function onNativeFile(e) {
+  const f = e.target.files?.[0]
+  if (!f) return
+  fileObj.value = f
+  fileName.value = f.name
+  appendLog(`已选择文件：${f.name}`)
+  e.target.value = ''
 }
 
-function openMatchSettings() {
-  settingsTab.value = 'match'
-  matchDrawer.value = true
+function openSettings(tab) {
+  settingsTab.value = tab
+  settingsVisible.value = true
 }
 
-function openAiSettings() {
-  settingsTab.value = 'ai'
-  aiDrawer.value = true
-}
-
-async function saveMatchConfig() {
-  saveMatchToStorage()
+function onSaveMatch(m) {
+  Object.assign(match, m)
+  saveMatchToStorage(m)
   ElMessage.success('结构匹配配置已保存')
-  matchDrawer.value = false
+  settingsVisible.value = false
 }
 
-async function saveAiConfig() {
+async function onSaveAi(cfg) {
   const body = {
-    base_url: aiConfig.base_url,
-    model: aiConfig.model,
-    concurrency: Number(aiConfig.concurrency) || 3,
-    system_prompt: aiConfig.system_prompt,
-    user_prompt_template: aiConfig.user_prompt_template,
+    base_url: cfg.base_url,
+    model: cfg.model,
+    concurrency: Number(cfg.concurrency) || 3,
+    system_prompt: cfg.system_prompt,
+    user_prompt_template: cfg.user_prompt_template,
   }
-  if (aiConfig.api_key) body.api_key = aiConfig.api_key
+  if (cfg.api_key) body.api_key = cfg.api_key
   const res = await fetch('/api/ai-config', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -147,12 +165,9 @@ async function saveAiConfig() {
   ElMessage.success('AI 配置已保存')
 }
 
-async function testAiConnection() {
-  const body = {
-    base_url: aiConfig.base_url,
-    model: aiConfig.model,
-  }
-  if (aiConfig.api_key) body.api_key = aiConfig.api_key
+async function onTestAi(cfg) {
+  const body = { base_url: cfg.base_url, model: cfg.model }
+  if (cfg.api_key) body.api_key = cfg.api_key
   statusText.value = '正在测试 AI 连接…'
   const res = await fetch('/api/ai-config/test', {
     method: 'POST',
@@ -160,14 +175,10 @@ async function testAiConnection() {
     body: JSON.stringify(body),
   })
   const data = await res.json()
-  if (data.success) {
-    ElMessage.success(data.message || '连接成功')
-    statusText.value = data.message || '连接成功'
-  } else {
-    ElMessage.error(data.message || '连接失败')
-    statusText.value = data.message || '连接失败'
-  }
+  statusText.value = data.message || (data.success ? '连接成功' : '连接失败')
   appendLog(statusText.value)
+  if (data.success) ElMessage.success(statusText.value)
+  else ElMessage.error(statusText.value)
 }
 
 async function runParse() {
@@ -187,9 +198,7 @@ async function runParse() {
     const res = await fetch('/api/parse', { method: 'POST', body: fd })
     const data = await res.json()
     lastPayload.value = data
-    if (data.log_lines?.length) {
-      logLines.value.push(...data.log_lines.map((l) => String(l)))
-    }
+    if (data.log_lines?.length) logLines.value.push(...data.log_lines.map(String))
     if (!data.success) {
       statusText.value = data.message || '解析失败'
       ElMessage.error(statusText.value)
@@ -216,11 +225,7 @@ function compoundsForAi({ excludeUnparseable = false } = {}) {
   if (excludeUnparseable) {
     list = list.filter((c) => (c.smiles || '').trim() && (c.text || '').trim())
   }
-  return list.map((c) => ({
-    compound_id: c.compound_id,
-    text: c.text || '',
-    smiles: c.smiles || '',
-  }))
+  return list.map((c) => ({ compound_id: c.compound_id, text: c.text || '' }))
 }
 
 async function runTextAi({ excludeUnparseable = false } = {}) {
@@ -235,7 +240,7 @@ async function runTextAi({ excludeUnparseable = false } = {}) {
   }
   if (!aiConfig.api_key && !aiConfig.api_key_set) {
     ElMessage.warning('请先在 AI 解析设置中配置 API Key')
-    openAiSettings()
+    openSettings('ai')
     return false
   }
 
@@ -248,7 +253,7 @@ async function runTextAi({ excludeUnparseable = false } = {}) {
   appendLog(`开始文本解析，共 ${list.length} 条`)
 
   const body = {
-    compounds: list.map(({ compound_id, text }) => ({ compound_id, text })),
+    compounds: list,
     exclude_empty_smiles: excludeUnparseable,
     stream: true,
     config: {
@@ -267,9 +272,7 @@ async function runTextAi({ excludeUnparseable = false } = {}) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
     })
-    if (!res.ok || !res.body) {
-      throw new Error(`请求失败 HTTP ${res.status}`)
-    }
+    if (!res.ok || !res.body) throw new Error(`请求失败 HTTP ${res.status}`)
     const reader = res.body.getReader()
     const decoder = new TextDecoder('utf-8')
     let buffer = ''
@@ -310,7 +313,6 @@ async function runTextAi({ excludeUnparseable = false } = {}) {
     }
 
     if (!finalPayload) {
-      // fallback non-stream
       const fallback = await fetch('/api/text-ai', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -334,7 +336,7 @@ async function runTextAi({ excludeUnparseable = false } = {}) {
     aiRunning.value = false
     setTimeout(() => {
       aiProgress.visible = false
-    }, 800)
+    }, 1000)
   }
 }
 
@@ -342,6 +344,14 @@ async function runAuto() {
   const ok = await runParse()
   if (!ok) return
   await runTextAi({ excludeUnparseable: true })
+}
+
+function viewFullTable() {
+  if (!mergedRows.value.length && !lastStructured.value?.tables) {
+    ElMessage.info('暂无结构化数据，请先完成文本解析')
+    return
+  }
+  activeTab.value = 'structured'
 }
 
 function downloadText(filename, content) {
@@ -378,11 +388,7 @@ async function exportReviewCsv() {
   const header = ['structure_index', 'smiles', 'center_x', 'center_y', 'x1', 'y1', 'x2', 'y2']
   const lines = [header.join(',')]
   for (const r of rows) {
-    lines.push(
-      header
-        .map((k) => `"${String(r[k] ?? '').replace(/"/g, '""')}"`)
-        .join(',')
-    )
+    lines.push(header.map((k) => `"${String(r[k] ?? '').replace(/"/g, '""')}"`).join(','))
   }
   downloadText('review_unmatched_structures.csv', '\ufeff' + lines.join('\n'))
   appendLog('已导出审查清单 CSV')
@@ -415,19 +421,12 @@ function importCompoundsJson(uploadFile) {
     try {
       const data = JSON.parse(String(reader.result || '{}'))
       const list = Array.isArray(data) ? data : data.compounds || []
-      if (!lastPayload.value) {
-        lastPayload.value = {
-          success: true,
-          compounds: list,
-          unmatched_structures: [],
-          message: '已导入化合物结构',
-        }
-      } else {
-        lastPayload.value = {
-          ...lastPayload.value,
-          compounds: list,
-          success: true,
-        }
+      lastPayload.value = {
+        ...(lastPayload.value || {}),
+        success: true,
+        compounds: list,
+        unmatched_structures: lastPayload.value?.unmatched_structures || [],
+        message: '已导入化合物结构',
       }
       ElMessage.success(`已导入 ${list.length} 条化合物`)
       appendLog(`导入化合物结构 ${list.length} 条`)
@@ -483,258 +482,284 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="app-shell">
-    <header class="app-header">
-      <h1>化合物解析</h1>
-    </header>
+  <div class="page">
+    <div class="dialog">
+      <header class="dlg-header">
+        <h1>化合物解析</h1>
+        <button type="button" class="dlg-close" aria-label="关闭" title="关闭">
+          <el-icon :size="16"><Close /></el-icon>
+        </button>
+      </header>
 
-    <section class="toolbar">
-      <div class="file-row">
-        <span class="label">上传CDXML文件</span>
-        <el-input :model-value="fileName" readonly placeholder="请选择 .cdxml 文件" class="file-input">
-          <template #append>
-            <el-upload :auto-upload="false" :show-file-list="false" accept=".cdxml,.xml" :on-change="onFileChange">
-              <el-button>浏览</el-button>
-            </el-upload>
-          </template>
-        </el-input>
-        <el-button v-if="fileName" text type="danger" @click="clearFile">清除</el-button>
-        <div class="settings-links">
-          <el-button link type="primary" @click="openMatchSettings">结构匹配设置</el-button>
-          <el-button link type="primary" @click="openAiSettings">AI 解析设置</el-button>
-        </div>
-      </div>
+      <div class="dlg-body">
+        <section class="toolbar">
+          <div class="file-row">
+            <el-button class="cf-btn-muted" @click="openFilePicker">上传CDXML文件</el-button>
+            <input
+              ref="fileInputRef"
+              type="file"
+              accept=".cdxml,.xml"
+              hidden
+              @change="onNativeFile"
+            />
+            <el-input
+              :model-value="fileName"
+              readonly
+              placeholder="请选择 .cdxml 文件"
+              class="file-name"
+              @click="openFilePicker"
+            />
+            <el-button @click="openSettings('match')">结构匹配设置</el-button>
+            <el-button @click="openSettings('ai')">AI 解析设置</el-button>
+          </div>
 
-      <div class="action-row">
-        <div class="actions">
-          <el-button type="primary" :loading="parsing" @click="runParse">开始解析</el-button>
-          <el-button :loading="aiRunning" @click="runTextAi()">文本解析</el-button>
-          <el-button :loading="parsing || aiRunning" @click="runAuto">自动执行</el-button>
-        </div>
-        <div v-if="aiProgress.visible || statusText" class="progress-box">
-          <span class="status">{{ statusText }}</span>
-          <el-progress
-            v-if="aiProgress.visible"
-            :percentage="aiProgressPct"
-            :stroke-width="8"
-            style="width: 220px"
-          />
-        </div>
-      </div>
-      <p class="hint">
-        请先运行 &lt;结构解析&gt; 再进行 &lt;文本解析&gt;，点击 &lt;自动执行&gt; 将自动排除无法解析的结构和内容
-      </p>
-    </section>
-
-    <main class="main-panel">
-      <el-tabs v-model="activeTab" class="main-tabs">
-        <el-tab-pane :label="`解析结果 (${compounds.length})`" name="results">
-          <el-table :data="compounds" border stripe height="100%" empty-text="暂无数据">
-            <el-table-column prop="compound_id" label="Compound_ID" width="130" />
-            <el-table-column label="结构" min-width="220">
-              <template #default="{ row }">
-                <StructureCell :smiles="row.smiles || ''" />
-              </template>
-            </el-table-column>
-            <el-table-column prop="tpsa" label="tPSA" width="90" />
-            <el-table-column prop="clogp" label="CLogP" width="110" />
-            <el-table-column prop="text" label="待解析文字" min-width="260" show-overflow-tooltip />
-          </el-table>
-        </el-tab-pane>
-
-        <el-tab-pane :label="`未匹配结构 (${unmatchedStructures.length})`" name="unmatched">
-          <el-table :data="unmatchedStructures" border stripe height="100%" empty-text="暂无数据">
-            <el-table-column prop="structure_index" label="结构序号" width="100" />
-            <el-table-column label="结构" min-width="220">
-              <template #default="{ row }">
-                <StructureCell :smiles="row.smiles || ''" />
-              </template>
-            </el-table-column>
-            <el-table-column prop="center_x" label="中心 X" width="100" />
-            <el-table-column prop="center_y" label="中心 Y" width="100" />
-            <el-table-column label="边界框" min-width="200">
-              <template #default="{ row }">
-                {{ row.x1 }}, {{ row.y1 }} — {{ row.x2 }}, {{ row.y2 }}
-              </template>
-            </el-table-column>
-          </el-table>
-        </el-tab-pane>
-
-        <el-tab-pane :label="`结构化数据表 (${mergedRows.length})`" name="structured">
-          <el-table
-            :data="mergedRows"
-            border
-            stripe
-            height="100%"
-            empty-text="请先完成结构解析与文本解析"
-          >
-            <template v-for="group in mergedColumns" :key="group.prop">
-              <el-table-column
-                v-if="!group.children"
-                :prop="group.prop"
-                :label="group.label"
-                width="130"
-                fixed
+          <div class="action-row">
+            <div class="actions">
+              <el-button type="primary" :loading="parsing" @click="runParse">开始解析</el-button>
+              <el-button class="cf-btn-secondary" :loading="aiRunning" @click="runTextAi()">文本解析</el-button>
+              <el-button class="cf-btn-secondary" :loading="parsing || aiRunning" @click="runAuto">自动执行</el-button>
+            </div>
+            <div class="progress-box">
+              <span v-if="statusText" class="status">{{ statusText }}</span>
+              <el-progress
+                v-if="aiProgress.visible"
+                :percentage="aiProgressPct"
+                :stroke-width="8"
+                :show-text="false"
+                style="width: 220px"
               />
-              <el-table-column v-else :label="group.label">
-                <el-table-column
-                  v-for="child in group.children"
-                  :key="child.prop"
-                  :prop="child.prop"
-                  :label="child.label"
-                  min-width="110"
-                  show-overflow-tooltip
-                />
+            </div>
+          </div>
+
+          <p class="hint">
+            请先运行 &lt;结构解析&gt; 再进行 &lt;文本解析&gt;，点击 &lt;自动执行&gt; 将自动排除无法解析的结构和内容
+          </p>
+        </section>
+
+        <el-tabs v-model="activeTab" class="main-tabs">
+          <el-tab-pane label="解析结果" name="results">
+            <el-table
+              class="cf-table"
+              :data="compounds"
+              border
+              height="100%"
+              empty-text="暂无数据"
+            >
+              <el-table-column prop="compound_id" label="Compound_ID" width="130" />
+              <el-table-column label="结构" min-width="220">
+                <template #default="{ row }">
+                  <StructureCell :smiles="row.smiles || ''" />
+                </template>
               </el-table-column>
-            </template>
-          </el-table>
-        </el-tab-pane>
+              <el-table-column prop="tpsa" label="tPSA" width="90" />
+              <el-table-column prop="clogp" label="CLogP" width="110" />
+              <el-table-column label="待解析文字" min-width="260">
+                <template #default="{ row }">
+                  <div class="pre-text">{{ row.text }}</div>
+                </template>
+              </el-table-column>
+            </el-table>
+          </el-tab-pane>
 
-        <el-tab-pane :label="`解析失败文本 (${parseErrors.length})`" name="errors">
-          <el-table :data="parseErrors" border stripe height="100%" empty-text="暂无失败项">
-            <el-table-column prop="compound_id" label="Compound_ID" width="140" />
-            <el-table-column prop="error" label="失败原因" min-width="200" />
-            <el-table-column prop="text" label="原文" min-width="280" show-overflow-tooltip />
-          </el-table>
-        </el-tab-pane>
-      </el-tabs>
-    </main>
+          <el-tab-pane label="未匹配结构" name="unmatched">
+            <el-table
+              class="cf-table"
+              :data="unmatchedStructures"
+              border
+              height="100%"
+              empty-text="暂无数据"
+            >
+              <el-table-column prop="structure_index" label="结构序号" width="100" />
+              <el-table-column label="结构" min-width="220">
+                <template #default="{ row }">
+                  <StructureCell :smiles="row.smiles || ''" />
+                </template>
+              </el-table-column>
+              <el-table-column prop="center_x" label="中心 X" width="100" />
+              <el-table-column prop="center_y" label="中心 Y" width="100" />
+              <el-table-column label="边界框" min-width="200">
+                <template #default="{ row }">
+                  {{ row.x1 }}, {{ row.y1 }} — {{ row.x2 }}, {{ row.y2 }}
+                </template>
+              </el-table-column>
+            </el-table>
+          </el-tab-pane>
 
-    <footer class="app-footer">
-      <div class="footer-left">
-        <el-button @click="logVisible = true">运行日志</el-button>
-        <el-button @click="exportMainCsv">导出结构解析结果</el-button>
-        <el-button @click="exportReviewCsv">导出审查清单</el-button>
-        <el-button @click="exportStructuredCsv">导出结构化数据表</el-button>
+          <el-tab-pane label="结构化数据表" name="structured">
+            <el-table
+              class="cf-table"
+              :data="mergedRows"
+              border
+              height="100%"
+              empty-text="请先完成结构解析与文本解析"
+              :span-method="spanMethod"
+            >
+              <template v-for="group in mergedColumns" :key="group.prop">
+                <el-table-column
+                  v-if="!group.children"
+                  :prop="group.prop"
+                  :label="group.label"
+                  width="130"
+                  fixed
+                  align="center"
+                />
+                <el-table-column v-else :label="group.label" align="center">
+                  <el-table-column
+                    v-for="child in group.children"
+                    :key="child.prop"
+                    :prop="child.prop"
+                    :label="child.label"
+                    min-width="110"
+                    align="center"
+                    show-overflow-tooltip
+                  />
+                </el-table-column>
+              </template>
+            </el-table>
+          </el-tab-pane>
+
+          <el-tab-pane label="解析失败文本" name="errors">
+            <el-table
+              class="cf-table"
+              :data="parseErrors"
+              border
+              height="100%"
+              empty-text="暂无失败项"
+            >
+              <el-table-column prop="compound_id" label="Compound_ID" width="140" />
+              <el-table-column prop="error" label="失败原因" min-width="200" />
+              <el-table-column prop="text" label="原文" min-width="280" show-overflow-tooltip />
+            </el-table>
+          </el-tab-pane>
+        </el-tabs>
       </div>
-      <div class="footer-right">
-        <el-upload :auto-upload="false" :show-file-list="false" accept=".json" :on-change="importCompoundsJson">
-          <el-button>导入化合物结构</el-button>
-        </el-upload>
-        <el-upload :auto-upload="false" :show-file-list="false" accept=".json" :on-change="importStructuredJson">
-          <el-button type="primary">导入化合物数据</el-button>
-        </el-upload>
-      </div>
-    </footer>
 
-    <!-- 结构匹配设置 -->
-    <el-drawer v-model="matchDrawer" title="结构匹配设置" size="420px" destroy-on-close>
-      <el-form label-position="top">
-        <el-form-item label="结构 X 扩展（坐标）">
-          <div class="pair-inputs">
-            <span>左侧</span>
-            <el-input-number v-model="match.matchXExtendLeft" :min="0" :step="1" />
-            <span>右侧</span>
-            <el-input-number v-model="match.matchXExtendRight" :min="0" :step="1" />
+      <footer class="dlg-footer">
+        <template v-if="!showStructuredFooter">
+          <div class="footer-left">
+            <el-button @click="logVisible = true">运行日志</el-button>
           </div>
-        </el-form-item>
-        <el-form-item label="结构 Y 扩展（坐标）">
-          <div class="pair-inputs">
-            <span>向下</span>
-            <el-input-number v-model="match.matchYDown" :min="1" :step="1" />
+          <div class="footer-right">
+            <el-button class="cf-btn-secondary" @click="viewFullTable">查看完整解析表</el-button>
           </div>
-        </el-form-item>
-        <el-button type="primary" @click="saveMatchConfig">保存配置</el-button>
-      </el-form>
-    </el-drawer>
+        </template>
+        <template v-else>
+          <div class="footer-left">
+            <el-button @click="logVisible = true">运行日志</el-button>
+            <el-button @click="exportMainCsv">导出结构解析结果</el-button>
+            <el-button @click="exportReviewCsv">导出审查清单</el-button>
+            <el-button @click="exportStructuredCsv">导出结构化数据表</el-button>
+          </div>
+          <div class="footer-right">
+            <el-upload :auto-upload="false" :show-file-list="false" accept=".json" :on-change="importCompoundsJson">
+              <el-button>导入化合物结构</el-button>
+            </el-upload>
+            <el-upload :auto-upload="false" :show-file-list="false" accept=".json" :on-change="importStructuredJson">
+              <el-button class="cf-btn-secondary">导入化合物数据</el-button>
+            </el-upload>
+          </div>
+        </template>
+      </footer>
+    </div>
 
-    <!-- AI 解析设置 -->
-    <el-drawer v-model="aiDrawer" title="AI 解析设置" size="480px" destroy-on-close>
-      <div class="ai-drawer-meta">
-        <span>并发 {{ aiConfig.concurrency }}</span>
-        <span v-if="aiProgress.visible">AI 结构化: {{ aiProgress.done }}/{{ aiProgress.total }}</span>
-      </div>
-      <el-form label-position="top">
-        <el-form-item label="API Base URL">
-          <el-input v-model="aiConfig.base_url" />
-        </el-form-item>
-        <el-form-item :label="aiConfig.api_key_set ? `API Key（已配置 ${aiConfig.api_key_masked}）` : 'API Key'">
-          <el-input
-            v-model="aiConfig.api_key"
-            type="password"
-            show-password
-            placeholder="留空则沿用已保存 Key"
-          />
-        </el-form-item>
-        <el-form-item label="Model / 并发">
-          <div class="pair-inputs">
-            <el-input v-model="aiConfig.model" style="flex: 1" />
-            <el-input-number v-model="aiConfig.concurrency" :min="1" :max="10" />
-          </div>
-        </el-form-item>
-        <el-form-item label="System Prompt">
-          <el-input v-model="aiConfig.system_prompt" type="textarea" :rows="10" />
-        </el-form-item>
-        <el-form-item label="User Prompt 模板">
-          <el-input v-model="aiConfig.user_prompt_template" type="textarea" :rows="4" />
-        </el-form-item>
-        <div class="drawer-actions">
-          <el-button type="primary" @click="saveAiConfig">保存配置</el-button>
-          <el-button @click="testAiConnection">测试连接</el-button>
-        </div>
-      </el-form>
-    </el-drawer>
+    <SettingsDrawer
+      v-model="settingsVisible"
+      v-model:tab="settingsTab"
+      :match="match"
+      :ai-config="aiConfig"
+      :ai-progress="aiProgress"
+      @save-match="onSaveMatch"
+      @save-ai="onSaveAi"
+      @test-ai="onTestAi"
+    />
 
-    <el-drawer v-model="logVisible" title="运行日志" size="40%">
+    <el-drawer v-model="logVisible" title="运行日志" size="40%" append-to-body>
       <pre class="log-box">{{ logLines.join('\n') || '暂无日志' }}</pre>
     </el-drawer>
   </div>
 </template>
 
 <style scoped>
-.app-shell {
+.page {
   height: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 16px 20px 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  background: rgba(255, 255, 255, 0.92);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  box-shadow: 0 8px 28px rgba(31, 45, 61, 0.08);
-  min-height: calc(100vh - 24px);
-  margin-top: 12px;
-  margin-bottom: 12px;
+  padding: 10px;
+  background: var(--cf-bg-page);
 }
 
-.app-header h1 {
+.dialog {
+  height: 100%;
+  background: var(--cf-bg-panel);
+  border: 1px solid var(--cf-border-light);
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  min-width: 960px;
+  overflow: hidden;
+}
+
+.dlg-header {
+  height: 48px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--cf-divider);
+  flex-shrink: 0;
+}
+
+.dlg-header h1 {
   margin: 0;
-  font-size: 22px;
-  font-weight: 650;
-  letter-spacing: 0.02em;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--cf-text);
+}
+
+.dlg-close {
+  border: none;
+  background: transparent;
+  color: var(--cf-text-secondary);
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+}
+.dlg-close:hover {
+  color: var(--cf-text);
+  background: #f2f3f5;
+}
+
+.dlg-body {
+  flex: 1;
+  min-height: 0;
+  padding: 12px 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .toolbar {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  flex-shrink: 0;
 }
 
 .file-row,
 .action-row {
   display: flex;
   align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
+  gap: 10px;
 }
 
-.label {
-  color: #606266;
-  white-space: nowrap;
-}
-
-.file-input {
+.file-name {
   flex: 1;
-  min-width: 240px;
-  max-width: 560px;
+  min-width: 200px;
 }
-
-.settings-links {
-  margin-left: auto;
-  display: flex;
-  gap: 4px;
+.file-name :deep(.el-input__wrapper) {
+  cursor: pointer;
 }
 
 .actions {
@@ -747,76 +772,69 @@ onMounted(async () => {
   display: flex;
   align-items: center;
   gap: 12px;
+  min-height: 32px;
 }
 
 .status {
-  color: #606266;
+  color: var(--cf-text-regular);
   font-size: 13px;
+  white-space: nowrap;
 }
 
 .hint {
   margin: 0;
-  color: var(--muted);
+  color: var(--cf-text-secondary);
   font-size: 12px;
+  line-height: 1.5;
 }
 
-.main-panel {
+.main-tabs {
   flex: 1;
   min-height: 0;
   display: flex;
   flex-direction: column;
 }
 
-.main-tabs {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+.main-tabs :deep(.el-tabs__header) {
+  margin: 0 0 8px;
 }
 
 .main-tabs :deep(.el-tabs__content) {
   flex: 1;
   min-height: 0;
+  overflow: hidden;
 }
 
 .main-tabs :deep(.el-tab-pane) {
   height: 100%;
 }
 
-.app-footer {
+.pre-text {
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.45;
+  color: var(--cf-text-regular);
+  font-size: 13px;
+}
+
+.dlg-footer {
+  flex-shrink: 0;
+  min-height: 52px;
+  padding: 10px 16px;
+  border-top: 1px solid var(--cf-divider);
   display: flex;
+  align-items: center;
   justify-content: space-between;
   gap: 12px;
-  flex-wrap: wrap;
-  padding-top: 4px;
-  border-top: 1px solid var(--border);
+  background: #fafbfc;
 }
 
 .footer-left,
 .footer-right {
   display: flex;
+  align-items: center;
   gap: 8px;
   flex-wrap: wrap;
-  align-items: center;
-}
-
-.pair-inputs {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-}
-
-.ai-drawer-meta {
-  display: flex;
-  justify-content: space-between;
-  color: #909399;
-  font-size: 12px;
-  margin-bottom: 12px;
-}
-
-.drawer-actions {
-  display: flex;
-  gap: 8px;
 }
 
 .log-box {
@@ -825,6 +843,6 @@ onMounted(async () => {
   word-break: break-word;
   font-size: 12px;
   line-height: 1.5;
-  color: #303133;
+  color: var(--cf-text);
 }
 </style>
