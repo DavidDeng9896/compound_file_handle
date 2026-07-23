@@ -62,10 +62,6 @@ function close() {
   visible.value = false
 }
 
-function switchTab(name) {
-  active.value = name
-}
-
 function onSaveMatch() {
   emit('save-match', { ...localMatch })
 }
@@ -94,27 +90,9 @@ function onTestAi() {
         aria-modal="true"
         :aria-label="title"
       >
-        <!-- 顶部：当前标题 + 可切换到另一项 + 关闭 -->
+        <!-- 顶部：仅当前标题 + 关闭 -->
         <header class="panel-head">
-          <div class="title-row">
-            <h2 class="panel-title">{{ title }}</h2>
-            <button
-              v-if="!isAi"
-              type="button"
-              class="alt-link"
-              @click="switchTab('ai')"
-            >
-              AI 解析设置
-            </button>
-            <button
-              v-else
-              type="button"
-              class="alt-link"
-              @click="switchTab('match')"
-            >
-              结构匹配设置
-            </button>
-          </div>
+          <h2 class="panel-title">{{ title }}</h2>
           <button type="button" class="panel-close" aria-label="关闭" @click="close">
             <el-icon :size="14"><Close /></el-icon>
           </button>
@@ -251,17 +229,10 @@ function onTestAi() {
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  min-height: 48px;
-  padding: 0 14px 0 18px;
+  min-height: 46px;
+  padding: 0 12px 0 18px;
   border-bottom: 1px solid rgba(228, 231, 237, 0.9);
   flex-shrink: 0;
-}
-
-.title-row {
-  display: flex;
-  align-items: baseline;
-  gap: 16px;
-  min-width: 0;
 }
 
 .panel-title {
@@ -271,19 +242,6 @@ function onTestAi() {
   color: #1f2329;
   letter-spacing: 0.01em;
   line-height: 1.2;
-}
-
-.alt-link {
-  border: none;
-  background: transparent;
-  padding: 0;
-  color: #c0c4cc;
-  font-size: 13px;
-  cursor: pointer;
-  transition: color 0.15s ease;
-}
-.alt-link:hover {
-  color: #909399;
 }
 
 .panel-close {
