@@ -679,7 +679,7 @@ onMounted(async () => {
 
     <SettingsDrawer
       v-model="settingsVisible"
-      v-model:tab="settingsTab"
+      :tab="settingsTab"
       :match="match"
       :ai-config="aiConfig"
       :ai-progress="aiProgress"
