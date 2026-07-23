@@ -62,7 +62,7 @@ const aiProgressLabel = computed(() => {
 })
 
 const tabLabels = computed(() => ({
-  results: `解析结果 (${compounds.value.length})`,
+  results: `化合物结构解析结果 (${compounds.value.length})`,
   unmatched: `未匹配结构 (${unmatchedStructures.value.length})`,
   structured: `结构化数据表 (${mergedRows.value.length})`,
   errors: `解析失败文本 (${parseErrors.value.length})`,
@@ -561,14 +561,19 @@ onMounted(async () => {
               empty-text="暂无数据"
             >
               <el-table-column prop="compound_id" label="Compound_ID" width="124" class-name="col-id" />
-              <el-table-column label="结构" min-width="210" class-name="col-struct">
+              <el-table-column label="结构" width="130" class-name="col-struct" align="center">
                 <template #default="{ row }">
-                  <StructureCell :smiles="row.smiles || ''" />
+                  <StructureCell :smiles="row.smiles || ''" :show-smiles="false" />
+                </template>
+              </el-table-column>
+              <el-table-column label="SMILES" min-width="220" class-name="col-smiles">
+                <template #default="{ row }">
+                  <div class="smiles-text" :title="row.smiles || ''">{{ row.smiles || '—' }}</div>
                 </template>
               </el-table-column>
               <el-table-column prop="tpsa" label="tPSA" width="88" align="right" class-name="col-num" />
               <el-table-column prop="clogp" label="CLogP" width="100" align="right" class-name="col-num" />
-              <el-table-column label="待解析文字" min-width="280" class-name="col-text">
+              <el-table-column label="待解析文字" min-width="260" class-name="col-text">
                 <template #default="{ row }">
                   <div class="pre-text">{{ row.text }}</div>
                 </template>
@@ -948,6 +953,15 @@ onMounted(async () => {
 .main-tabs :deep(.col-struct .cell) {
   padding-top: 2px;
   padding-bottom: 2px;
+}
+
+.smiles-text {
+  font-size: 12px;
+  line-height: 1.45;
+  color: #4e5969;
+  word-break: break-all;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  padding: 2px 0;
 }
 
 .pre-text {

@@ -6,6 +6,7 @@ const props = defineProps({
   smiles: { type: String, default: '' },
   width: { type: Number, default: 92 },
   height: { type: Number, default: 72 },
+  showSmiles: { type: Boolean, default: true },
 })
 
 const svgRef = ref(null)
@@ -66,7 +67,7 @@ watch(() => props.smiles, draw)
 </script>
 
 <template>
-  <div class="mol">
+  <div class="mol" :class="{ 'mol--compact': !showSmiles }">
     <div class="mol-card">
       <svg
         ref="svgRef"
@@ -76,7 +77,7 @@ watch(() => props.smiles, draw)
         xmlns="http://www.w3.org/2000/svg"
       />
     </div>
-    <div class="mol-smiles" :title="smiles">{{ smiles || '—' }}</div>
+    <div v-if="showSmiles" class="mol-smiles" :title="smiles">{{ smiles || '—' }}</div>
     <div v-if="error" class="mol-err">{{ error }}</div>
   </div>
 </template>
@@ -88,6 +89,11 @@ watch(() => props.smiles, draw)
   gap: 5px;
   padding: 2px 0 4px;
   max-width: 260px;
+}
+.mol--compact {
+  max-width: none;
+  align-items: center;
+  padding: 2px 0;
 }
 .mol-card {
   display: inline-flex;
