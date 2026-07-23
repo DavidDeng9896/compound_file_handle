@@ -55,6 +55,19 @@ const aiProgressPct = computed(() => {
   return Math.min(100, Math.round((aiProgress.done / aiProgress.total) * 100))
 })
 
+const aiProgressLabel = computed(() => {
+  if (!aiProgress.visible) return statusText.value
+  const id = aiProgress.compoundId ? ` · ${aiProgress.compoundId}` : ''
+  return `AI 结构化 ${aiProgress.done}/${aiProgress.total}${id}`
+})
+
+const tabLabels = computed(() => ({
+  results: `解析结果 (${compounds.value.length})`,
+  unmatched: `未匹配结构 (${unmatchedStructures.value.length})`,
+  structured: `结构化数据表 (${mergedRows.value.length})`,
+  errors: `解析失败文本 (${parseErrors.value.length})`,
+}))
+
 const showStructuredFooter = computed(() => activeTab.value === 'structured')
 
 const compoundIdSpans = computed(() => {
@@ -519,15 +532,17 @@ onMounted(async () => {
               <el-button class="cf-btn-secondary" :loading="aiRunning" @click="runTextAi()">文本解析</el-button>
               <el-button class="cf-btn-secondary" :loading="parsing || aiRunning" @click="runAuto">自动执行</el-button>
             </div>
-            <div class="progress-box">
-              <span v-if="statusText" class="status" :class="{ 'is-progress': aiProgress.visible }">{{ statusText }}</span>
-              <el-progress
-                v-if="aiProgress.visible"
-                :percentage="aiProgressPct"
-                :stroke-width="6"
-                :show-text="false"
-                class="ai-progress"
-              />
+            <div class="progress-box" :class="{ 'is-running': aiProgress.visible }">
+              <template v-if="aiProgress.visible">
+                <div class="progress-meta">
+                  <span class="progress-label">{{ aiProgressLabel }}</span>
+                  <span class="progress-pct">{{ aiProgressPct }}%</span>
+                </div>
+                <div class="progress-track" aria-hidden="true">
+                  <div class="progress-fill" :style="{ width: `${aiProgressPct}%` }" />
+                </div>
+              </template>
+              <span v-else-if="statusText" class="status-idle">{{ statusText }}</span>
             </div>
           </div>
 
@@ -537,7 +552,7 @@ onMounted(async () => {
         </section>
 
         <el-tabs v-model="activeTab" class="main-tabs">
-          <el-tab-pane label="解析结果" name="results">
+          <el-tab-pane :label="tabLabels.results" name="results">
             <el-table
               class="cf-table"
               :data="compounds"
@@ -561,7 +576,7 @@ onMounted(async () => {
             </el-table>
           </el-tab-pane>
 
-          <el-tab-pane label="未匹配结构" name="unmatched">
+          <el-tab-pane :label="tabLabels.unmatched" name="unmatched">
             <el-table
               class="cf-table"
               :data="unmatchedStructures"
@@ -585,7 +600,7 @@ onMounted(async () => {
             </el-table>
           </el-tab-pane>
 
-          <el-tab-pane label="结构化数据表" name="structured">
+          <el-tab-pane :label="tabLabels.structured" name="structured">
             <el-table
               class="cf-table"
               :data="mergedRows"
@@ -618,7 +633,7 @@ onMounted(async () => {
             </el-table>
           </el-tab-pane>
 
-          <el-tab-pane label="解析失败文本" name="errors">
+          <el-tab-pane :label="tabLabels.errors" name="errors">
             <el-table
               class="cf-table"
               :data="parseErrors"
@@ -787,24 +802,95 @@ onMounted(async () => {
 .progress-box {
   margin-left: auto;
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 10px;
-  min-height: 30px;
-  min-width: 0;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 6px;
+  min-width: 260px;
+  max-width: 340px;
+  min-height: 36px;
 }
 
-.status {
+.progress-box.is-running {
+  padding: 4px 0 2px;
+}
+
+.progress-meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  width: 100%;
+  gap: 12px;
+}
+
+.progress-label {
+  color: #3d8bfd;
+  font-size: 12.5px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
+}
+
+.progress-pct {
+  color: #86909c;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+
+.progress-track {
+  width: 100%;
+  height: 10px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #e8eef8 0%, #edf2fa 100%);
+  border: 1px solid #d7e3f4;
+  overflow: hidden;
+  box-shadow: inset 0 1px 1px rgba(31, 35, 41, 0.04);
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #5a9dff 0%, #3d8bfd 55%, #2f78e8 100%);
+  box-shadow: 0 0 0 1px rgba(61, 139, 253, 0.12);
+  transition: width 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.35) 50%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+  animation: cf-shimmer 1.4s linear infinite;
+}
+
+@keyframes cf-shimmer {
+  from {
+    background-position: 120% 0;
+  }
+  to {
+    background-position: -80% 0;
+  }
+}
+
+.status-idle {
   color: var(--cf-text-secondary);
   font-size: 12px;
   white-space: nowrap;
   max-width: 280px;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-.status.is-progress {
-  color: var(--cf-primary);
-  font-variant-numeric: tabular-nums;
 }
 
 .ai-progress {

@@ -247,6 +247,16 @@ SMILES 文本（可折行，max-width 与图同宽）
 
 ---
 
+## 12. 文件落点
+
+- 规范本文：`docs/superpowers/specs/2026-07-23-compound-ui-spec.md`
+- 样式 token：`web/src/styles/tokens.css`
+- 主界面：`web/src/App.vue`
+- 结构单元格：`web/src/components/StructureCell.vue`
+- 设置浮层：`web/src/components/SettingsDrawer.vue`
+
+---
+
 ## 13. 细腻度修订（2026-07-23 二轮）
 
 面向「工具产品」观感的密度与节奏：
