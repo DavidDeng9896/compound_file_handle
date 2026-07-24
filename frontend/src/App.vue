@@ -67,18 +67,41 @@ const columnConfig = {
 const resultsTableRef = ref(null)
 const structuredTableRef = ref(null)
 
+let removeEditOutsideGuard = null
+
 function exitCellEdit() {
+  removeEditOutsideGuard?.()
+  removeEditOutsideGuard = null
   resultsTableRef.value?.clearEdit?.()
   structuredTableRef.value?.clearEdit?.()
 }
 
-function onEditorBlur() {
-  // Defer so dblclick-to-edit on another cell can still activate first if needed
-  setTimeout(() => {
-    const active = document.activeElement
-    if (active?.closest?.('.vxe-cell--edit, .cell-text-editor')) return
+function isEventInsideActiveEditor(target) {
+  if (!target?.closest) return false
+  // Click stays inside the currently activated edit cell → keep editing
+  return !!target.closest(
+    '.cf-vxe .col--actived .vxe-cell--edit, .cf-vxe .col--actived .vxe-input, .cf-vxe .col--actived .vxe-textarea, .cf-vxe .col--actived textarea, .cf-vxe .col--actived input, .cf-vxe .col--actived .cell-text-editor'
+  )
+}
+
+function bindEditOutsideGuard() {
+  removeEditOutsideGuard?.()
+  const onPointerDown = (evnt) => {
+    if (isEventInsideActiveEditor(evnt.target)) return
     exitCellEdit()
-  }, 20)
+  }
+  const onKeyDown = (evnt) => {
+    if (evnt.key === 'Escape') {
+      evnt.preventDefault()
+      exitCellEdit()
+    }
+  }
+  document.addEventListener('mousedown', onPointerDown, true)
+  document.addEventListener('keydown', onKeyDown, true)
+  removeEditOutsideGuard = () => {
+    document.removeEventListener('mousedown', onPointerDown, true)
+    document.removeEventListener('keydown', onKeyDown, true)
+  }
 }
 
 function fitTextEditor(e) {
@@ -88,7 +111,8 @@ function fitTextEditor(e) {
   el.style.height = `${Math.max(el.scrollHeight, 24)}px`
 }
 
-function onCellEditActivated({ column, $table }) {
+function onCellEditActivated({ column }) {
+  bindEditOutsideGuard()
   nextTick(() => {
     if (column?.field === 'text') {
       const el = document.querySelector('.cf-vxe textarea.cell-text-editor')
@@ -97,20 +121,12 @@ function onCellEditActivated({ column, $table }) {
         el.style.height = `${Math.max(el.scrollHeight, 24)}px`
       }
     }
-    const root = $table?.$el || document
-    const editor = root.querySelector?.(
-      '.vxe-cell--edit textarea, .vxe-cell--edit input, textarea.cell-text-editor'
-    )
-    if (!editor) return
-    editor.addEventListener('blur', onEditorBlur, { once: true })
   })
 }
 
-function onEditorKeydown(e) {
-  if (e.key === 'Escape') {
-    e.preventDefault()
-    exitCellEdit()
-  }
+function onCellEditClosed() {
+  removeEditOutsideGuard?.()
+  removeEditOutsideGuard = null
 }
 
 const aiProgressPct = computed(() => {
@@ -667,6 +683,7 @@ onMounted(async () => {
                 :row-config="{ isHover: true }"
                 empty-text="暂无数据"
                 @edit-activated="onCellEditActivated"
+                @edit-closed="onCellEditClosed"
               >
                 <vxe-column
                   field="compound_id"
@@ -732,8 +749,6 @@ onMounted(async () => {
                       v-model="row.text"
                       @focus="fitTextEditor"
                       @input="fitTextEditor"
-                      @blur="onEditorBlur"
-                      @keydown="onEditorKeydown"
                     />
                   </template>
                 </vxe-column>
@@ -788,6 +803,7 @@ onMounted(async () => {
                 :row-config="{ isHover: true }"
                 empty-text="请先完成结构解析与文本解析"
                 @edit-activated="onCellEditActivated"
+                @edit-closed="onCellEditClosed"
               >
                 <template v-for="group in mergedColumns" :key="group.prop">
                   <vxe-column
