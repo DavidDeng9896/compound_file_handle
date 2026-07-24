@@ -83,6 +83,21 @@
   overflow: visible;
 }
 
+.cf-vxe.vxe-table .col-text .vxe-cell,
+.cf-vxe.vxe-table .col-text .vxe-cell--wrapper {
+  overflow: visible;
+  line-height: 1.5;
+}
+
+.cf-vxe.vxe-table .col-text .vxe-cell--edit {
+  padding: 0;
+}
+
+.cf-vxe.vxe-table .col-text textarea.cell-text-editor {
+  width: 100%;
+  box-sizing: border-box;
+}
+
 .cf-vxe.vxe-table .vxe-body--row.row--hover,
 .cf-vxe.vxe-table .vxe-body--row:hover {
   background-color: var(--cf-bg-row-hover);

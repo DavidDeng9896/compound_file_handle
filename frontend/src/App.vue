@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted, reactive, ref } from 'vue'
+import { computed, nextTick, onMounted, reactive, ref } from 'vue'
 import { Close } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
 import StructureCell from './components/StructureCell.vue'
@@ -62,6 +62,23 @@ const cellEditConfig = {
 
 const columnConfig = {
   resizable: true,
+}
+
+function fitTextEditor(e) {
+  const el = e?.target
+  if (!el || el.tagName !== 'TEXTAREA') return
+  el.style.height = '0px'
+  el.style.height = `${Math.max(el.scrollHeight, 24)}px`
+}
+
+function onCellEditActivated({ column }) {
+  if (column?.field !== 'text') return
+  nextTick(() => {
+    const el = document.querySelector('.cf-vxe textarea.cell-text-editor')
+    if (!el) return
+    el.style.height = '0px'
+    el.style.height = `${Math.max(el.scrollHeight, 24)}px`
+  })
 }
 
 const aiProgressPct = computed(() => {
@@ -616,6 +633,7 @@ onMounted(async () => {
                 :column-config="columnConfig"
                 :row-config="{ isHover: true }"
                 empty-text="暂无数据"
+                @edit-activated="onCellEditActivated"
               >
                 <vxe-column
                   field="compound_id"
@@ -670,10 +688,18 @@ onMounted(async () => {
                   min-width="260"
                   class-name="col-text"
                   :show-overflow="false"
-                  :edit-render="{ name: 'textarea', attrs: { rows: 3 } }"
+                  :edit-render="{ autofocus: 'textarea.cell-text-editor' }"
                 >
                   <template #default="{ row }">
                     <div class="pre-text">{{ row.text }}</div>
+                  </template>
+                  <template #edit="{ row }">
+                    <textarea
+                      class="pre-text cell-text-editor"
+                      v-model="row.text"
+                      @focus="fitTextEditor"
+                      @input="fitTextEditor"
+                    />
                   </template>
                 </vxe-column>
               </vxe-table>
@@ -1079,6 +1105,22 @@ onMounted(async () => {
   font-size: 12.5px;
   font-family: var(--cf-font);
   padding: 1px 0;
+}
+
+.cell-text-editor {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 1px 4px;
+  border: 1px solid var(--cf-primary);
+  border-radius: var(--cf-radius);
+  outline: none;
+  resize: none;
+  overflow: hidden;
+  background: #fff;
+  min-height: 1.5em;
+  field-sizing: content;
 }
 
 .dlg-footer {
