@@ -56,7 +56,12 @@ const cellEditConfig = {
   trigger: 'dblclick',
   mode: 'cell',
   showStatus: false,
+  showIcon: false,
   autoClear: true,
+}
+
+const columnConfig = {
+  resizable: true,
 }
 
 const aiProgressPct = computed(() => {
@@ -605,10 +610,10 @@ onMounted(async () => {
               <vxe-table
                 class="cf-vxe"
                 border
-                show-overflow
                 height="100%"
                 :data="compounds"
                 :edit-config="cellEditConfig"
+                :column-config="columnConfig"
                 :row-config="{ isHover: true }"
                 empty-text="暂无数据"
               >
@@ -619,7 +624,14 @@ onMounted(async () => {
                   class-name="col-id"
                   :edit-render="{ name: 'input' }"
                 />
-                <vxe-column title="结构" width="130" class-name="col-struct" align="center">
+                <vxe-column
+                  title="结构"
+                  width="156"
+                  min-width="140"
+                  class-name="col-struct"
+                  align="center"
+                  :show-overflow="false"
+                >
                   <template #default="{ row }">
                     <StructureCell :smiles="row.smiles || ''" :show-smiles="false" />
                   </template>
@@ -629,6 +641,7 @@ onMounted(async () => {
                   title="SMILES"
                   min-width="220"
                   class-name="col-smiles"
+                  :show-overflow="false"
                   :edit-render="{ name: 'textarea', attrs: { rows: 2 } }"
                 >
                   <template #default="{ row }">
@@ -656,6 +669,7 @@ onMounted(async () => {
                   title="待解析文字"
                   min-width="260"
                   class-name="col-text"
+                  :show-overflow="false"
                   :edit-render="{ name: 'textarea', attrs: { rows: 3 } }"
                 >
                   <template #default="{ row }">
@@ -671,21 +685,26 @@ onMounted(async () => {
               <vxe-table
                 class="cf-vxe"
                 border
-                show-overflow
                 height="100%"
                 :data="unmatchedStructures"
+                :column-config="columnConfig"
                 :row-config="{ isHover: true }"
                 empty-text="暂无数据"
               >
                 <vxe-column field="structure_index" title="结构序号" width="100" />
-                <vxe-column field="smiles" title="结构" min-width="220">
+                <vxe-column
+                  title="结构"
+                  min-width="220"
+                  class-name="col-struct"
+                  :show-overflow="false"
+                >
                   <template #default="{ row }">
                     <StructureCell :smiles="row.smiles || ''" />
                   </template>
                 </vxe-column>
                 <vxe-column field="center_x" title="中心 X" width="100" />
                 <vxe-column field="center_y" title="中心 Y" width="100" />
-                <vxe-column field="bbox" title="边界框" min-width="200">
+                <vxe-column field="bbox" title="边界框" min-width="200" :show-overflow="false">
                   <template #default="{ row }">
                     {{ row.x1 }}, {{ row.y1 }} — {{ row.x2 }}, {{ row.y2 }}
                   </template>
@@ -699,10 +718,10 @@ onMounted(async () => {
               <vxe-table
                 class="cf-vxe"
                 border
-                show-overflow
                 height="100%"
                 :data="mergedRows"
                 :edit-config="cellEditConfig"
+                :column-config="columnConfig"
                 :span-method="spanMethod"
                 :row-config="{ isHover: true }"
                 empty-text="请先完成结构解析与文本解析"
@@ -713,6 +732,7 @@ onMounted(async () => {
                     :field="group.prop"
                     :title="group.label"
                     width="130"
+                    min-width="100"
                     fixed="left"
                     align="center"
                     :edit-render="{ name: 'input' }"
@@ -725,7 +745,7 @@ onMounted(async () => {
                       :title="child.label"
                       min-width="110"
                       align="center"
-                      show-overflow
+                      :show-overflow="false"
                       :edit-render="{ name: 'input' }"
                     />
                   </vxe-colgroup>
@@ -739,15 +759,15 @@ onMounted(async () => {
               <vxe-table
                 class="cf-vxe"
                 border
-                show-overflow
                 height="100%"
                 :data="parseErrors"
+                :column-config="columnConfig"
                 :row-config="{ isHover: true }"
                 empty-text="暂无失败项"
               >
                 <vxe-column field="compound_id" title="Compound_ID" width="140" />
-                <vxe-column field="error" title="失败原因" min-width="200" />
-                <vxe-column field="text" title="原文" min-width="280" show-overflow />
+                <vxe-column field="error" title="失败原因" min-width="200" :show-overflow="false" />
+                <vxe-column field="text" title="原文" min-width="280" :show-overflow="false" />
               </vxe-table>
             </div>
           </el-tab-pane>
@@ -1037,30 +1057,17 @@ onMounted(async () => {
   height: 100%;
 }
 
-.main-tabs :deep(.col-id .cell) {
-  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-  font-size: 12px;
-  color: var(--cf-text);
-  letter-spacing: 0.01em;
-}
-
-.main-tabs :deep(.col-num .cell) {
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: "tnum";
-  color: var(--cf-text);
-}
-
-.main-tabs :deep(.col-struct .cell) {
-  padding-top: 2px;
-  padding-bottom: 2px;
+.table-wrap {
+  height: 100%;
+  min-height: 0;
 }
 
 .smiles-text {
-  font-size: 12px;
+  font-size: 12.5px;
   line-height: 1.45;
-  color: #4e5969;
+  color: var(--cf-text-regular);
   word-break: break-all;
-  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-family: var(--cf-font);
   padding: 2px 0;
 }
 
@@ -1070,6 +1077,7 @@ onMounted(async () => {
   line-height: 1.5;
   color: var(--cf-text-regular);
   font-size: 12.5px;
+  font-family: var(--cf-font);
   padding: 1px 0;
 }
 
