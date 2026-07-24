@@ -149,8 +149,6 @@ const tabLabels = computed(() => ({
   errors: `解析失败文本 (${parseErrors.value.length})`,
 }))
 
-const showStructuredFooter = computed(() => activeTab.value === 'structured')
-
 const compoundIdSpans = computed(() => {
   const rows = mergedRows.value
   const spans = new Array(rows.length).fill(1)
@@ -454,12 +452,19 @@ async function runAuto() {
   await runTextAi({ excludeUnparseable: true })
 }
 
-function viewFullTable() {
-  if (!mergedRows.value.length && !lastStructured.value?.tables) {
-    ElMessage.info('暂无结构化数据，请先完成文本解析')
-    return
+function toggleDevDebug() {
+  devDebug.value = !devDebug.value
+  ElMessage.info(devDebug.value ? '已开启开发调试模式' : '已关闭开发调试模式')
+  appendLog(devDebug.value ? '开发调试模式：开' : '开发调试模式：关')
+}
+
+function onGlobalHotkey(evnt) {
+  if (!(evnt.ctrlKey && evnt.altKey)) return
+  // Ctrl+Alt+- （主键盘减号 / 数字小键盘减号）
+  if (evnt.key === '-' || evnt.code === 'Minus' || evnt.code === 'NumpadSubtract') {
+    evnt.preventDefault()
+    toggleDevDebug()
   }
-  activeTab.value = 'structured'
 }
 
 function downloadText(filename, content) {
@@ -604,11 +609,17 @@ function importStructuredJson(uploadFile) {
 
 onMounted(async () => {
   loadMatchFromStorage()
+  document.addEventListener('keydown', onGlobalHotkey, true)
   try {
     await loadAiConfig()
   } catch (e) {
     appendLog(`加载 AI 配置失败：${e.message || e}`)
   }
+})
+
+onUnmounted(() => {
+  document.removeEventListener('keydown', onGlobalHotkey, true)
+  removeEditOutsideGuard?.()
 })
 </script>
 
@@ -642,7 +653,13 @@ onMounted(async () => {
             />
             <div class="settings-group">
               <el-button class="cf-btn-ghost" @click="openSettings('match')">结构匹配设置</el-button>
-              <el-button class="cf-btn-ghost" @click="openSettings('ai')">AI 解析设置</el-button>
+              <el-button
+                v-if="devDebug"
+                class="cf-btn-ghost"
+                @click="openSettings('ai')"
+              >
+                AI 解析设置
+              </el-button>
             </div>
           </div>
 
@@ -856,30 +873,20 @@ onMounted(async () => {
       </div>
 
       <footer class="dlg-footer">
-        <template v-if="!showStructuredFooter">
-          <div class="footer-left">
-            <el-button class="cf-btn-ghost" @click="logVisible = true">运行日志</el-button>
-          </div>
-          <div class="footer-right">
-            <el-button class="cf-btn-secondary" @click="viewFullTable">查看完整解析表</el-button>
-          </div>
-        </template>
-        <template v-else>
-          <div class="footer-left">
-            <el-button class="cf-btn-ghost" @click="logVisible = true">运行日志</el-button>
-            <el-button class="cf-btn-ghost" @click="exportMainCsv">导出结构解析结果</el-button>
-            <el-button class="cf-btn-ghost" @click="exportReviewCsv">导出审查清单</el-button>
-            <el-button class="cf-btn-ghost" @click="exportStructuredCsv">导出结构化数据表</el-button>
-          </div>
-          <div class="footer-right">
-            <el-upload :auto-upload="false" :show-file-list="false" accept=".json" :on-change="importCompoundsJson">
-              <el-button class="cf-btn-ghost">导入化合物结构</el-button>
-            </el-upload>
-            <el-upload :auto-upload="false" :show-file-list="false" accept=".json" :on-change="importStructuredJson">
-              <el-button class="cf-btn-secondary">导入化合物数据</el-button>
-            </el-upload>
-          </div>
-        </template>
+        <div class="footer-left">
+          <el-button v-if="devDebug" class="cf-btn-ghost" @click="logVisible = true">运行日志</el-button>
+          <el-button class="cf-btn-ghost" @click="exportMainCsv">导出结构解析结果</el-button>
+          <el-button v-if="devDebug" class="cf-btn-ghost" @click="exportReviewCsv">导出审查清单</el-button>
+          <el-button class="cf-btn-ghost" @click="exportStructuredCsv">导出结构化数据表</el-button>
+        </div>
+        <div class="footer-right">
+          <el-upload :auto-upload="false" :show-file-list="false" accept=".json" :on-change="importCompoundsJson">
+            <el-button class="cf-btn-ghost">导入化合物结构</el-button>
+          </el-upload>
+          <el-upload :auto-upload="false" :show-file-list="false" accept=".json" :on-change="importStructuredJson">
+            <el-button class="cf-btn-secondary">导入化合物数据</el-button>
+          </el-upload>
+        </div>
       </footer>
     </div>
 
