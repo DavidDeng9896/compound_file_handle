@@ -2,7 +2,8 @@
 
 从 ChemDraw 导出的 **CDXML** 中解析化合物结构（RDKit → SMILES），通过空间几何规则匹配 HW 编号、tPSA、CLogP 与其他说明文字，并导出 CSV。可选对 `text` 做 AI 结构化拆表。
 
-详细算法与参数说明见 [docs/项目总结.md](docs/项目总结.md)。
+- **功能说明**（已实现能力）：[docs/功能说明.md](docs/功能说明.md)
+- **算法与参数**：[docs/项目总结.md](docs/项目总结.md)
 
 ## 目录结构
 
