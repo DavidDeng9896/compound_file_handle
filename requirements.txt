@@ -6,10 +6,5 @@ httpx>=0.27.0
 jsonschema>=4.0.0
 json-repair>=0.30.0
 
-# Optional: PySide6 Qt GUI (python -m cdxml.gui)
-PySide6>=6.6.0
-
-# Electron UI: run npm install in electron/
-
 # Web UI API (Vue3 front-end in web/)
 -r server/requirements.txt
