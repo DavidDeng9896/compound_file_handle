@@ -4,7 +4,7 @@ import json
 
 import pytest
 
-from cdxml.text_ai.json_util import parse_llm_json
+from cdxml_parser.text_ai.json_util import parse_llm_json
 
 
 def test_parse_trailing_comma() -> None:

@@ -1,7 +1,7 @@
 """tests for Compound_ID table merge."""
 
-from cdxml.text_ai.merge import merge_tables_by_compound_id
-from cdxml.text_ai.schema import flatten_to_tables
+from cdxml_parser.text_ai.merge import merge_tables_by_compound_id
+from cdxml_parser.text_ai.schema import flatten_to_tables
 import json
 from pathlib import Path
 

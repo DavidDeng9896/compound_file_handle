@@ -9,9 +9,9 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional
 
-from cdxml.text_ai.client import AiClientError, OpenAiCompatibleClient
-from cdxml.text_ai.parser import parse_compound_with_ai
-from cdxml.text_ai.schema import flatten_to_tables
+from cdxml_parser.text_ai.client import AiClientError, OpenAiCompatibleClient
+from cdxml_parser.text_ai.parser import parse_compound_with_ai
+from cdxml_parser.text_ai.schema import flatten_to_tables
 
 LogFn = Callable[..., None]
 
@@ -28,7 +28,7 @@ def _emit_progress(
     compound_id: str,
     status: str,
 ) -> None:
-    """向 stderr 打一行机器可读进度（Electron 解析）；人类日志仍走 log。"""
+    """向 stderr 打一行机器可读进度；人类日志仍走 log。"""
     line = json.dumps(
         {
             "type": "progress",
@@ -234,7 +234,7 @@ def run_batch(
 
 
 def default_cache_dir() -> str:
-    """Electron userData 或项目本地 .cache。"""
+    """项目本地 .cache。"""
     env = os.environ.get("CDXML_AI_CACHE_DIR", "").strip()
     if env:
         return env

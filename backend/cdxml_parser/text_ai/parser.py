@@ -5,8 +5,8 @@ from __future__ import annotations
 import json
 from typing import Any, Dict, Optional
 
-from cdxml.text_ai.client import AiClientError, OpenAiCompatibleClient
-from cdxml.text_ai.schema import validate_compound_response
+from cdxml_parser.text_ai.client import AiClientError, OpenAiCompatibleClient
+from cdxml_parser.text_ai.schema import validate_compound_response
 
 
 def parse_compound_with_ai(

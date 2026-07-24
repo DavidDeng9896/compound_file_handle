@@ -7,7 +7,7 @@ import io
 from pathlib import Path
 from typing import Dict, List
 
-from cdxml.text_ai.schema import CSV_FILENAMES, TABLE_HEADERS, TABLE_NAMES
+from cdxml_parser.text_ai.schema import CSV_FILENAMES, TABLE_HEADERS, TABLE_NAMES
 
 BOM = "\ufeff"
 

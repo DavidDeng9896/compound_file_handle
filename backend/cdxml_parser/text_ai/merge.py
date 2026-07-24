@@ -5,7 +5,7 @@ from __future__ import annotations
 from collections import OrderedDict
 from typing import Any, Dict, List, Sequence, Tuple
 
-from cdxml.text_ai.schema import TABLE_HEADERS, TABLE_NAMES
+from cdxml_parser.text_ai.schema import TABLE_HEADERS, TABLE_NAMES
 
 # 合并表中子列不重复带 Compound_ID
 _SKIP_KEYS = frozenset({"Compound_ID"})

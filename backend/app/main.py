@@ -1,4 +1,4 @@
-"""FastAPI web server for CDXML compound parser (non-Electron)."""
+"""FastAPI web server for CDXML compound parser."""
 
 from __future__ import annotations
 
@@ -16,14 +16,19 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, StreamingResponse
 from pydantic import BaseModel, Field
 
-from cdxml.parser import main as parse_main, parse_result_to_json_dict
-from cdxml.text_ai.batch import default_cache_dir, run_batch, run_test_connection
-from cdxml.text_ai.export_csv import tables_to_csv_dict
-from cdxml.text_ai.merge import merge_tables_by_compound_id
-from cdxml.text_ai.prompts import DEFAULT_SYSTEM_PROMPT, DEFAULT_USER_PROMPT_TEMPLATE
+from cdxml_parser.parser import main as parse_main, parse_result_to_json_dict
+from cdxml_parser.text_ai.batch import default_cache_dir, run_batch, run_test_connection
+from cdxml_parser.text_ai.export_csv import tables_to_csv_dict
+from cdxml_parser.text_ai.merge import merge_tables_by_compound_id
+from cdxml_parser.text_ai.prompts import DEFAULT_SYSTEM_PROMPT, DEFAULT_USER_PROMPT_TEMPLATE
 
-ROOT = Path(__file__).resolve().parents[1]
-CONFIG_PATH = Path(os.environ.get("CDXML_AI_CONFIG", str(ROOT / "ai_config.json")))
+BACKEND_ROOT = Path(__file__).resolve().parents[1]
+CONFIG_PATH = Path(
+    os.environ.get(
+        "CDXML_AI_CONFIG",
+        str(BACKEND_ROOT / "config" / "ai_config.json"),
+    )
+)
 
 DEFAULT_AI_CONFIG: Dict[str, Any] = {
     "base_url": "https://api.openai.com/v1",

@@ -1,6 +1,6 @@
 """CDXML 化合物解析：结构提取、空间匹配与 CSV 导出。"""
 
-from cdxml.parser import (
+from cdxml_parser.parser import (
     ParseResult,
     has_x_overlap,
     main,

@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from cdxml.text_ai.schema import (
+from cdxml_parser.text_ai.schema import (
     TABLE_HEADERS,
     flatten_to_tables,
     validate_compound_response,

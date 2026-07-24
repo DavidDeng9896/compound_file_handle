@@ -1,7 +1,7 @@
 """export_csv 单元测试。"""
 
-from cdxml.text_ai.export_csv import tables_to_csv_dict
-from cdxml.text_ai.schema import flatten_to_tables
+from cdxml_parser.text_ai.export_csv import tables_to_csv_dict
+from cdxml_parser.text_ai.schema import flatten_to_tables
 import json
 from pathlib import Path
 

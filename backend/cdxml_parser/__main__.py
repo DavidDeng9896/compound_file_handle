@@ -1,10 +1,10 @@
-"""命令行：python -m cdxml <cdxml> [-o output.csv]"""
+"""命令行：python -m cdxml_parser <cdxml> [-o output.csv]"""
 
 from __future__ import annotations
 
 import argparse
 
-from cdxml.parser import main
+from cdxml_parser.parser import main
 
 
 def cli() -> None:

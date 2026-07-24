@@ -7,8 +7,8 @@ from typing import Any, Dict, Optional
 
 import httpx
 
-from cdxml.text_ai.json_util import parse_llm_json, strip_markdown_fence, strip_think_blocks
-from cdxml.text_ai.prompts import DEFAULT_SYSTEM_PROMPT, DEFAULT_USER_PROMPT_TEMPLATE
+from cdxml_parser.text_ai.json_util import parse_llm_json, strip_markdown_fence, strip_think_blocks
+from cdxml_parser.text_ai.prompts import DEFAULT_SYSTEM_PROMPT, DEFAULT_USER_PROMPT_TEMPLATE
 
 
 class AiClientError(Exception):
@@ -141,7 +141,7 @@ class OpenAiCompatibleClient:
         return data
 
     def test_connection(self) -> Dict[str, Any]:
-        from cdxml.text_ai.prompts import TEST_USER_PROMPT
+        from cdxml_parser.text_ai.prompts import TEST_USER_PROMPT
 
         data = self.chat_json(
             TEST_USER_PROMPT,

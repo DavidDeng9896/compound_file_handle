@@ -8,16 +8,18 @@
 
 ```
 compound_file_handle/
-├── cdxml/              # Python 核心包
-│   ├── parser.py       # 解析与匹配
-│   └── text_ai/        # AI 解析 schema、批量、导出、连表合并
-├── server/             # FastAPI Web API
-├── web/                # Vue3 + Element Plus 前端
+├── frontend/              # Vue3 + Element Plus + Vite
+├── backend/               # 全部 Python
+│   ├── app/               # FastAPI（uvicorn app.main:app）
+│   ├── cdxml_parser/      # 解析核心 + text_ai + CLI
+│   ├── config/            # ai_config.example.json 等
+│   ├── tests/             # pytest
+│   └── requirements.txt
+├── samples/               # 示例 CDXML 与 CSV
 ├── scripts/
-│   └── dev-web.sh      # 一键启动 API + Vite
-├── samples/            # 示例 CDXML 与 CSV
-├── docs/               # 项目文档
-└── requirements.txt
+│   └── dev.sh             # 一键启动 API + Vite
+├── docs/
+└── requirements.txt       # 转发到 backend/requirements.txt
 ```
 
 ## 快速开始
@@ -26,41 +28,42 @@ compound_file_handle/
 
 ```bash
 pip install -r requirements.txt
-cd web && npm install && cd ..
+cd frontend && npm install && cd ..
 ```
 
 ### Web UI（推荐）
 
 ```bash
-# 终端 1：API
-PYTHONPATH=. uvicorn server.app:app --reload --host 0.0.0.0 --port 8000
-# 终端 2：前端
-cd web && npm run dev
+./scripts/dev.sh
 ```
 
-浏览器打开 Vite 提示的地址（默认 http://127.0.0.1:5173）。
+浏览器打开 http://127.0.0.1:5173（Vite 将 `/api` 代理到后端 `:8000`）。
 
-或一键：
+手动启动：
 
 ```bash
-./scripts/dev-web.sh
+# 终端 1：API（在 backend 目录）
+cd backend
+PYTHONPATH=. uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+
+# 终端 2：前端
+cd frontend && npm run dev
 ```
 
 ### 命令行解析
 
 ```bash
-python -m cdxml samples/cdxml/EO018\ compounds\ list.cdxml -o out.csv
+cd backend
+PYTHONPATH=. python -m cdxml_parser ../samples/cdxml/EO018\ compounds\ list.cdxml -o out.csv
 ```
 
 可选匹配参数：`--match-x-left`、`--match-x-right`、`--match-y-down`。
 
 ### AI 结构化 text
 
-在 Web UI 中配置 OpenAI 兼容 API（Base URL、Key、Model、提示词），解析完成后对 `text` 做结构化拆表。
+在 Web UI 中配置 OpenAI 兼容 API。也可将配置放在 `backend/config/ai_config.json`（见 `backend/config/ai_config.example.json`；该文件已 gitignore），或用环境变量 `CDXML_AI_API_KEY` 覆盖 Key。
 
-也可将配置放在本地 `ai_config.json`（见 `ai_config.example.json`；该文件已 gitignore），或用环境变量 `CDXML_AI_API_KEY` 覆盖 Key。
-
-结构化输出表：`IC50`、`AUC0_t`、`Fu`、`Solubility`、`MMS_T12`、`CYP_inhibition`（字段定义见 `cdxml/text_ai/schema.py`）。
+结构化输出表：`IC50`、`AUC0_t`、`Fu`、`Solubility`、`MMS_T12`、`CYP_inhibition`（字段定义见 `backend/cdxml_parser/text_ai/schema.py`）。
 
 ## 匹配参数
 
@@ -75,3 +78,10 @@ python -m cdxml samples/cdxml/EO018\ compounds\ list.cdxml -o out.csv
 `Compound_ID`, `structure`, `tPSA`, `CLogP`, `text`
 
 示例格式见 [samples/compounds_list_template.csv](samples/compounds_list_template.csv)。
+
+## 测试
+
+```bash
+cd backend
+PYTHONPATH=. pytest tests/
+```
