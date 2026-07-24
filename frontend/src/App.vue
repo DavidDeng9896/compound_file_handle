@@ -1,5 +1,5 @@
 <script setup>
-import { computed, nextTick, onMounted, reactive, ref } from 'vue'
+import { computed, nextTick, onMounted, onUnmounted, reactive, ref } from 'vue'
 import { Close } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
 import StructureCell from './components/StructureCell.vue'
@@ -22,6 +22,8 @@ const logLines = ref([])
 const logVisible = ref(false)
 const settingsVisible = ref(false)
 const settingsTab = ref('match')
+/** Dev/debug UI (AI settings, run log, review export). Toggle: Ctrl+Alt+- */
+const devDebug = ref(false)
 
 const match = reactive({
   matchXExtendLeft: 0,
