@@ -67,10 +67,6 @@ const columnConfig = {
 const resultsTableRef = ref(null)
 const structuredTableRef = ref(null)
 
-function getActiveEditTable() {
-  return resultsTableRef.value || structuredTableRef.value
-}
-
 function exitCellEdit() {
   resultsTableRef.value?.clearEdit?.()
   structuredTableRef.value?.clearEdit?.()
