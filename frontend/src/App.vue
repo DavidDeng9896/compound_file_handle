@@ -44,11 +44,20 @@ const lastPayload = ref(null)
 const lastStructured = ref(null)
 const aiProgress = reactive({ done: 0, total: 0, compoundId: '', visible: false })
 
-const compounds = computed(() => lastPayload.value?.compounds || [])
+/** Mutable rows for editable tabs (方案 2) */
+const compounds = ref([])
+const mergedRows = ref([])
+const mergedColumns = ref([])
+
 const unmatchedStructures = computed(() => lastPayload.value?.unmatched_structures || [])
-const mergedRows = computed(() => lastStructured.value?.merged_rows || [])
-const mergedColumns = computed(() => lastStructured.value?.merged_columns || [])
 const parseErrors = computed(() => (lastStructured.value?.results || []).filter((r) => r.error))
+
+const cellEditConfig = {
+  trigger: 'dblclick',
+  mode: 'cell',
+  showStatus: false,
+  autoClear: true,
+}
 
 const aiProgressPct = computed(() => {
   if (!aiProgress.total) return 0
@@ -85,11 +94,27 @@ const compoundIdSpans = computed(() => {
 })
 
 function spanMethod({ column, rowIndex }) {
-  if (column.property === 'Compound_ID') {
+  const field = column.field || column.property
+  if (field === 'Compound_ID') {
     const rowspan = compoundIdSpans.value[rowIndex] ?? 1
     return { rowspan, colspan: rowspan > 0 ? 1 : 0 }
   }
   return { rowspan: 1, colspan: 1 }
+}
+
+function cloneRows(list) {
+  return (list || []).map((row) => ({ ...row }))
+}
+
+function applyParsePayload(data) {
+  lastPayload.value = data
+  compounds.value = cloneRows(data?.compounds)
+}
+
+function applyStructuredPayload(data) {
+  lastStructured.value = data
+  mergedRows.value = cloneRows(data?.merged_rows)
+  mergedColumns.value = data?.merged_columns || []
 }
 
 function appendLog(msg) {
@@ -210,7 +235,7 @@ async function runParse() {
   try {
     const res = await fetch('/api/parse', { method: 'POST', body: fd })
     const data = await res.json()
-    lastPayload.value = data
+    applyParsePayload(data)
     if (data.log_lines?.length) logLines.value.push(...data.log_lines.map(String))
     if (!data.success) {
       statusText.value = data.message || '解析失败'
@@ -218,7 +243,7 @@ async function runParse() {
       return false
     }
     saveMatchToStorage()
-    statusText.value = data.message || `解析完成：${(data.compounds || []).length} 条`
+    statusText.value = data.message || `解析完成：${compounds.value.length} 条`
     appendLog(statusText.value)
     activeTab.value = 'results'
     return true
@@ -333,7 +358,7 @@ async function runTextAi({ excludeUnparseable = false } = {}) {
       finalPayload = await fallback.json()
     }
 
-    lastStructured.value = finalPayload
+    applyStructuredPayload(finalPayload)
     statusText.value = finalPayload?.message || 'AI 结构化完成'
     appendLog(statusText.value)
     activeTab.value = 'structured'
@@ -406,8 +431,31 @@ async function exportReviewCsv() {
 }
 
 async function exportStructuredCsv() {
-  if (!lastStructured.value?.tables) {
+  if (!mergedRows.value.length && !lastStructured.value?.tables) {
     ElMessage.warning('暂无结构化数据')
+    return
+  }
+  // Prefer current (possibly edited) merged grid so dblclick edits are exported
+  if (mergedRows.value.length && mergedColumns.value.length) {
+    const headers = []
+    const props = []
+    for (const g of mergedColumns.value) {
+      if (!g.children) {
+        headers.push(g.label || g.prop)
+        props.push(g.prop)
+      } else {
+        for (const ch of g.children) {
+          headers.push(`${g.label}.${ch.label}`)
+          props.push(ch.prop)
+        }
+      }
+    }
+    const lines = [headers.join(',')]
+    for (const row of mergedRows.value) {
+      lines.push(props.map((p) => `"${String(row[p] ?? '').replace(/"/g, '""')}"`).join(','))
+    }
+    downloadText('structured_merged.csv', '\ufeff' + lines.join('\n'))
+    appendLog('已导出结构化数据表 CSV')
     return
   }
   const res = await fetch('/api/export/structured-csv', {
@@ -432,13 +480,13 @@ function importCompoundsJson(uploadFile) {
     try {
       const data = JSON.parse(String(reader.result || '{}'))
       const list = Array.isArray(data) ? data : data.compounds || []
-      lastPayload.value = {
+      applyParsePayload({
         ...(lastPayload.value || {}),
         success: true,
         compounds: list,
         unmatched_structures: lastPayload.value?.unmatched_structures || [],
         message: '已导入化合物结构',
-      }
+      })
       ElMessage.success(`已导入 ${list.length} 条化合物`)
       appendLog(`导入化合物结构 ${list.length} 条`)
       activeTab.value = 'results'
@@ -464,14 +512,14 @@ function importStructuredJson(uploadFile) {
         body: JSON.stringify({ tables, compound_id_order: order }),
       })
       const merged = await res.json()
-      lastStructured.value = {
+      applyStructuredPayload({
         success: true,
         tables,
         results: data.results || [],
         merged_rows: merged.merged_rows,
         merged_columns: merged.merged_columns,
         message: '已导入化合物数据',
-      }
+      })
       ElMessage.success('已导入结构化数据')
       appendLog('导入化合物数据成功')
       activeTab.value = 'structured'
@@ -553,103 +601,155 @@ onMounted(async () => {
 
         <el-tabs v-model="activeTab" class="main-tabs">
           <el-tab-pane :label="tabLabels.results" name="results">
-            <el-table
-              class="cf-table"
-              :data="compounds"
-              border
-              height="100%"
-              empty-text="暂无数据"
-            >
-              <el-table-column prop="compound_id" label="Compound_ID" width="124" class-name="col-id" />
-              <el-table-column label="结构" width="130" class-name="col-struct" align="center">
-                <template #default="{ row }">
-                  <StructureCell :smiles="row.smiles || ''" :show-smiles="false" />
-                </template>
-              </el-table-column>
-              <el-table-column label="SMILES" min-width="220" class-name="col-smiles">
-                <template #default="{ row }">
-                  <div class="smiles-text" :title="row.smiles || ''">{{ row.smiles || '—' }}</div>
-                </template>
-              </el-table-column>
-              <el-table-column prop="tpsa" label="tPSA" width="88" align="right" class-name="col-num" />
-              <el-table-column prop="clogp" label="CLogP" width="100" align="right" class-name="col-num" />
-              <el-table-column label="待解析文字" min-width="260" class-name="col-text">
-                <template #default="{ row }">
-                  <div class="pre-text">{{ row.text }}</div>
-                </template>
-              </el-table-column>
-            </el-table>
+            <div class="table-wrap">
+              <vxe-table
+                class="cf-vxe"
+                border
+                show-overflow
+                height="100%"
+                :data="compounds"
+                :edit-config="cellEditConfig"
+                :row-config="{ isHover: true }"
+                empty-text="暂无数据"
+              >
+                <vxe-column
+                  field="compound_id"
+                  title="Compound_ID"
+                  width="124"
+                  class-name="col-id"
+                  :edit-render="{ name: 'input' }"
+                />
+                <vxe-column title="结构" width="130" class-name="col-struct" align="center">
+                  <template #default="{ row }">
+                    <StructureCell :smiles="row.smiles || ''" :show-smiles="false" />
+                  </template>
+                </vxe-column>
+                <vxe-column
+                  field="smiles"
+                  title="SMILES"
+                  min-width="220"
+                  class-name="col-smiles"
+                  :edit-render="{ name: 'textarea', attrs: { rows: 2 } }"
+                >
+                  <template #default="{ row }">
+                    <div class="smiles-text" :title="row.smiles || ''">{{ row.smiles || '—' }}</div>
+                  </template>
+                </vxe-column>
+                <vxe-column
+                  field="tpsa"
+                  title="tPSA"
+                  width="88"
+                  align="right"
+                  class-name="col-num"
+                  :edit-render="{ name: 'input' }"
+                />
+                <vxe-column
+                  field="clogp"
+                  title="CLogP"
+                  width="100"
+                  align="right"
+                  class-name="col-num"
+                  :edit-render="{ name: 'input' }"
+                />
+                <vxe-column
+                  field="text"
+                  title="待解析文字"
+                  min-width="260"
+                  class-name="col-text"
+                  :edit-render="{ name: 'textarea', attrs: { rows: 3 } }"
+                >
+                  <template #default="{ row }">
+                    <div class="pre-text">{{ row.text }}</div>
+                  </template>
+                </vxe-column>
+              </vxe-table>
+            </div>
           </el-tab-pane>
 
           <el-tab-pane :label="tabLabels.unmatched" name="unmatched">
-            <el-table
-              class="cf-table"
-              :data="unmatchedStructures"
-              border
-              height="100%"
-              empty-text="暂无数据"
-            >
-              <el-table-column prop="structure_index" label="结构序号" width="100" />
-              <el-table-column label="结构" min-width="220">
-                <template #default="{ row }">
-                  <StructureCell :smiles="row.smiles || ''" />
-                </template>
-              </el-table-column>
-              <el-table-column prop="center_x" label="中心 X" width="100" />
-              <el-table-column prop="center_y" label="中心 Y" width="100" />
-              <el-table-column label="边界框" min-width="200">
-                <template #default="{ row }">
-                  {{ row.x1 }}, {{ row.y1 }} — {{ row.x2 }}, {{ row.y2 }}
-                </template>
-              </el-table-column>
-            </el-table>
+            <div class="table-wrap">
+              <vxe-table
+                class="cf-vxe"
+                border
+                show-overflow
+                height="100%"
+                :data="unmatchedStructures"
+                :row-config="{ isHover: true }"
+                empty-text="暂无数据"
+              >
+                <vxe-column field="structure_index" title="结构序号" width="100" />
+                <vxe-column field="smiles" title="结构" min-width="220">
+                  <template #default="{ row }">
+                    <StructureCell :smiles="row.smiles || ''" />
+                  </template>
+                </vxe-column>
+                <vxe-column field="center_x" title="中心 X" width="100" />
+                <vxe-column field="center_y" title="中心 Y" width="100" />
+                <vxe-column field="bbox" title="边界框" min-width="200">
+                  <template #default="{ row }">
+                    {{ row.x1 }}, {{ row.y1 }} — {{ row.x2 }}, {{ row.y2 }}
+                  </template>
+                </vxe-column>
+              </vxe-table>
+            </div>
           </el-tab-pane>
 
           <el-tab-pane :label="tabLabels.structured" name="structured">
-            <el-table
-              class="cf-table"
-              :data="mergedRows"
-              border
-              height="100%"
-              empty-text="请先完成结构解析与文本解析"
-              :span-method="spanMethod"
-            >
-              <template v-for="group in mergedColumns" :key="group.prop">
-                <el-table-column
-                  v-if="!group.children"
-                  :prop="group.prop"
-                  :label="group.label"
-                  width="130"
-                  fixed
-                  align="center"
-                />
-                <el-table-column v-else :label="group.label" align="center">
-                  <el-table-column
-                    v-for="child in group.children"
-                    :key="child.prop"
-                    :prop="child.prop"
-                    :label="child.label"
-                    min-width="110"
+            <div class="table-wrap">
+              <vxe-table
+                class="cf-vxe"
+                border
+                show-overflow
+                height="100%"
+                :data="mergedRows"
+                :edit-config="cellEditConfig"
+                :span-method="spanMethod"
+                :row-config="{ isHover: true }"
+                empty-text="请先完成结构解析与文本解析"
+              >
+                <template v-for="group in mergedColumns" :key="group.prop">
+                  <vxe-column
+                    v-if="!group.children"
+                    :field="group.prop"
+                    :title="group.label"
+                    width="130"
+                    fixed="left"
                     align="center"
-                    show-overflow-tooltip
+                    :edit-render="{ name: 'input' }"
                   />
-                </el-table-column>
-              </template>
-            </el-table>
+                  <vxe-colgroup v-else :title="group.label" align="center">
+                    <vxe-column
+                      v-for="child in group.children"
+                      :key="child.prop"
+                      :field="child.prop"
+                      :title="child.label"
+                      min-width="110"
+                      align="center"
+                      show-overflow
+                      :edit-render="{ name: 'input' }"
+                    />
+                  </vxe-colgroup>
+                </template>
+              </vxe-table>
+            </div>
           </el-tab-pane>
 
           <el-tab-pane :label="tabLabels.errors" name="errors">
-            <el-table
-              class="cf-table"
-              :data="parseErrors"
-              border
-              height="100%"
-              empty-text="暂无失败项"
-            >
-              <el-table-column prop="compound_id" label="Compound_ID" width="140" />
-              <el-table-column prop="error" label="失败原因" min-width="200" />
-              <el-table-column prop="text" label="原文" min-width="280" show-overflow-tooltip />
-            </el-table>
+            <div class="table-wrap">
+              <vxe-table
+                class="cf-vxe"
+                border
+                show-overflow
+                height="100%"
+                :data="parseErrors"
+                :row-config="{ isHover: true }"
+                empty-text="暂无失败项"
+              >
+                <vxe-column field="compound_id" title="Compound_ID" width="140" />
+                <vxe-column field="error" title="失败原因" min-width="200" />
+                <vxe-column field="text" title="原文" min-width="280" show-overflow />
+              </vxe-table>
+            </div>
           </el-tab-pane>
         </el-tabs>
       </div>
