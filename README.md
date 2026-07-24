@@ -16,7 +16,6 @@ compound_file_handle/
 ├── scripts/
 │   └── dev-web.sh      # 一键启动 API + Vite
 ├── samples/            # 示例 CDXML 与 CSV
-├── tests/              # pytest 单元测试
 ├── docs/               # 项目文档
 └── requirements.txt
 ```
@@ -76,9 +75,3 @@ python -m cdxml samples/cdxml/EO018\ compounds\ list.cdxml -o out.csv
 `Compound_ID`, `structure`, `tPSA`, `CLogP`, `text`
 
 示例格式见 [samples/compounds_list_template.csv](samples/compounds_list_template.csv)。
-
-## 测试
-
-```bash
-PYTHONPATH=. pytest tests/
-```
