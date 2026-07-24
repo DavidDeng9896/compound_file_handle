@@ -64,6 +64,27 @@ const columnConfig = {
   resizable: true,
 }
 
+const resultsTableRef = ref(null)
+const structuredTableRef = ref(null)
+
+function getActiveEditTable() {
+  return resultsTableRef.value || structuredTableRef.value
+}
+
+function exitCellEdit() {
+  resultsTableRef.value?.clearEdit?.()
+  structuredTableRef.value?.clearEdit?.()
+}
+
+function onEditorBlur() {
+  // Defer so dblclick-to-edit on another cell can still activate first if needed
+  setTimeout(() => {
+    const active = document.activeElement
+    if (active?.closest?.('.vxe-cell--edit, .cell-text-editor')) return
+    exitCellEdit()
+  }, 20)
+}
+
 function fitTextEditor(e) {
   const el = e?.target
   if (!el || el.tagName !== 'TEXTAREA') return
@@ -71,14 +92,29 @@ function fitTextEditor(e) {
   el.style.height = `${Math.max(el.scrollHeight, 24)}px`
 }
 
-function onCellEditActivated({ column }) {
-  if (column?.field !== 'text') return
+function onCellEditActivated({ column, $table }) {
   nextTick(() => {
-    const el = document.querySelector('.cf-vxe textarea.cell-text-editor')
-    if (!el) return
-    el.style.height = '0px'
-    el.style.height = `${Math.max(el.scrollHeight, 24)}px`
+    if (column?.field === 'text') {
+      const el = document.querySelector('.cf-vxe textarea.cell-text-editor')
+      if (el) {
+        el.style.height = '0px'
+        el.style.height = `${Math.max(el.scrollHeight, 24)}px`
+      }
+    }
+    const root = $table?.$el || document
+    const editor = root.querySelector?.(
+      '.vxe-cell--edit textarea, .vxe-cell--edit input, textarea.cell-text-editor'
+    )
+    if (!editor) return
+    editor.addEventListener('blur', onEditorBlur, { once: true })
   })
+}
+
+function onEditorKeydown(e) {
+  if (e.key === 'Escape') {
+    e.preventDefault()
+    exitCellEdit()
+  }
 }
 
 const aiProgressPct = computed(() => {
@@ -625,6 +661,7 @@ onMounted(async () => {
           <el-tab-pane :label="tabLabels.results" name="results">
             <div class="table-wrap">
               <vxe-table
+                ref="resultsTableRef"
                 class="cf-vxe"
                 border
                 height="100%"
@@ -699,6 +736,8 @@ onMounted(async () => {
                       v-model="row.text"
                       @focus="fitTextEditor"
                       @input="fitTextEditor"
+                      @blur="onEditorBlur"
+                      @keydown="onEditorKeydown"
                     />
                   </template>
                 </vxe-column>
@@ -742,6 +781,7 @@ onMounted(async () => {
           <el-tab-pane :label="tabLabels.structured" name="structured">
             <div class="table-wrap">
               <vxe-table
+                ref="structuredTableRef"
                 class="cf-vxe"
                 border
                 height="100%"
@@ -751,6 +791,7 @@ onMounted(async () => {
                 :span-method="spanMethod"
                 :row-config="{ isHover: true }"
                 empty-text="请先完成结构解析与文本解析"
+                @edit-activated="onCellEditActivated"
               >
                 <template v-for="group in mergedColumns" :key="group.prop">
                   <vxe-column
