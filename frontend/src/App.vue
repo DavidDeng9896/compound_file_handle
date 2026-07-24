@@ -489,7 +489,7 @@ async function exportMainCsv() {
   })
   const data = await res.json()
   downloadText(data.filename || 'compounds.csv', data.content || '')
-  appendLog('已导出结构解析结果 CSV')
+  appendLog('已导出化合物结构解析结果 CSV')
 }
 
 async function exportReviewCsv() {
@@ -875,7 +875,7 @@ onUnmounted(() => {
       <footer class="dlg-footer">
         <div class="footer-left">
           <el-button v-if="devDebug" class="cf-btn-ghost" @click="logVisible = true">运行日志</el-button>
-          <el-button class="cf-btn-ghost" @click="exportMainCsv">导出结构解析结果</el-button>
+          <el-button class="cf-btn-ghost" @click="exportMainCsv">导出化合物结构解析结果</el-button>
           <el-button v-if="devDebug" class="cf-btn-ghost" @click="exportReviewCsv">导出审查清单</el-button>
           <el-button class="cf-btn-ghost" @click="exportStructuredCsv">导出结构化数据表</el-button>
         </div>
