@@ -1,6 +1,6 @@
 # CDXML Compound Parser
 
-从 ChemDraw 导出的 **CDXML** 中解析化合物结构（RDKit → SMILES），通过空间几何规则匹配 HW 编号、tPSA、CLogP 与其他说明文字，并导出 CSV。
+从 ChemDraw 导出的 **CDXML** 中解析化合物结构（RDKit → SMILES），通过空间几何规则匹配 HW 编号、tPSA、CLogP 与其他说明文字，并导出 CSV。可选对 `text` 做 AI 结构化拆表。
 
 详细算法与参数说明见 [docs/项目总结.md](docs/项目总结.md)。
 
@@ -10,20 +10,15 @@
 compound_file_handle/
 ├── cdxml/              # Python 核心包
 │   ├── parser.py       # 解析与匹配
-│   ├── bridge.py       # Electron 子进程桥接（JSON）
-│   ├── text_ai_bridge.py  # AI 结构化 text 桥接
-│   ├── text_ai/        # AI 解析 6 表 schema、批量、导出、连表合并
-│   ├── gui.py          # PySide6 图形界面
-│   └── review.py       # 审查清单 CSV 导出
-├── server/             # FastAPI Web API（供 Vue 前端）
+│   └── text_ai/        # AI 解析 schema、批量、导出、连表合并
+├── server/             # FastAPI Web API
 ├── web/                # Vue3 + Element Plus 前端
-├── electron/           # Electron 桌面应用（可选）
-├── packaging/          # PyInstaller 规格
-├── scripts/            # 命令行工具脚本
+├── scripts/
+│   └── dev-web.sh      # 一键启动 API + Vite
 ├── samples/            # 示例 CDXML 与 CSV
+├── tests/              # pytest 单元测试
 ├── docs/               # 项目文档
-├── requirements.txt
-└── build-release.cmd   # Windows 一键打包
+└── requirements.txt
 ```
 
 ## 快速开始
@@ -32,23 +27,15 @@ compound_file_handle/
 
 ```bash
 pip install -r requirements.txt
-cd electron && npm install
-```
-
-### 命令行解析
-
-```bash
-python -m cdxml samples/cdxml/EO018\ compounds\ list.cdxml -o out.csv
-```
-
-### Web UI 开发（推荐，无需 Electron）
-
-```bash
-pip install -r requirements.txt
 cd web && npm install && cd ..
+```
+
+### Web UI（推荐）
+
+```bash
 # 终端 1：API
 PYTHONPATH=. uvicorn server.app:app --reload --host 0.0.0.0 --port 8000
-# 终端 2：Vue3 + Element Plus
+# 终端 2：前端
 cd web && npm run dev
 ```
 
@@ -60,50 +47,21 @@ cd web && npm run dev
 ./scripts/dev-web.sh
 ```
 
-### Electron 开发
+### 命令行解析
 
 ```bash
-cd electron && npm start
+python -m cdxml samples/cdxml/EO018\ compounds\ list.cdxml -o out.csv
 ```
 
-### PySide6 界面（可选）
+可选匹配参数：`--match-x-left`、`--match-x-right`、`--match-y-down`。
 
-```bash
-pip install PySide6
-python -m cdxml.gui
-```
+### AI 结构化 text
 
-### 导出审查清单
+在 Web UI 中配置 OpenAI 兼容 API（Base URL、Key、Model、提示词），解析完成后对 `text` 做结构化拆表。
 
-```bash
-python scripts/export_review.py samples/cdxml/EO018\ compounds\ list.cdxml -o review.csv
-```
-
-### AI 结构化 text（可选）
-
-CDXML 解析完成后，在 Electron 界面展开 **「AI 结构化」**，配置 OpenAI 兼容 API（Base URL、Key、Model、提示词），点击 **「AI 结构化 text」** 将 `text` 拆为 6 张表并导出 CSV。
-
-命令行（开发调试）：
-
-```bash
-# 测试 API 连接
-echo {"config":{"api_key":"sk-..."}} | python -m cdxml.text_ai_bridge --test
-
-# 批量结构化并导出 6 个 CSV
-python scripts/parse_text_ai.py --config ai_config.json --input compounds.json -o out_structured/
-```
-
-配置保存在 Electron 用户目录 `ai_config.json`；也可用环境变量 `CDXML_AI_API_KEY` 覆盖 Key。
+也可将配置放在本地 `ai_config.json`（见 `ai_config.example.json`；该文件已 gitignore），或用环境变量 `CDXML_AI_API_KEY` 覆盖 Key。
 
 结构化输出表：`IC50`、`AUC0_t`、`Fu`、`Solubility`、`MMS_T12`、`CYP_inhibition`（字段定义见 `cdxml/text_ai/schema.py`）。
-
-## 打包（Windows）
-
-```bash
-build-release.cmd
-```
-
-产出便携 exe：`electron/dist-installer/CDXML Compound Parser-*-portable-x64.exe`
 
 ## 匹配参数
 
@@ -113,14 +71,14 @@ build-release.cmd
 | `--match-x-right` | 0 | 结构框右侧 X 扩展 |
 | `--match-y-down` | 130 | Y/距离匹配上限 |
 
-Electron 桥接（开发态）：
-
-```bash
-python -m cdxml.bridge input.cdxml __NO_CSV__ 0 0 130
-```
-
 ## 输出 CSV 列
 
 `Compound_ID`, `structure`, `tPSA`, `CLogP`, `text`
 
 示例格式见 [samples/compounds_list_template.csv](samples/compounds_list_template.csv)。
+
+## 测试
+
+```bash
+PYTHONPATH=. pytest tests/
+```
