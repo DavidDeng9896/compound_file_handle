@@ -40,6 +40,14 @@ cd frontend && npm install && cd ..
 
 浏览器打开 http://127.0.0.1:5173（Vite 将 `/api` 代理到后端 `:8000`）。
 
+需要外网访问时，另开终端：
+
+```bash
+./scripts/tunnel.sh
+```
+
+终端会打印 `https://*.trycloudflare.com` 公网地址（需本机已安装 `cloudflared`）。
+
 手动启动：
 
 ```bash
