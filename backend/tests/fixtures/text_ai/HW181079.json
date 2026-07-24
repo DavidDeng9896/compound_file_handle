@@ -1,0 +1,41 @@
+{
+  "compound_id": "HW181079",
+  "ic50": [
+    {"cell_line": "MCF-7", "ic50_nm": 12.68, "ic50_sd": null, "top_percent": null, "positive_control": 61.34, "stereochemistry": null},
+    {"cell_line": "MCF-7", "ic50_nm": 12.17, "ic50_sd": null, "top_percent": null, "positive_control": 56.64, "stereochemistry": null},
+    {"cell_line": "MCF-7", "ic50_nm": 540.68, "ic50_sd": null, "top_percent": null, "positive_control": "14.95, HW181079A", "stereochemistry": "HW181079A"},
+    {"cell_line": "H226", "ic50_nm": 6.42, "ic50_sd": null, "top_percent": null, "positive_control": 12.40, "stereochemistry": null},
+    {"cell_line": "H226", "ic50_nm": 337.63, "ic50_sd": null, "top_percent": null, "positive_control": 6.22, "stereochemistry": "HW181079A"}
+  ],
+  "auc": [
+    {"species": "mouse", "auc_h_ng_ml": 42013.64, "f_percent": null, "dose_mpk": null},
+    {"species": "rat", "auc_h_ng_ml": 15340.8, "f_percent": null, "dose_mpk": null}
+  ],
+  "fu": [
+    {"species": "human", "fu_percent": 0.236},
+    {"species": "rat", "fu_percent": 0.659},
+    {"species": "mouse", "fu_percent": 0.711},
+    {"species": "dog", "fu_percent": 0.963},
+    {"species": "monkey", "fu_percent": 0.298}
+  ],
+  "solubility": [
+    {"medium": "FaSSGF", "solubility_ug_ml": 18.98, "ph": 1.6},
+    {"medium": "FaSSIF", "solubility_ug_ml": 4.82, "ph": 6.5},
+    {"medium": "PBS", "solubility_ug_ml": 0.13, "ph": 7.4}
+  ],
+  "mms": [
+    {"species": "human", "t12_min": 312.58, "method": "肝微粒体"},
+    {"species": "rat", "t12_min": 212.32, "method": "肝微粒体"},
+    {"species": "mouse", "t12_min": 113.99, "method": "肝微粒体"},
+    {"species": "dog", "t12_min": 181.86, "method": "肝微粒体"},
+    {"species": "monkey", "t12_min": 21.45, "method": "肝微粒体"}
+  ],
+  "cyp_inhibition": [
+    {"isoform": "2C9", "concentration_um": 10, "inhibition_percent": 37.17},
+    {"isoform": "2D6", "concentration_um": 10, "inhibition_percent": 2.10},
+    {"isoform": "3A4M", "concentration_um": 10, "inhibition_percent": -2.85},
+    {"isoform": "3A4T", "concentration_um": 10, "inhibition_percent": -12.30}
+  ],
+  "unparsed_lines": [],
+  "warnings": []
+}
