@@ -107,11 +107,11 @@ watch(() => props.smiles, draw)
   box-shadow: 0 1px 0 rgba(31, 35, 41, 0.03);
 }
 .mol-smiles {
-  font-size: 11px;
-  color: #86909c;
+  font-size: 12.5px;
+  color: var(--cf-text-regular, #4e5969);
   word-break: break-all;
   line-height: 1.4;
-  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
   max-width: 100%;
 }
 .mol-err {

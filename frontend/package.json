@@ -12,7 +12,9 @@
     "@element-plus/icons-vue": "^2.3.2",
     "element-plus": "^2.14.3",
     "smiles-drawer": "^2.4.1",
-    "vue": "^3.5.39"
+    "vue": "^3.5.39",
+    "vxe-table": "^4.6.25",
+    "xe-utils": "^3.5.32"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.7",

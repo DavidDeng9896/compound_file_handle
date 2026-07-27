@@ -1,0 +1,133 @@
+/* Align vxe-table with existing cf-table look */
+.cf-vxe.vxe-table {
+  font-size: 12.5px;
+  color: var(--cf-text-regular);
+  font-family: var(--cf-font);
+  border-radius: var(--cf-radius);
+  --vxe-table-border-color: var(--cf-border-light);
+  --vxe-table-header-background-color: var(--cf-bg-header-table);
+  --vxe-table-header-font-color: var(--cf-text);
+  --vxe-table-body-background-color: #fff;
+  --vxe-table-row-hover-background-color: var(--cf-bg-row-hover);
+  --vxe-table-column-padding-default: 8px 0;
+  --vxe-table-cell-padding-left: 12px;
+  --vxe-table-cell-padding-right: 12px;
+  --vxe-table-font-size: 12.5px;
+  --vxe-font-family: var(--cf-font);
+  --vxe-font-color: var(--cf-text-regular);
+  --vxe-primary-color: var(--cf-primary);
+}
+
+.cf-vxe.vxe-table,
+.cf-vxe.vxe-table .vxe-header--column,
+.cf-vxe.vxe-table .vxe-body--column,
+.cf-vxe.vxe-table .vxe-cell,
+.cf-vxe.vxe-table .vxe-cell--label,
+.cf-vxe.vxe-table .vxe-cell--title {
+  font-family: var(--cf-font) !important;
+  font-size: 12.5px;
+}
+
+.cf-vxe.vxe-table .vxe-header--column {
+  font-weight: 500;
+  height: 36px;
+  color: var(--cf-text);
+  background-color: var(--cf-bg-header-table) !important;
+}
+
+/* Hide unused header edit / sort chrome */
+.cf-vxe.vxe-table .vxe-cell--edit-icon,
+.cf-vxe.vxe-table .vxe-header-cell--wrapper .vxe-cell--edit-icon,
+.cf-vxe.vxe-table .vxe-cell--sort,
+.cf-vxe.vxe-table .vxe-sort--asc-btn,
+.cf-vxe.vxe-table .vxe-sort--desc-btn,
+.cf-vxe.vxe-table .vxe-cell--title .vxe-icon {
+  display: none !important;
+}
+
+.cf-vxe.vxe-table .vxe-body--column {
+  vertical-align: middle;
+  line-height: 1.45;
+}
+
+.cf-vxe.vxe-table .vxe-cell {
+  padding: 8px 12px;
+  line-height: 1.45;
+  color: var(--cf-text-regular);
+}
+
+.cf-vxe.vxe-table .vxe-table--empty-content,
+.cf-vxe.vxe-table .vxe-table--empty-block {
+  color: var(--cf-text-secondary);
+  font-size: 13px;
+  font-family: var(--cf-font);
+}
+
+.cf-vxe.vxe-table .col-id .vxe-cell {
+  color: var(--cf-text);
+  letter-spacing: 0.01em;
+}
+
+.cf-vxe.vxe-table .col-num .vxe-cell {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+.cf-vxe.vxe-table .col-struct .vxe-cell {
+  padding: 6px 8px;
+  overflow: visible;
+  line-height: 1;
+}
+
+.cf-vxe.vxe-table .col-struct .vxe-cell--wrapper {
+  overflow: visible;
+}
+
+.cf-vxe.vxe-table .col-text .vxe-cell,
+.cf-vxe.vxe-table .col-text .vxe-cell--wrapper {
+  overflow: visible;
+  line-height: 1.5;
+}
+
+.cf-vxe.vxe-table .col-text .vxe-cell--edit {
+  padding: 0;
+}
+
+.cf-vxe.vxe-table .col-text textarea.cell-text-editor {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.cf-vxe.vxe-table .vxe-body--row.row--hover,
+.cf-vxe.vxe-table .vxe-body--row:hover {
+  background-color: var(--cf-bg-row-hover);
+}
+
+.cf-vxe.vxe-table .vxe-cell--edit,
+.cf-vxe.vxe-table .vxe-input,
+.cf-vxe.vxe-table .vxe-textarea,
+.cf-vxe.vxe-table .vxe-input--inner,
+.cf-vxe.vxe-table .vxe-textarea--inner {
+  font-size: 12.5px;
+  font-family: var(--cf-font) !important;
+  color: var(--cf-text-regular);
+}
+
+.cf-vxe.vxe-table .vxe-input--inner,
+.cf-vxe.vxe-table .vxe-textarea--inner {
+  border-radius: var(--cf-radius);
+  border-color: var(--cf-primary);
+}
+
+/* Column resize handle */
+.cf-vxe.vxe-table .vxe-header--column .vxe-cell--col-resizable {
+  opacity: 0.35;
+}
+.cf-vxe.vxe-table .vxe-header--column:hover .vxe-cell--col-resizable {
+  opacity: 0.7;
+}
+
+.table-wrap {
+  height: 100%;
+  min-height: 0;
+}
