@@ -1,7 +1,5 @@
-electron/node_modules/
-electron/dist-installer/
-web/node_modules/
-web/dist/
+frontend/node_modules/
+frontend/dist/
 dist/
 build/
 __pycache__/
@@ -10,6 +8,7 @@ __pycache__/
 _e_err.txt
 _e_out.json
 ai_config.json
+backend/config/ai_config.json
 .cache/
 debug/
 .venv/
