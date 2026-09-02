@@ -20,6 +20,7 @@ IC50_HEADERS = [
 AUC_HEADERS = [
     "Compound_ID",
     "Species",
+    "给药途径",
     "AUC₀₋t（h·ng/mL）",
     "F%",
     "给药剂量(mpk)",
@@ -97,6 +98,7 @@ COMPOUND_RESPONSE_SCHEMA: Dict[str, Any] = {
                 "type": "object",
                 "properties": {
                     "species": {"type": ["string", "null"]},
+                    "route": {"type": ["string", "null"]},
                     "auc_h_ng_ml": {"type": ["number", "null"]},
                     "f_percent": {"type": ["number", "null"]},
                     "dose_mpk": {"type": ["number", "null"]},
@@ -195,6 +197,7 @@ def flatten_to_tables(
                 {
                     "Compound_ID": cid,
                     "Species": _cell(row.get("species")),
+                    "给药途径": _cell(row.get("route")),
                     "AUC₀₋t（h·ng/mL）": _cell(row.get("auc_h_ng_ml")),
                     "F%": _cell(row.get("f_percent")),
                     "给药剂量(mpk)": _cell(row.get("dose_mpk")),

@@ -18,3 +18,4 @@ def test_csv_dict_has_bom_and_headers() -> None:
     assert csv_map["IC50.csv"].startswith("\ufeff")
     assert "Compound_ID" in csv_map["IC50.csv"]
     assert "AUC₀₋t（h·ng/mL）" in csv_map["AUC0_t.csv"]
+    assert "给药途径" in csv_map["AUC0_t.csv"]
