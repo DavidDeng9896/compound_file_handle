@@ -485,7 +485,7 @@ def assign_other_texts_to_compounds(
     *,
     match_x_extend_left: float = 0.0,
     match_x_extend_right: float = 0.0,
-    match_y_down: float = 130.0,
+    match_y_down: float = 300.0,
 ) -> set:
     """将其他说明文字独占分配到化合物；返回已使用的 other_texts 下标集合。"""
     used_other: set = set()
@@ -558,7 +558,7 @@ def main(
     *,
     match_x_extend_left: float = 0.0,
     match_x_extend_right: float = 0.0,
-    match_y_down: float = 130.0,
+    match_y_down: float = 300.0,
 ) -> ParseResult:
     if match_x_extend_left < 0:
         match_x_extend_left = 0.0
@@ -569,7 +569,7 @@ def main(
     if match_x_extend_right > 1e6:
         match_x_extend_right = 1e6
     if match_y_down <= 0:
-        match_y_down = 130.0
+        match_y_down = 300.0
 
     tree = ET.parse(cdxml_path)
     root = tree.getroot()
