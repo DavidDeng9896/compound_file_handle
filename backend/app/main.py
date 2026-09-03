@@ -37,7 +37,7 @@ DEFAULT_AI_CONFIG: Dict[str, Any] = {
     "temperature": 0,
     "max_tokens": 4096,
     "concurrency": 3,
-    "use_cache": True,
+    "use_cache": False,
     "system_prompt": DEFAULT_SYSTEM_PROMPT,
     "user_prompt_template": DEFAULT_USER_PROMPT_TEMPLATE,
 }
@@ -71,6 +71,8 @@ def _load_ai_config() -> Dict[str, Any]:
         cfg["system_prompt"] = DEFAULT_SYSTEM_PROMPT
     if not str(cfg.get("user_prompt_template") or "").strip():
         cfg["user_prompt_template"] = DEFAULT_USER_PROMPT_TEMPLATE
+    # 文本解析结果不缓存；用户设置（Key/模型/提示词）仍持久化到本文件
+    cfg["use_cache"] = False
     return cfg
 
 
@@ -81,7 +83,10 @@ def _save_ai_config(config: Dict[str, Any]) -> Dict[str, Any]:
             continue
         if k in ("system_prompt", "user_prompt_template") and not str(v or "").strip():
             continue
+        if k == "use_cache":
+            continue
         merged[k] = v
+    merged["use_cache"] = False
     CONFIG_PATH.parent.mkdir(parents=True, exist_ok=True)
     CONFIG_PATH.write_text(json.dumps(merged, ensure_ascii=False, indent=2), encoding="utf-8")
     return merged

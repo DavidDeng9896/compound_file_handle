@@ -1,4 +1,4 @@
-"""批量 AI 解析：并发、缓存、重试。"""
+"""批量 AI 解析：并发；解析结果不缓存。"""
 
 from __future__ import annotations
 
@@ -104,9 +104,6 @@ def run_batch(
         }
 
     concurrency = max(1, int(config.get("concurrency", 3)))
-    use_cache = bool(config.get("use_cache", True))
-    cache_dir = _cache_path(config)
-    cache: Dict[str, Any] = _load_cache(cache_dir) if (use_cache and cache_dir) else {}
 
     to_process: List[Dict[str, str]] = []
     results: List[Dict[str, Any]] = []
@@ -138,24 +135,8 @@ def run_batch(
     def work(item: Dict[str, str]) -> Dict[str, Any]:
         cid = item["compound_id"]
         text = item["text"]
-        h = _text_hash(text)
-        if use_cache and cache_dir and h in cache:
-            log(f"[缓存] {cid}")
-            parsed = cache[h]
-            return {
-                "compound_id": cid,
-                "text": text,
-                "skipped": False,
-                "cached": True,
-                "parsed": parsed,
-                "error": None,
-                "warnings": parsed.get("warnings") or [],
-                "unparsed_lines": parsed.get("unparsed_lines") or [],
-            }
         try:
             parsed = parse_compound_with_ai(client, cid, text)
-            if use_cache and cache_dir is not None:
-                cache[h] = parsed
             return {
                 "compound_id": cid,
                 "text": text,
@@ -208,9 +189,6 @@ def run_batch(
                 compound_id=item["compound_id"],
                 status=prog_status,
             )
-
-    if use_cache and cache_dir:
-        _save_cache(cache_dir, cache)
 
     ordered: List[Dict[str, Any]] = []
     for c in compounds:
