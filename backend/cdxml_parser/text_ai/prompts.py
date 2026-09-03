@@ -20,6 +20,7 @@ DEFAULT_SYSTEM_PROMPT = """你是药物化学实验数据解析助手。输入�
   "auc": [
     {
       "species": "human|rat|mouse|dog|monkey",
+      "route": "PO|IV|null",
       "auc_h_ng_ml": <number>,
       "f_percent": <number 或 null>,
       "dose_mpk": <number 或 null>
@@ -47,6 +48,10 @@ DEFAULT_SYSTEM_PROMPT = """你是药物化学实验数据解析助手。输入�
 5. MMS 检测方法原文无则填「肝微粒体」。
 6. CYP：支持 = 后换行；2C9/2D6/3A4M/3A4T 与 10uM。
 7. AUC0-t：物种统一小写英文 mouse/rat/dog 等；提取 F%、mpk 若存在。
+   - 给药途径 route 统一大写 PO 或 IV；无明确途径时填 null。
+   - 识别口服/静脉格式，如「Mouse po AUC = 806 h·ng/mL (1525), F% = 42.4」：主值为 PO AUC，括号内为同物种 IV 参照 AUC（不单独落列）。
+   - 上述格式拆成两行：PO 行 route=PO、auc_h_ng_ml=主值、f_percent=给出的 F%；IV 行 route=IV、auc_h_ng_ml=括号值、f_percent=null。
+   - 仅 IV 或无括号参照时只输出对应一行。
 8. hERG 等无法归类内容放入 unparsed_lines。
 9. 缺失字段用 null；数组无数据用 []。
 10. ic50_sd 源数据无则始终 null。

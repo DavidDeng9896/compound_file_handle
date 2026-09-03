@@ -16,7 +16,7 @@ def test_merge_aligns_nth_records_horizontally():
             {"Compound_ID": "A", "Cell_line": "c2", "IC50(nM)": "2", "IC50_SD": "", "Top（%）": "", "Positive control": "", "构型": ""},
         ],
         "auc": [
-            {"Compound_ID": "A", "Species": "mouse", "AUC₀₋t（h·ng/mL）": "10", "F%": "", "给药剂量(mpk)": ""},
+            {"Compound_ID": "A", "Species": "mouse", "给药途径": "PO", "AUC₀₋t（h·ng/mL）": "10", "F%": "", "给药剂量(mpk)": ""},
         ],
         "fu": [],
         "solubility": [],
@@ -28,6 +28,7 @@ def test_merge_aligns_nth_records_horizontally():
     assert rows[0]["Compound_ID"] == "A"
     assert rows[0]["ic50__Cell_line"] == "c1"
     assert rows[0]["auc__Species"] == "mouse"
+    assert rows[0]["auc__给药途径"] == "PO"
     assert rows[1]["ic50__Cell_line"] == "c2"
     assert rows[1]["auc__Species"] == ""
     assert cols[0]["prop"] == "Compound_ID"

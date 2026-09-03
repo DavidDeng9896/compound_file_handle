@@ -1,0 +1,16 @@
+{
+  "compound_id": "PK001",
+  "ic50": [],
+  "auc": [
+    {"species": "mouse", "route": "PO", "auc_h_ng_ml": 806, "f_percent": 42.4, "dose_mpk": null},
+    {"species": "mouse", "route": "IV", "auc_h_ng_ml": 1525, "f_percent": null, "dose_mpk": null},
+    {"species": "rat", "route": "PO", "auc_h_ng_ml": 158, "f_percent": 12.1, "dose_mpk": null},
+    {"species": "rat", "route": "IV", "auc_h_ng_ml": 2128, "f_percent": null, "dose_mpk": null}
+  ],
+  "fu": [],
+  "solubility": [],
+  "mms": [],
+  "cyp_inhibition": [],
+  "unparsed_lines": [],
+  "warnings": []
+}

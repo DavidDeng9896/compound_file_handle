@@ -63,3 +63,24 @@ def test_hw181079_stereochemistry() -> None:
     assert len(stereo) >= 1
     assert len(tables["mms"]) == 5
     assert tables["mms"][0]["检测方法"] == "肝微粒体"
+
+
+def test_pk_po_iv_route_split() -> None:
+    """口服 AUC 带括号 IV 参照时拆成 PO/IV 两行，IV 行 F% 为空。"""
+    raw = json.loads((FIXTURES / "PK_po_iv.json").read_text(encoding="utf-8"))
+    validate_compound_response(raw)
+    tables = flatten_to_tables(
+        [{"compound_id": raw["compound_id"], "parsed": raw, "error": None}]
+    )
+    auc = tables["auc"]
+    assert len(auc) == 4
+    mouse_po = next(r for r in auc if r["Species"] == "mouse" and r["给药途径"] == "PO")
+    mouse_iv = next(r for r in auc if r["Species"] == "mouse" and r["给药途径"] == "IV")
+    assert mouse_po["AUC₀₋t（h·ng/mL）"] == "806"
+    assert mouse_po["F%"] == "42.4"
+    assert mouse_iv["AUC₀₋t（h·ng/mL）"] == "1525"
+    assert mouse_iv["F%"] == ""
+    rat_po = next(r for r in auc if r["Species"] == "rat" and r["给药途径"] == "PO")
+    rat_iv = next(r for r in auc if r["Species"] == "rat" and r["给药途径"] == "IV")
+    assert rat_po["F%"] == "12.1"
+    assert rat_iv["F%"] == ""
