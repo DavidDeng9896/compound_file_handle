@@ -28,7 +28,7 @@ const devDebug = ref(false)
 const match = reactive({
   matchXExtendLeft: 0,
   matchXExtendRight: 0,
-  matchYDown: 130,
+  matchYDown: 300,
 })
 
 const aiConfig = reactive({
@@ -38,6 +38,8 @@ const aiConfig = reactive({
   concurrency: 3,
   system_prompt: '',
   user_prompt_template: '',
+  default_system_prompt: '',
+  default_user_prompt_template: '',
   api_key_set: false,
   api_key_masked: '',
 })
@@ -213,12 +215,16 @@ function saveMatchToStorage(m = match) {
 async function loadAiConfig() {
   const res = await fetch('/api/ai-config')
   const cfg = await res.json()
+  const defaultSystem = cfg.default_system_prompt || cfg.system_prompt || ''
+  const defaultUser = cfg.default_user_prompt_template || cfg.user_prompt_template || ''
   Object.assign(aiConfig, {
     base_url: cfg.base_url || '',
     model: cfg.model || 'gpt-4o-mini',
     concurrency: cfg.concurrency || 3,
-    system_prompt: cfg.system_prompt || '',
-    user_prompt_template: cfg.user_prompt_template || '',
+    system_prompt: (cfg.system_prompt || '').trim() || defaultSystem,
+    user_prompt_template: (cfg.user_prompt_template || '').trim() || defaultUser,
+    default_system_prompt: defaultSystem,
+    default_user_prompt_template: defaultUser,
     api_key_set: !!cfg.api_key_set,
     api_key_masked: cfg.api_key_masked || '',
     api_key: '',
@@ -270,6 +276,12 @@ async function onSaveAi(cfg) {
     return
   }
   Object.assign(aiConfig, data.config, { api_key: '' })
+  if (data.config?.default_system_prompt) {
+    aiConfig.default_system_prompt = data.config.default_system_prompt
+  }
+  if (data.config?.default_user_prompt_template) {
+    aiConfig.default_user_prompt_template = data.config.default_user_prompt_template
+  }
   ElMessage.success('AI 配置已保存')
 }
 

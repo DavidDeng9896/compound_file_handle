@@ -18,7 +18,7 @@ def cli() -> None:
     )
     parser.add_argument("--match-x-left", type=float, default=0.0, help="结构框 X 左扩展")
     parser.add_argument("--match-x-right", type=float, default=0.0, help="结构框 X 右扩展")
-    parser.add_argument("--match-y-down", type=float, default=130.0, help="Y/距离匹配上限")
+    parser.add_argument("--match-y-down", type=float, default=300.0, help="Y/距离匹配上限")
     args = parser.parse_args()
     result = main(
         args.cdxml,

@@ -52,11 +52,11 @@ def test_other_text_y_band_capped_by_next():
 
 def test_other_text_y_band_without_next_uses_match_y_down():
     struct = _bbox(0, 0, 100, 50)
-    assert other_text_y_upper(struct, 130, None) == 180
-    text = _bbox(0, 170, 80, 190)
-    assert other_text_in_y_band(struct, text, 130, None)
-    text_far = _bbox(0, 200, 80, 220)
-    assert not other_text_in_y_band(struct, text_far, 130, None)
+    assert other_text_y_upper(struct, 300, None) == 350
+    text = _bbox(0, 320, 80, 340)
+    assert other_text_in_y_band(struct, text, 300, None)
+    text_far = _bbox(0, 400, 80, 420)
+    assert not other_text_in_y_band(struct, text_far, 300, None)
 
 
 def test_assign_other_texts_exclusive_nearest():

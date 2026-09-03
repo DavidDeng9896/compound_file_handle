@@ -80,7 +80,7 @@ PYTHONPATH=. python -m cdxml_parser ../samples/cdxml/EO018\ compounds\ list.cdxm
 |------|------|------|
 | `--match-x-left` | 0 | 结构框左侧 X 扩展（坐标单位） |
 | `--match-x-right` | 0 | 结构框右侧 X 扩展 |
-| `--match-y-down` | 130 | Y/距离匹配上限 |
+| `--match-y-down` | 300 | Y/距离匹配上限 |
 
 ## 输出 CSV 列
 

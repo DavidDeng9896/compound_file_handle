@@ -28,7 +28,7 @@ const title = computed(() => (isAi.value ? 'AI 解析设置' : '结构匹配设�
 const localMatch = reactive({
   matchXExtendLeft: 0,
   matchXExtendRight: 0,
-  matchYDown: 130,
+  matchYDown: 300,
 })
 
 const localAi = reactive({
@@ -38,6 +38,8 @@ const localAi = reactive({
   concurrency: 3,
   system_prompt: '',
   user_prompt_template: '',
+  default_system_prompt: '',
+  default_user_prompt_template: '',
   api_key_set: false,
   api_key_masked: '',
 })
@@ -48,6 +50,12 @@ watch(
     if (!open) return
     Object.assign(localMatch, props.match)
     Object.assign(localAi, props.aiConfig, { api_key: '' })
+    if (!(localAi.system_prompt || '').trim()) {
+      localAi.system_prompt = localAi.default_system_prompt || ''
+    }
+    if (!(localAi.user_prompt_template || '').trim()) {
+      localAi.user_prompt_template = localAi.default_user_prompt_template || ''
+    }
   },
   { immediate: true }
 )
@@ -66,6 +74,11 @@ function onSaveAi() {
 
 function onTestAi() {
   emit('test-ai', { ...localAi })
+}
+
+function onResetPrompts() {
+  localAi.system_prompt = localAi.default_system_prompt || ''
+  localAi.user_prompt_template = localAi.default_user_prompt_template || ''
 }
 </script>
 
@@ -164,7 +177,10 @@ function onTestAi() {
             </div>
 
             <label class="stack-field">
-              <span class="block-title">System Prompt</span>
+              <span class="block-title prompt-head">
+                <span>System Prompt</span>
+                <button type="button" class="link-btn" @click="onResetPrompts">恢复默认</button>
+              </span>
               <el-input v-model="localAi.system_prompt" type="textarea" :rows="9" resize="vertical" />
             </label>
 
@@ -286,6 +302,26 @@ function onTestAi() {
   font-weight: 500;
   color: #303133;
   line-height: 1.4;
+}
+
+.prompt-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.link-btn {
+  border: none;
+  background: transparent;
+  padding: 0;
+  font-size: 12px;
+  color: #409eff;
+  cursor: pointer;
+}
+
+.link-btn:hover {
+  text-decoration: underline;
 }
 
 .block-divider {
