@@ -66,6 +66,11 @@ def _load_ai_config() -> Dict[str, Any]:
     env_key = os.environ.get("CDXML_AI_API_KEY", "").strip()
     if env_key:
         cfg["api_key"] = env_key
+    # 空提示词视为未配置，回退到代码内默认模板（避免保存空串后设置面板空白）
+    if not str(cfg.get("system_prompt") or "").strip():
+        cfg["system_prompt"] = DEFAULT_SYSTEM_PROMPT
+    if not str(cfg.get("user_prompt_template") or "").strip():
+        cfg["user_prompt_template"] = DEFAULT_USER_PROMPT_TEMPLATE
     return cfg
 
 
@@ -73,6 +78,8 @@ def _save_ai_config(config: Dict[str, Any]) -> Dict[str, Any]:
     merged = _load_ai_config()
     for k, v in config.items():
         if k == "api_key" and (v is None or v == ""):
+            continue
+        if k in ("system_prompt", "user_prompt_template") and not str(v or "").strip():
             continue
         merged[k] = v
     CONFIG_PATH.parent.mkdir(parents=True, exist_ok=True)
@@ -88,6 +95,9 @@ def _public_ai_config(cfg: Dict[str, Any]) -> Dict[str, Any]:
     # 前端可显示是否已配置；不回传明文 key
     if key:
         out["api_key_masked"] = key[:4] + "****" + key[-4:] if len(key) > 8 else "****"
+    # 始终附带代码内默认提示词，便于设置面板「恢复默认」
+    out["default_system_prompt"] = DEFAULT_SYSTEM_PROMPT
+    out["default_user_prompt_template"] = DEFAULT_USER_PROMPT_TEMPLATE
     return out
 
 
@@ -158,7 +168,7 @@ async def parse_cdxml(
     file: UploadFile = File(...),
     match_x_extend_left: float = Form(0),
     match_x_extend_right: float = Form(0),
-    match_y_down: float = Form(130),
+    match_y_down: float = Form(300),
 ) -> JSONResponse:
     suffix = Path(file.filename or "upload.cdxml").suffix or ".cdxml"
     log_lines: List[str] = []
@@ -206,6 +216,11 @@ def _merge_config(patch: Optional[AiConfigBody]) -> Dict[str, Any]:
         data = {k: v for k, v in patch.model_dump().items() if v is not None}
         if data.get("api_key") == "":
             data.pop("api_key", None)
+        # 空提示词不覆盖已加载的默认/已存值
+        if not str(data.get("system_prompt") or "").strip():
+            data.pop("system_prompt", None)
+        if not str(data.get("user_prompt_template") or "").strip():
+            data.pop("user_prompt_template", None)
         cfg.update(data)
     if not cfg.get("cache_dir"):
         cfg["cache_dir"] = str(default_cache_dir())
