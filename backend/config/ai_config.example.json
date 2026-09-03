@@ -5,7 +5,7 @@
   "temperature": 0,
   "max_tokens": 4096,
   "concurrency": 3,
-  "use_cache": true,
-  "system_prompt": "见 cdxml/text_ai/prompts.py DEFAULT_SYSTEM_PROMPT",
+  "use_cache": false,
+  "system_prompt": "见 backend/cdxml_parser/text_ai/prompts.py DEFAULT_SYSTEM_PROMPT",
   "user_prompt_template": "Compound_ID: {compound_id}\n\ntext:\n{text}"
 }
