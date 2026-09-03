@@ -418,6 +418,139 @@ def has_x_overlap(
     return x1 <= bbox2["x2"] and bbox2["x1"] <= x2
 
 
+def strip_trailing_paren_group(text: str) -> str:
+    """去掉末尾一对圆括号及其中内容，例如 HW1800023(VET,102354) → HW1800023。"""
+    m = re.match(r"^(.*)(\([^)]*\))\s*$", text)
+    if not m:
+        return text
+    return m.group(1).rstrip()
+
+
+def find_next_structure_below(
+    struct_bbox: Dict[str, float],
+    structures: List[Dict[str, Any]],
+    x_extend_left: float = 0.0,
+    x_extend_right: float = 0.0,
+) -> Optional[Dict[str, Any]]:
+    """在 X 重叠且中心 Y 更大的结构中，取竖直方向最近的下一个结构。"""
+    best: Optional[Dict[str, Any]] = None
+    best_dy = float("inf")
+    cy = struct_bbox["center_y"]
+    for struct in structures:
+        other = struct["bbox"]
+        if other is struct_bbox:
+            continue
+        if other["center_y"] <= cy:
+            continue
+        if not has_x_overlap(
+            struct_bbox, other, x_extend_left, x_extend_right
+        ):
+            continue
+        dy = other["center_y"] - cy
+        if dy < best_dy:
+            best_dy = dy
+            best = struct
+    return best
+
+
+def other_text_y_upper(
+    struct_bbox: Dict[str, float],
+    match_y_down: float,
+    next_struct: Optional[Dict[str, Any]] = None,
+) -> float:
+    """其他文字归属的 Y 上界：min(底边+match_y_down, 下一结构顶边)。"""
+    upper = struct_bbox["y2"] + float(match_y_down)
+    if next_struct is not None:
+        upper = min(upper, next_struct["bbox"]["y1"])
+    return upper
+
+
+def other_text_in_y_band(
+    struct_bbox: Dict[str, float],
+    text_bbox: Dict[str, float],
+    match_y_down: float,
+    next_struct: Optional[Dict[str, Any]] = None,
+) -> bool:
+    """文字顶边中点（用 y1）是否落在 [结构底边, Y 上界] 内。"""
+    y_top = text_bbox["y1"]
+    y_bottom = struct_bbox["y2"]
+    upper = other_text_y_upper(struct_bbox, match_y_down, next_struct)
+    return y_bottom <= y_top <= upper
+
+
+def assign_other_texts_to_compounds(
+    compounds: List[Dict[str, Any]],
+    other_texts: List[Dict[str, Any]],
+    structures: List[Dict[str, Any]],
+    *,
+    match_x_extend_left: float = 0.0,
+    match_x_extend_right: float = 0.0,
+    match_y_down: float = 130.0,
+) -> set:
+    """将其他说明文字独占分配到化合物；返回已使用的 other_texts 下标集合。"""
+    used_other: set = set()
+    pending: Dict[int, List[Tuple[int, str, float]]] = {
+        i: [] for i in range(len(compounds))
+    }
+
+    next_by_compound: List[Optional[Dict[str, Any]]] = []
+    for compound in compounds:
+        next_by_compound.append(
+            find_next_structure_below(
+                compound["bbox"],
+                structures,
+                match_x_extend_left,
+                match_x_extend_right,
+            )
+        )
+
+    for k, other in enumerate(other_texts):
+        best_i: Optional[int] = None
+        best_dist = float("inf")
+        text_top_center = (
+            (other["bbox"]["x1"] + other["bbox"]["x2"]) / 2,
+            other["bbox"]["y1"],
+        )
+        for i, compound in enumerate(compounds):
+            struct_bbox = compound["bbox"]
+            if not has_x_overlap(
+                struct_bbox,
+                other["bbox"],
+                match_x_extend_left,
+                match_x_extend_right,
+            ):
+                continue
+            if not other_text_in_y_band(
+                struct_bbox,
+                other["bbox"],
+                match_y_down,
+                next_by_compound[i],
+            ):
+                continue
+            struct_bottom_center = (
+                (struct_bbox["x1"] + struct_bbox["x2"]) / 2,
+                struct_bbox["y2"],
+            )
+            dist = distance(struct_bottom_center, text_top_center)
+            if dist < best_dist:
+                best_dist = dist
+                best_i = i
+        if best_i is not None:
+            pending[best_i].append((k, other["content"], best_dist))
+            used_other.add(k)
+
+    for i, compound in enumerate(compounds):
+        items = sorted(pending[i], key=lambda x: x[2])
+        if items:
+            compound["text"] = " ".join(content for _, content, _ in items)
+            for k, _, _ in items:
+                used_other.add(k)
+        else:
+            compound["text"] = ""
+
+    return used_other
+
+
 def main(
     cdxml_path: str,
     output_path: Optional[str] = None,
@@ -507,7 +640,6 @@ def main(
     used_hw: set = set()
     used_tpsa: set = set()
     used_clogp: set = set()
-    used_other: set = set()
     used_struct_indices: set = set()
 
     compounds: List[Dict[str, Any]] = []
@@ -555,7 +687,7 @@ def main(
             "element": struct["element"],
             "bbox": struct_bbox,
             "smiles": struct["smiles"],
-            "name": hw["content"],
+            "name": strip_trailing_paren_group(hw["content"]),
             "tpsa": "",
             "clogp": "",
             "text": "",
@@ -609,32 +741,16 @@ def main(
                 compound["clogp"] = clogp_match.group(1)
             used_clogp.add(best_clogp[0])
 
-        struct_bottom_center = ((struct_bbox["x1"] + struct_bbox["x2"]) / 2, struct_bbox["y2"])
-
-        matched_others = []
-        for k, other in enumerate(other_texts):
-            if k in used_other:
-                continue
-
-            if not has_x_overlap(
-                struct_bbox, other["bbox"], match_x_extend_left, match_x_extend_right
-            ):
-                continue
-
-            text_top_center = ((other["bbox"]["x1"] + other["bbox"]["x2"]) / 2, other["bbox"]["y1"])
-            dist = distance(struct_bottom_center, text_top_center)
-            if dist < match_y_down:
-                matched_others.append((k, other, dist))
-
-        if matched_others:
-            matched_others_sorted = sorted(matched_others, key=lambda x: x[2])
-            text_parts = []
-            for k, other, dist in matched_others_sorted:
-                text_parts.append(other["content"])
-                used_other.add(k)
-            compound["text"] = " ".join(text_parts)
-
         compounds.append(compound)
+
+    used_other = assign_other_texts_to_compounds(
+        compounds,
+        other_texts,
+        structures,
+        match_x_extend_left=match_x_extend_left,
+        match_x_extend_right=match_x_extend_right,
+        match_y_down=match_y_down,
+    )
 
     log(f"\n成功匹配到 {len(compounds)} 个化合物\n")
 
