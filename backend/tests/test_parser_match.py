@@ -4,7 +4,9 @@ from __future__ import annotations
 
 from cdxml_parser.parser import (
     assign_other_texts_to_compounds,
+    dedupe_texts_by_content_bbox,
     find_next_structure_below,
+    hw_vertically_plausible,
     other_text_in_y_band,
     other_text_y_upper,
     strip_trailing_paren_group,
@@ -97,3 +99,23 @@ def test_assign_does_not_cross_next_structure():
     )
     assert upper["text"] == ""
     assert lower["text"] == "X"
+
+
+def test_dedupe_texts_by_content_bbox_keeps_first():
+    """同内容且包围盒几乎重合的重复 HW/文字只保留一条（EO035 HW356041）。"""
+    a = {"content": "HW356041", "bbox": _bbox(1518.98, 1333.74, 1569.02, 1345.49)}
+    b = {"content": "HW356041", "bbox": _bbox(1518.98, 1333.74, 1569.02, 1345.49)}
+    c = {"content": "HW356047", "bbox": _bbox(1513.0, 1551.8, 1563.0, 1563.6)}
+    out = dedupe_texts_by_content_bbox([a, b, c])
+    assert len(out) == 2
+    assert out[0] is a
+    assert out[1] is c
+
+
+def test_hw_vertically_plausible_rejects_label_above_structure():
+    """HW 整体在结构顶边之上时不可作为该结构标签（避免重复 HW 抢走下方结构）。"""
+    hw = _bbox(1519, 1333.7, 1569, 1345.5)
+    upper = _bbox(1473, 1208.8, 1612, 1321.6)
+    lower = _bbox(1474, 1440.5, 1614, 1540.1)
+    assert hw_vertically_plausible(hw, upper)
+    assert not hw_vertically_plausible(hw, lower)

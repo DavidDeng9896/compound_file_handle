@@ -426,6 +426,44 @@ def strip_trailing_paren_group(text: str) -> str:
     return m.group(1).rstrip()
 
 
+def dedupe_texts_by_content_bbox(
+    texts: List[Dict[str, Any]],
+    *,
+    tol: float = 0.05,
+) -> List[Dict[str, Any]]:
+    """去掉 content + bbox 几乎相同的重复文字，保留首次出现。"""
+    seen: List[Tuple[str, Dict[str, float]]] = []
+    out: List[Dict[str, Any]] = []
+    for item in texts:
+        content = item.get("content", "")
+        bbox = item["bbox"]
+        dup = False
+        for prev_content, prev_bbox in seen:
+            if prev_content != content:
+                continue
+            if (
+                abs(prev_bbox["x1"] - bbox["x1"]) <= tol
+                and abs(prev_bbox["y1"] - bbox["y1"]) <= tol
+                and abs(prev_bbox["x2"] - bbox["x2"]) <= tol
+                and abs(prev_bbox["y2"] - bbox["y2"]) <= tol
+            ):
+                dup = True
+                break
+        if dup:
+            continue
+        seen.append((content, bbox))
+        out.append(item)
+    return out
+
+
+def hw_vertically_plausible(
+    hw_bbox: Dict[str, float],
+    struct_bbox: Dict[str, float],
+) -> bool:
+    """HW 标签不应整体落在结构顶边之上（否则更像上一结构的标签）。"""
+    return hw_bbox["y2"] >= struct_bbox["y1"]
+
+
 def find_next_structure_below(
     struct_bbox: Dict[str, float],
     structures: List[Dict[str, Any]],
@@ -626,6 +664,11 @@ def main(
                     else:
                         other_texts.append({"content": content, "bbox": bbox})
 
+    hw_before = len(hw_texts)
+    hw_texts = dedupe_texts_by_content_bbox(hw_texts)
+    if len(hw_texts) < hw_before:
+        log(f"去重重复 HW 标签：{hw_before} → {len(hw_texts)}")
+
     log(f"找到 {len(structures)} 个化合物结构")
     log(f"找到 {len(hw_texts)} 个HW开头的文字")
     log(f"找到 {len(tpsa_texts)} 个tPSA相关文字")
@@ -662,6 +705,8 @@ def main(
             if not has_x_overlap(
                 struct_bbox, hw_bbox, match_x_extend_left, match_x_extend_right
             ):
+                continue
+            if not hw_vertically_plausible(hw_bbox, struct_bbox):
                 continue
 
             dist = abs(hw_bbox["center_y"] - struct_bbox["center_y"])
