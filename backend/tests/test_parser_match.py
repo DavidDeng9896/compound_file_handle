@@ -3,11 +3,15 @@
 from __future__ import annotations
 
 from cdxml_parser.parser import (
+    assign_exclusive_nearest,
     assign_other_texts_to_compounds,
+    dedupe_texts_by_content_bbox,
     find_next_structure_below,
+    hw_vertically_plausible,
     other_text_in_y_band,
     other_text_y_upper,
     strip_trailing_paren_group,
+    text_in_near_zone,
 )
 
 
@@ -97,3 +101,71 @@ def test_assign_does_not_cross_next_structure():
     )
     assert upper["text"] == ""
     assert lower["text"] == "X"
+
+
+def test_dedupe_texts_by_content_bbox_keeps_first():
+    """同内容且包围盒几乎重合的重复 HW/文字只保留一条（EO035 HW356041）。"""
+    a = {"content": "HW356041", "bbox": _bbox(1518.98, 1333.74, 1569.02, 1345.49)}
+    b = {"content": "HW356041", "bbox": _bbox(1518.98, 1333.74, 1569.02, 1345.49)}
+    c = {"content": "HW356047", "bbox": _bbox(1513.0, 1551.8, 1563.0, 1563.6)}
+    out = dedupe_texts_by_content_bbox([a, b, c])
+    assert len(out) == 2
+    assert out[0] is a
+    assert out[1] is c
+
+
+def test_hw_vertically_plausible_rejects_label_above_structure():
+    """HW 整体在结构顶边之上时不可作为该结构标签（避免重复 HW 抢走下方结构）。"""
+    hw = _bbox(1519, 1333.7, 1569, 1345.5)
+    upper = _bbox(1473, 1208.8, 1612, 1321.6)
+    lower = _bbox(1474, 1440.5, 1614, 1540.1)
+    assert hw_vertically_plausible(hw, upper)
+    assert not hw_vertically_plausible(hw, lower)
+
+
+def test_text_in_near_zone_stops_at_next_structure():
+    upper = _bbox(0, 0, 100, 50)
+    lower = {"bbox": _bbox(0, 200, 100, 250)}
+    # 落在下一结构领地内，不应再算 upper 的附近区
+    in_lower = _bbox(10, 210, 90, 220)
+    assert not text_in_near_zone(upper, in_lower, 300, lower)
+    between = _bbox(10, 80, 90, 90)
+    assert text_in_near_zone(upper, between, 300, lower)
+
+
+def test_assign_exclusive_nearest_one_text_one_structure():
+    """按距离贪心：文字全局一次，结构每类至多一条。"""
+    # (dist, struct_i, text_k)
+    cands = [
+        (10.0, 0, 0),
+        (11.0, 1, 0),  # 同一文字，结构1抢不到
+        (12.0, 0, 2),  # 结构0已有 HW，不再认领
+        (20.0, 1, 1),
+    ]
+    got = assign_exclusive_nearest(cands, one_per_structure=True)
+    assert got == {0: 0, 1: 1}
+
+
+def test_structure_first_duplicate_hw_does_not_steal_lower():
+    """重合双 HW 只应归上方结构；下方结构认领自己的 HW（不依赖预去重）。"""
+    upper = {"bbox": _bbox(0, 0, 100, 50)}
+    lower = {"bbox": _bbox(0, 200, 100, 250)}
+    structures = [upper, lower]
+    hw_dup_a = {"content": "HW356041", "bbox": _bbox(20, 60, 80, 70)}
+    hw_dup_b = {"content": "HW356041", "bbox": _bbox(20, 60, 80, 70)}
+    hw_lower = {"content": "HW356047", "bbox": _bbox(20, 260, 80, 270)}
+    hw_texts = [hw_dup_a, hw_dup_b, hw_lower]
+
+    cands = []
+    for j, struct in enumerate(structures):
+        nxt = find_next_structure_below(struct["bbox"], structures)
+        for i, hw in enumerate(hw_texts):
+            if not text_in_near_zone(struct["bbox"], hw["bbox"], 300, nxt):
+                continue
+            dist = abs(hw["bbox"]["center_y"] - struct["bbox"]["center_y"])
+            if dist < 300:
+                cands.append((dist, j, i))
+    assigned = assign_exclusive_nearest(cands, one_per_structure=True)
+    assert assigned[0] in (0, 1)  # 上方拿到重复 HW 之一
+    assert assigned.get(1) == 2  # 下方拿到 HW356047
+    assert len(assigned) == 2

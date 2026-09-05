@@ -426,6 +426,90 @@ def strip_trailing_paren_group(text: str) -> str:
     return m.group(1).rstrip()
 
 
+def dedupe_texts_by_content_bbox(
+    texts: List[Dict[str, Any]],
+    *,
+    tol: float = 0.05,
+) -> List[Dict[str, Any]]:
+    """去掉 content + bbox 几乎相同的重复文字，保留首次出现。"""
+    seen: List[Tuple[str, Dict[str, float]]] = []
+    out: List[Dict[str, Any]] = []
+    for item in texts:
+        content = item.get("content", "")
+        bbox = item["bbox"]
+        dup = False
+        for prev_content, prev_bbox in seen:
+            if prev_content != content:
+                continue
+            if (
+                abs(prev_bbox["x1"] - bbox["x1"]) <= tol
+                and abs(prev_bbox["y1"] - bbox["y1"]) <= tol
+                and abs(prev_bbox["x2"] - bbox["x2"]) <= tol
+                and abs(prev_bbox["y2"] - bbox["y2"]) <= tol
+            ):
+                dup = True
+                break
+        if dup:
+            continue
+        seen.append((content, bbox))
+        out.append(item)
+    return out
+
+
+def hw_vertically_plausible(
+    hw_bbox: Dict[str, float],
+    struct_bbox: Dict[str, float],
+) -> bool:
+    """HW 标签不应整体落在结构顶边之上（否则更像上一结构的标签）。"""
+    return hw_bbox["y2"] >= struct_bbox["y1"]
+
+
+def text_in_near_zone(
+    struct_bbox: Dict[str, float],
+    text_bbox: Dict[str, float],
+    match_y_down: float,
+    next_struct: Optional[Dict[str, Any]] = None,
+    *,
+    x_extend_left: float = 0.0,
+    x_extend_right: float = 0.0,
+    require_vertically_plausible: bool = True,
+) -> bool:
+    """结构附近区：X 重叠，可选垂直合理性，且不进入下一结构顶边以下领地。"""
+    if not has_x_overlap(
+        struct_bbox, text_bbox, x_extend_left, x_extend_right
+    ):
+        return False
+    if require_vertically_plausible and not hw_vertically_plausible(
+        text_bbox, struct_bbox
+    ):
+        return False
+    if next_struct is not None and text_bbox["center_y"] >= next_struct["bbox"]["y1"]:
+        return False
+    return True
+
+
+def assign_exclusive_nearest(
+    candidates: List[Tuple[float, int, int]],
+    *,
+    one_per_structure: bool = True,
+) -> Dict[int, int]:
+    """按距离升序贪心独占分配。
+
+    candidates: (dist, structure_or_compound_index, text_index)
+    返回 index -> text_index。每条文字只用一次；one_per_structure 时每个结构至多一条。
+    """
+    assigned: Dict[int, int] = {}
+    used_text: set = set()
+    for _dist, si, tk in sorted(candidates, key=lambda x: x[0]):
+        if tk in used_text:
+            continue
+        if one_per_structure and si in assigned:
+            continue
+        assigned[si] = tk
+        used_text.add(tk)
+    return assigned
+
+
 def find_next_structure_below(
     struct_bbox: Dict[str, float],
     structures: List[Dict[str, Any]],
@@ -626,6 +710,11 @@ def main(
                     else:
                         other_texts.append({"content": content, "bbox": bbox})
 
+    hw_before = len(hw_texts)
+    hw_texts = dedupe_texts_by_content_bbox(hw_texts)
+    if len(hw_texts) < hw_before:
+        log(f"去重重复 HW 标签：{hw_before} → {len(hw_texts)}")
+
     log(f"找到 {len(structures)} 个化合物结构")
     log(f"找到 {len(hw_texts)} 个HW开头的文字")
     log(f"找到 {len(tpsa_texts)} 个tPSA相关文字")
@@ -633,116 +722,129 @@ def main(
     log(f"找到 {len(other_texts)} 个其他文字\n")
 
     log(
-        f"=== 开始匹配 ===（结构 X 左扩展={match_x_extend_left}，右扩展={match_x_extend_right}，"
+        f"=== 开始匹配（结构优先）===（结构 X 左扩展={match_x_extend_left}，右扩展={match_x_extend_right}，"
         f"Y 向下匹配距离上限={match_y_down}）"
     )
 
-    used_hw: set = set()
-    used_tpsa: set = set()
-    used_clogp: set = set()
-    used_struct_indices: set = set()
+    next_by_struct: List[Optional[Dict[str, Any]]] = [
+        find_next_structure_below(
+            s["bbox"], structures, match_x_extend_left, match_x_extend_right
+        )
+        for s in structures
+    ]
 
-    compounds: List[Dict[str, Any]] = []
-    unmatched_hw: List[Dict[str, Any]] = []
-
-    for i, hw in enumerate(hw_texts):
-        if i in used_hw:
-            continue
-
-        hw_bbox = hw["bbox"]
-
-        best_struct = None
-        best_dist = float("inf")
-        for j, struct in enumerate(structures):
-            if any(s["element"] is struct["element"] for s in compounds):
-                continue
-
-            struct_bbox = struct["bbox"]
-
-            if not has_x_overlap(
-                struct_bbox, hw_bbox, match_x_extend_left, match_x_extend_right
+    # 1) 结构认领 HW（附近区 + 独占去重：每结构至多 1 个 HW，每条 HW 只用一次）
+    hw_candidates: List[Tuple[float, int, int]] = []
+    for j, struct in enumerate(structures):
+        struct_bbox = struct["bbox"]
+        nxt = next_by_struct[j]
+        for i, hw in enumerate(hw_texts):
+            if not text_in_near_zone(
+                struct_bbox,
+                hw["bbox"],
+                match_y_down,
+                nxt,
+                x_extend_left=match_x_extend_left,
+                x_extend_right=match_x_extend_right,
+                require_vertically_plausible=True,
             ):
                 continue
+            dist = abs(hw["bbox"]["center_y"] - struct_bbox["center_y"])
+            if dist < match_y_down:
+                hw_candidates.append((dist, j, i))
+    hw_assigned = assign_exclusive_nearest(hw_candidates, one_per_structure=True)
 
-            dist = abs(hw_bbox["center_y"] - struct_bbox["center_y"])
-            if dist < match_y_down and dist < best_dist:
-                best_dist = dist
-                best_struct = (j, struct)
+    used_hw: set = set(hw_assigned.values())
+    used_struct_indices: set = set(hw_assigned.keys())
+    used_tpsa: set = set()
+    used_clogp: set = set()
 
-        if best_struct is None:
+    compounds: List[Dict[str, Any]] = []
+    # 按结构顺序生成化合物，保证稳定
+    for j in sorted(hw_assigned.keys()):
+        i = hw_assigned[j]
+        struct = structures[j]
+        hw = hw_texts[i]
+        compounds.append(
+            {
+                "element": struct["element"],
+                "bbox": struct["bbox"],
+                "smiles": struct["smiles"],
+                "name": strip_trailing_paren_group(hw["content"]),
+                "tpsa": "",
+                "clogp": "",
+                "text": "",
+                "_struct_index": j,
+            }
+        )
+
+    unmatched_hw: List[Dict[str, Any]] = []
+    for i, hw in enumerate(hw_texts):
+        if i not in used_hw:
             unmatched_hw.append(
                 {
                     "content": hw["content"],
-                    **_bbox_to_row(hw_bbox),
+                    **_bbox_to_row(hw["bbox"]),
                 }
             )
-            continue
 
-        idx, struct = best_struct
-        used_struct_indices.add(idx)
-        struct_bbox = struct["bbox"]
+    # 2) 已匹配结构认领 tPSA / CLogP（附近区，不强制垂直合理性；独占）
+    tpsa_candidates: List[Tuple[float, int, int]] = []
+    clogp_candidates: List[Tuple[float, int, int]] = []
+    for ci, compound in enumerate(compounds):
+        struct_bbox = compound["bbox"]
+        sj = compound["_struct_index"]
+        nxt = next_by_struct[sj]
         struct_center = (struct_bbox["center_x"], struct_bbox["center_y"])
-
-        compound = {
-            "element": struct["element"],
-            "bbox": struct_bbox,
-            "smiles": struct["smiles"],
-            "name": strip_trailing_paren_group(hw["content"]),
-            "tpsa": "",
-            "clogp": "",
-            "text": "",
-        }
-
-        used_hw.add(i)
-
-        best_tpsa = None
-        best_tpsa_dist = float("inf")
         for k, tpsa in enumerate(tpsa_texts):
-            if k in used_tpsa:
-                continue
-
-            if not has_x_overlap(
-                struct_bbox, tpsa["bbox"], match_x_extend_left, match_x_extend_right
+            if not text_in_near_zone(
+                struct_bbox,
+                tpsa["bbox"],
+                match_y_down,
+                nxt,
+                x_extend_left=match_x_extend_left,
+                x_extend_right=match_x_extend_right,
+                require_vertically_plausible=False,
             ):
                 continue
-
             tpsa_center = (tpsa["bbox"]["center_x"], tpsa["bbox"]["center_y"])
             dist = distance(struct_center, tpsa_center)
-            if dist < match_y_down and dist < best_tpsa_dist:
-                best_tpsa_dist = dist
-                best_tpsa = (k, tpsa)
-
-        if best_tpsa is not None:
-            tpsa_match = re.search(r"tPSA[:\s]*([\d.]+)", best_tpsa[1]["content"], re.IGNORECASE)
-            if tpsa_match:
-                compound["tpsa"] = tpsa_match.group(1)
-            used_tpsa.add(best_tpsa[0])
-
-        best_clogp = None
-        best_clogp_dist = float("inf")
+            if dist < match_y_down:
+                tpsa_candidates.append((dist, ci, k))
         for k, clogp in enumerate(clogp_texts):
-            if k in used_clogp:
-                continue
-
-            if not has_x_overlap(
-                struct_bbox, clogp["bbox"], match_x_extend_left, match_x_extend_right
+            if not text_in_near_zone(
+                struct_bbox,
+                clogp["bbox"],
+                match_y_down,
+                nxt,
+                x_extend_left=match_x_extend_left,
+                x_extend_right=match_x_extend_right,
+                require_vertically_plausible=False,
             ):
                 continue
-
             clogp_center = (clogp["bbox"]["center_x"], clogp["bbox"]["center_y"])
             dist = distance(struct_center, clogp_center)
-            if dist < match_y_down and dist < best_clogp_dist:
-                best_clogp_dist = dist
-                best_clogp = (k, clogp)
+            if dist < match_y_down:
+                clogp_candidates.append((dist, ci, k))
 
-        if best_clogp is not None:
-            clogp_match = re.search(r"CLogP[:\s]*([\d.]+)", best_clogp[1]["content"], re.IGNORECASE)
-            if clogp_match:
-                compound["clogp"] = clogp_match.group(1)
-            used_clogp.add(best_clogp[0])
+    tpsa_assigned = assign_exclusive_nearest(tpsa_candidates, one_per_structure=True)
+    clogp_assigned = assign_exclusive_nearest(clogp_candidates, one_per_structure=True)
+    for ci, k in tpsa_assigned.items():
+        tpsa_match = re.search(
+            r"tPSA[:\s]*([\d.]+)", tpsa_texts[k]["content"], re.IGNORECASE
+        )
+        if tpsa_match:
+            compounds[ci]["tpsa"] = tpsa_match.group(1)
+        used_tpsa.add(k)
+    for ci, k in clogp_assigned.items():
+        clogp_match = re.search(
+            r"CLogP[:\s]*([\d.]+)", clogp_texts[k]["content"], re.IGNORECASE
+        )
+        if clogp_match:
+            compounds[ci]["clogp"] = clogp_match.group(1)
+        used_clogp.add(k)
 
-        compounds.append(compound)
-
+    # 3) 其他文字：向下 Y 带 + 独占（可多条）
     used_other = assign_other_texts_to_compounds(
         compounds,
         other_texts,
@@ -751,6 +853,9 @@ def main(
         match_x_extend_right=match_x_extend_right,
         match_y_down=match_y_down,
     )
+
+    for compound in compounds:
+        compound.pop("_struct_index", None)
 
     log(f"\n成功匹配到 {len(compounds)} 个化合物\n")
 
